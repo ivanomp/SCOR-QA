@@ -24,4 +24,9 @@
     <string name="option_4">Option 4</string>
     <string name="next_question">Next Question</string>
     <string name="quiz_description">Test your knowledge by answering one question at a time. Your score will be displayed at the end.</string>
+    <string name="submit_answer">Submit Answer</string>
+    <string name="drag_drop_instruction">Drag each item to its correct category</string>
+    <string name="verify_answers">Verify Answers</string>
+    <string name="correct_placement">Correct placement!</string>
+    <string name="incorrect_placement">Incorrect placement. Try again.</string>
 </resources>

@@ -6,87 +6,104 @@
     android:background="#F5F5F5"
     android:padding="16dp">
 
-    <!-- Progress Bar -->
     <com.google.android.material.progressindicator.LinearProgressIndicator
         android:id="@+id/progressIndicator"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:progress="0"
         app:indicatorColor="#FF9800"
         app:trackColor="#E0E0E0"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Question Number -->
     <TextView
         android:id="@+id/questionNumberText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="Question 1 of 4"
+        android:layout_marginTop="16dp"
         android:textColor="#757575"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/progressIndicator" />
 
-    <!-- Question Text -->
     <TextView
         android:id="@+id/questionText"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:textColor="#212121"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/questionNumberText" />
 
-    <!-- Answer Options Container -->
     <ScrollView
-        android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toTopOf="@id/submitButton"
         app:layout_constraintTop_toBottomOf="@id/questionText">
 
         <LinearLayout
-            android:id="@+id/optionsContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:spacing="16dp">
+            android:orientation="vertical">
 
-            <!-- Options will be added programmatically -->
+            <!-- Container for multiple choice options -->
+            <LinearLayout
+                android:id="@+id/optionsContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
 
+            <!-- Container for drag and drop -->
+            <LinearLayout
+                android:id="@+id/dragDropContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:visibility="gone"
+                android:baselineAligned="false">
+
+                <!-- Left column for draggable items -->
+                <LinearLayout
+                    android:id="@+id/itemsContainer"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_marginEnd="8dp" />
+
+                <!-- Right column for categories -->
+                <LinearLayout
+                    android:id="@+id/categoriesContainer"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_marginStart="8dp" />
+
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 
-    <!-- Submit Button -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/submitButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
         android:backgroundTint="#FF9800"
         android:padding="16dp"
         android:text="Submit Answer"
         android:textColor="#FFFFFF"
-        android:textSize="16sp"
         android:visibility="gone"
         app:cornerRadius="8dp"
-        app:layout_constraintBottom_toTopOf="@id/explanationCard"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintBottom_toTopOf="@id/explanationCard" />
 
-    <!-- Explanation Card -->
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/explanationCard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:visibility="gone"
-        app:cardBackgroundColor="#FFFFFF"
         app:cardCornerRadius="8dp"
         app:cardElevation="4dp"
         app:layout_constraintBottom_toTopOf="@id/nextButton">
@@ -99,9 +116,8 @@
 
             <TextView
                 android:id="@+id/resultText"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#212121"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -112,22 +128,17 @@
                 android:layout_marginTop="8dp"
                 android:textColor="#757575"
                 android:textSize="14sp" />
-
         </LinearLayout>
-
     </com.google.android.material.card.MaterialCardView>
 
-    <!-- Next Button -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/nextButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:backgroundTint="#FF9800"
         android:padding="16dp"
         android:text="Next Question"
         android:textColor="#FFFFFF"
-        android:textSize="16sp"
         android:visibility="gone"
         app:cornerRadius="8dp"
         app:layout_constraintBottom_toBottomOf="parent" />
