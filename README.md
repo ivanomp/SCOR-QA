@@ -68,7 +68,8 @@ Contributions are welcome! Please feel free to submit a Pull Request. For major 
 2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
 3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
 4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+5. Open a Pull Request.
+6. Add questions and answers  here https://github.com/ivanomp/SCOR-QA/blob/master/app/src/main/java/com/ivanmp/myapplication/QuizQuestions.kt
 
 
 ## Acknowledgments
