@@ -138,7 +138,10 @@ class QuizActivity : AppCompatActivity() {
         slideIn.duration = 500
         questionText.startAnimation(slideIn)
 
-        question.options.forEach { option ->
+        // Shuffle the options
+        val shuffledOptions = question.options.shuffled()
+
+        shuffledOptions.forEach { option ->
             val button = MaterialButton(this).apply {
                 text = option
                 textSize = 16f
@@ -411,7 +414,7 @@ class QuizActivity : AppCompatActivity() {
             }
         }
 
-        // Play sound based on result
+        // Play sound and update score based on result
         if (isCorrect) {
             soundManager.playCorrectSound()
             score++
@@ -424,14 +427,30 @@ class QuizActivity : AppCompatActivity() {
     }
 
     private fun submitDragAndDropAnswer(question: Question.DragAndDrop) {
+        // First check if all items have been placed
+        if (itemPlacements.size != question.items.size) {
+            // Not all items have been placed
+            soundManager.playIncorrectSound()
+            showExplanation(
+                "Please place all items into categories before submitting.",
+                question.reference,
+                false
+            )
+            return
+        }
+
+        // Check if all placements are correct
         var isCorrect = true
-        itemPlacements.forEach { (item, category) ->
-            if (question.correctMapping[item] != category) {
+        question.items.forEach { item ->
+            val placedCategory = itemPlacements[item]
+            val correctCategory = question.correctMapping[item]
+            
+            if (placedCategory != correctCategory) {
                 isCorrect = false
             }
         }
 
-        // Play sound based on result
+        // Play sound and update score based on result
         if (isCorrect) {
             soundManager.playCorrectSound()
             score++

@@ -13,12 +13,12 @@ class QuizCompleteActivity : AppCompatActivity() {
         setContentView(R.layout.activity_quiz_complete)
 
         val score = intent.getIntExtra("score", 0)
-        val totalQuestions = intent.getIntExtra("total_questions", 0)
-        val incorrectAnswers = totalQuestions - score
+        val total = intent.getIntExtra("total", 0)
+        val incorrect = total - score
 
-        // Animate score text
+        // Update score text
         findViewById<TextView>(R.id.scoreText).apply {
-            text = "$score/$totalQuestions"
+            text = "$score/$total"
             startAnimation(AnimationUtils.loadAnimation(context, android.R.anim.fade_in))
         }
 
@@ -30,24 +30,22 @@ class QuizCompleteActivity : AppCompatActivity() {
 
         // Update incorrect answers count
         findViewById<TextView>(R.id.incorrectAnswersCount).apply {
-            text = incorrectAnswers.toString()
+            text = incorrect.toString()
             startAnimation(AnimationUtils.loadAnimation(context, android.R.anim.fade_in))
         }
 
         // Set feedback text based on score
-        findViewById<TextView>(R.id.feedbackText).apply {
-            text = when {
-                score == totalQuestions -> "Perfect! You're a network security expert!"
-                score >= totalQuestions * 0.8 -> "Great job! You have a solid understanding of network security."
-                score >= totalQuestions * 0.6 -> "Good effort! Keep learning to improve your knowledge."
-                else -> "Keep practicing! Network security concepts take time to master."
-            }
-            startAnimation(AnimationUtils.loadAnimation(context, android.R.anim.fade_in))
+        val feedbackText = findViewById<TextView>(R.id.feedbackText)
+        val percentage = (score.toFloat() / total.toFloat()) * 100
+        feedbackText.text = when {
+            percentage >= 90 -> "Excellent! You have a strong understanding of network security!"
+            percentage >= 70 -> "Great job! You have a good grasp of network security concepts."
+            percentage >= 50 -> "Good effort! Keep studying to improve your network security knowledge."
+            else -> "Keep practicing! Review the concepts and try again to improve your score."
         }
 
         // Set up restart button
         findViewById<MaterialButton>(R.id.restartButton).setOnClickListener {
-            startActivity(Intent(this, MainActivity::class.java))
             finish()
         }
 
@@ -55,8 +53,9 @@ class QuizCompleteActivity : AppCompatActivity() {
         findViewById<MaterialButton>(R.id.shareButton).setOnClickListener {
             val shareIntent = Intent().apply {
                 action = Intent.ACTION_SEND
+                putExtra(Intent.EXTRA_TEXT, 
+                    "I scored $score out of $total on the SCOR QA Quiz!")
                 type = "text/plain"
-                putExtra(Intent.EXTRA_TEXT, "I scored $score out of $totalQuestions on the Network Security Quiz!")
             }
             startActivity(Intent.createChooser(shareIntent, "Share your score"))
         }
