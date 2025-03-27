@@ -19,6 +19,20 @@ class MainActivity : AppCompatActivity() {
             }
         )
 
+        findViewById<TextView>(R.id.subtitleText).startAnimation(
+            AnimationUtils.loadAnimation(this, android.R.anim.fade_in).apply {
+                duration = 1000
+                startOffset = 300
+            }
+        )
+
+        findViewById<TextView>(R.id.updateDateText).startAnimation(
+            AnimationUtils.loadAnimation(this, android.R.anim.fade_in).apply {
+                duration = 1000
+                startOffset = 400
+            }
+        )
+
         findViewById<TextView>(R.id.descriptionText).startAnimation(
             AnimationUtils.loadAnimation(this, android.R.anim.fade_in).apply {
                 duration = 1000
