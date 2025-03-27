@@ -469,6 +469,164 @@ object QuizQuestions {
                 ),
                 explanation = "Cisco Tetration platform studies the behavior of various processes and applications in the workload, measuring them against known bad behavior sequences. It factors in process hashes and understands clear definitions of these building blocks to watch for suspicious patterns including shell code execution, privilege escalation, side channel attacks, raw socket creation, user login behavior, file access patterns, and unseen commands.",
                 reference = "https://www.cisco.com/c/en/us/products/collateral/data-center-analytics/tetration-analytics/white-paper-c11-740380.html"
+            ),
+            Question.MultipleChoice(
+                question = "What is the purpose of the My Devices Portal in a Cisco ISE environment?",
+                options = listOf(
+                    "A. to register new laptops and mobile devices",
+                    "B. to request a newly provisioned mobile device",
+                    "C. to provision userless and agentless systems",
+                    "D. to manage and deploy antivirus definitions and patches on systems owned by the end user"
+                ),
+                correct = setOf("A"),
+                explanation = "Depending on your company policy, you might be able to use your mobile phones, tablets, printers, Internet radios, and other network devices on your company's network. You can use the My Devices portal to register and manage these devices on your company's network.",
+                reference = "https://www.cisco.com/c/en/us/td/docs/security/ise/2-4/mydevices/b_mydevices_2x.html"
+            ),
+            Question.MultipleChoice(
+                question = "Refer to the exhibit.\n\nip dhcp snooping\nip dhcp snooping vlan 41,44\n!\ninterface GigabitEthernet1/0/1\n description Uplink_To_Distro_Switch_g1/0/11\n switchport trunk native vlan 999\n switchport trunk allowed vlan 40,41,44\n switchport mode trunk\n\nAn organization is using DHCP Snooping within their network. A user on VLAN 41 on a new switch is complaining that an IP address is not being obtained. Which command should be configured on the switch interface in order to provide the user with network connectivity?",
+                options = listOf(
+                    "A. ip dhcp snooping verify mac-address",
+                    "B. ip dhcp snooping limit 41",
+                    "C. ip dhcp snooping vlan 41",
+                    "D. ip dhcp snooping trust"
+                ),
+                correct = setOf("D"),
+                explanation = "To understand DHCP snooping we need to learn about DHCP spoofing attack first. DHCP spoofing is a type of attack in that the attacker listens for DHCP Requests from clients and answers them with fake DHCP Response before the authorized DHCP Response comes to the clients. The fake DHCP Response often gives its IP address as the client default gateway -> all the traffic sent from the client will go through the attacker computer, the attacker becomes a \"man-in-the-middle\". DHCP snooping can prevent DHCP spoofing attacks. DHCP snooping is a Cisco Catalyst feature that determines which switch ports can respond to DHCP requests. Ports are identified as trusted and untrusted. Only ports that connect to an authorized DHCP server are trusted, and allowed to send all types of DHCP messages. All other ports on the switch are untrusted and can send only DHCP requests. If a DHCP response is seen on an untrusted port, the port is shut down. The port connected to a DHCP server should be configured as trusted port with the \"ip dhcp snooping trust\" command. Other ports connecting to hosts are untrusted ports by default.",
+                reference = "CCNP And CCIE Security Core SCOR 350-701 Official Cert Guide"
+            ),
+            Question.MultipleChoice(
+                question = "What is the purpose of the certificate signing request when adding a new certificate for a server?",
+                options = listOf(
+                    "A. It is the password for the certificate that is needed to install it with.",
+                    "B. It provides the server information so a certificate can be created and signed",
+                    "C. It provides the certificate client information so the server can authenticate against it when installing",
+                    "D. It is the certificate that will be loaded onto the server"
+                ),
+                correct = setOf("B"),
+                explanation = "A certificate signing request (CSR) is one of the first steps towards getting your own SSL Certificate. Generated on the same server you plan to install the certificate on, the CSR contains information (e.g. common name, organization, country) that the Certificate Authority (CA) will use to create your certificate. It also contains the public key that will be included in your certificate and is signed with the corresponding private key.",
+                reference = "CCNP And CCIE Security Core SCOR 350-701 Official Cert Guide"
+            ),
+            Question.MultipleChoice(
+                question = "What is the Cisco API-based broker that helps reduce compromises, application risks, and data breaches in an environment that is not on-premise?",
+                options = listOf(
+                    "A. Cisco Cloudlock",
+                    "B. Cisco Umbrella",
+                    "C. Cisco AMP",
+                    "D. Cisco App Dynamics"
+                ),
+                correct = setOf("A"),
+                explanation = "Cisco Cloudlock is a cloud-native cloud access security broker (CASB) that helps you move to the cloud safely. It protects your cloud users, data, and apps. Cisco Cloudlock provides visibility and compliance checks, protects data against misuse and exfiltration, and provides threat protections against malware like ransomware.",
+                reference = "CCNP And CCIE Security Core SCOR 350-701 Official Cert Guide"
+            ),
+            Question.MultipleChoice(
+                question = "What is managed by Cisco Security Manager?",
+                options = listOf(
+                    "A. access point",
+                    "B. Secure Web Appliance",
+                    "C. ASA",
+                    "D. Secure Email Gateway"
+                ),
+                correct = setOf("C"),
+                explanation = "Cisco Security Manager provides a comprehensive management solution for:\n- Cisco ASA 5500 Series Adaptive Security Appliances\n- Cisco intrusion prevention systems 4200 and 4500 Series Sensors\n- Cisco AnyConnect Secure Mobility Client",
+                reference = "https://www.cisco.com/c/en/us/products/security/security-manager/index.html"
+            ),
+            Question.MultipleChoice(
+                question = "How does Cisco Advanced Phishing Protection protect users?",
+                options = listOf(
+                    "A. It validates the sender by using DKIM.",
+                    "B. It determines which identities are perceived by the sender",
+                    "C. It utilizes sensors that send messages securely.",
+                    "D. It uses machine learning and real-time behavior analytics."
+                ),
+                correct = setOf("D"),
+                explanation = "Cisco Advanced Phishing Protection provides sender authentication and BEC detection capabilities. It uses advanced machine learning techniques, real-time behavior analytics, relationship modeling, and telemetry to protect against identity deception-based threats.",
+                reference = "https://docs.ces.cisco.com/docs/advanced-phishing-protection"
+            ),
+            Question.MultipleChoice(
+                question = "What is a benefit of using Cisco FMC over Cisco ASDM?",
+                options = listOf(
+                    "A. Cisco FMC uses Java while Cisco ASDM uses HTML5.",
+                    "B. Cisco FMC provides centralized management while Cisco ASDM does not.",
+                    "C. Cisco FMC supports pushing configurations to devices while Cisco ASDM does not.",
+                    "D. Cisco FMC supports all firewall products whereas Cisco ASDM only supports Cisco ASA devices"
+                ),
+                correct = setOf("B"),
+                explanation = "The Cisco Secure Firewall Threat Defense Manager (Firepower Management Center) increases the effectiveness of your Cisco network security solutions by providing centralized, integrated, and streamlined management.",
+                reference = "https://www.cisco.com/c/en/us/products/collateral/security/firesight-management-center/datasheet-c78-736775.html"
+            ),
+            Question.MultipleChoice(
+                question = "What is a key difference between Cisco Firepower and Cisco ASA?",
+                options = listOf(
+                    "A. Cisco ASA provides access control while Cisco Firepower does not.",
+                    "B. Cisco Firepower provides identity-based access control while Cisco ASA does not.",
+                    "C. Cisco Firepower natively provides intrusion prevention capabilities while Cisco ASA does not.",
+                    "D. Cisco ASA provides SSL inspection while Cisco Firepower does not."
+                ),
+                correct = setOf("C"),
+                explanation = "Cisco Firepower provides native intrusion prevention capabilities while Cisco ASA requires additional modules for this functionality.",
+                reference = "CCNP And CCIE Security Core SCOR 350-701 Official Cert Guide"
+            ),
+            Question.MultipleChoice(
+                question = "An organization is implementing URL blocking using Cisco Umbrella. The users are able to go to some sites but other sites are not accessible due to an error. Why is the error occurring?",
+                options = listOf(
+                    "A. Client computers do not have the Cisco Umbrella Root CA certificate installed.",
+                    "B. IP-Layer Enforcement is not configured.",
+                    "C. Client computers do not have an SSL certificate deployed from an internal CA server.",
+                    "D. Intelligent proxy and SSL decryption is disabled in the policy."
+                ),
+                correct = setOf("A"),
+                explanation = "Other features are dependent on SSL Decryption functionality, which requires the Cisco Umbrella root certificate. Having the SSL Decryption feature improves: Custom URL Blocking—Required to block the HTTPS version of a URL. Umbrella's Block Page and Block Page Bypass features present an SSL certificate to browsers that make connections to HTTPS sites. This SSL certificate matches the requested site but will be signed by the Cisco Umbrella certificate authority (CA). If the CA is not trusted by your browser, an error page may be displayed.",
+                reference = "https://docs.umbrella.com/deployment-umbrella/docs/rebrand-cisco-certificate-import-information"
+            ),
+            Question.MultipleChoice(
+                question = "Which two aspects of the cloud PaaS model are managed by the customer but not the provider? (Choose two)",
+                options = listOf(
+                    "A. virtualization",
+                    "B. middleware",
+                    "C. operating systems",
+                    "D. applications",
+                    "E. data"
+                ),
+                correct = setOf("D", "E"),
+                explanation = "Customers must manage applications and data in PaaS.",
+                reference = "CCNP And CCIE Security Core SCOR 350-701 Official Cert Guide"
+            ),
+            Question.MultipleChoice(
+                question = "What is an attribute of the DevSecOps process?",
+                options = listOf(
+                    "A. mandated security controls and check lists",
+                    "B. security scanning and theoretical vulnerabilities",
+                    "C. development security",
+                    "D. isolated security team"
+                ),
+                correct = setOf("C"),
+                explanation = "DevSecOps (development, security, and operations) is a concept used in recent years to describe how to move security activities to the start of the development life cycle and have built-in security practices in the continuous integration/continuous deployment (CI/CD) pipeline. Thus minimizing vulnerabilities and bringing security closer to IT and business objectives.",
+                reference = "CCNP And CCIE Security Core SCOR 350-701 Official Cert Guide"
+            ),
+            Question.MultipleChoice(
+                question = "An engineer notices traffic interruption on the network. Upon further investigation, it is learned that broadcast packets have been flooding the network. What must be configured, based on a predefined threshold, to address this issue?",
+                options = listOf(
+                    "A. Bridge Protocol Data Unit guard",
+                    "B. embedded event monitoring",
+                    "C. storm control",
+                    "D. access control lists"
+                ),
+                correct = setOf("C"),
+                explanation = "Storm control prevents traffic on a LAN from being disrupted by a broadcast, multicast, or unicast storm on one of the physical interfaces. A LAN storm occurs when packets flood the LAN, creating excessive traffic and degrading network performance. Errors in the protocol-stack implementation, mistakes in network configurations, or users issuing a denial-of-service attack can cause a storm.",
+                reference = "CCNP And CCIE Security Core SCOR 350-701 Official Cert Guide"
+            ),
+            Question.MultipleChoice(
+                question = "Which two cryptographic algorithms are used with IPsec? (Choose two)",
+                options = listOf(
+                    "A. AES-BAC",
+                    "B. AES-ABC",
+                    "C. HMAC-SHA1/SHA2",
+                    "D. Triple AMC-CBC",
+                    "E. AES-CBC"
+                ),
+                correct = setOf("C", "E"),
+                explanation = "Cryptographic algorithms defined for use with IPsec include:\n+ HMAC-SHA1/SHA2 for integrity protection and authenticity.\n+ TripleDES-CBC for confidentiality\n+ AES-CBC and AES-CTR for confidentiality.\n+ AES-GCM and ChaCha20-Poly1305 providing confidentiality and authentication together efficiently.",
+                reference = "CCNP And CCIE Security Core SCOR 350-701 Official Cert Guide"
             )
         ))
     }
