@@ -30,7 +30,7 @@
         android:layout_marginBottom="16dp"
         android:fillViewport="true"
         app:layout_constraintTop_toBottomOf="@id/questionNumberText"
-        app:layout_constraintBottom_toTopOf="@id/nextButton">
+        app:layout_constraintBottom_toTopOf="@id/buttonContainer">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -132,21 +132,33 @@
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/nextButton"
+    <LinearLayout
+        android:id="@+id/buttonContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="16dp"
+        android:orientation="horizontal"
+        android:gravity="center"
         android:padding="16dp"
-        android:text="@string/next_question"
-        android:textColor="@android:color/white"
-        android:textSize="16sp"
-        android:backgroundTint="@android:color/holo_blue_dark"
-        app:cornerRadius="8dp"
-        app:elevation="4dp"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/previousButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginEnd="8dp"
+            android:text="Previous"
+            android:visibility="gone"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/nextButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="8dp"
+            android:text="Next"
+            android:visibility="gone"/>
+
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout> 

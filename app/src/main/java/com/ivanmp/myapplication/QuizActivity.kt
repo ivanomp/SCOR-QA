@@ -4,7 +4,12 @@ import android.animation.ObjectAnimator
 import android.content.ClipData
 import android.content.ClipDescription
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.method.LinkMovementMethod
+import android.text.style.URLSpan
 import android.util.Log
 import android.util.TypedValue
 import android.view.DragEvent
@@ -39,6 +44,7 @@ class QuizActivity : AppCompatActivity() {
     private lateinit var resultText: TextView
     private lateinit var explanationText: TextView
     private lateinit var nextButton: MaterialButton
+    private lateinit var previousButton: MaterialButton
 
     private var currentQuestionIndex = 0
     private var score = 0
@@ -48,6 +54,14 @@ class QuizActivity : AppCompatActivity() {
     private var itemPlacements = mutableMapOf<String, String>() // item text to category
     private var soundManager: SoundManager? = null
     private var currentCorrectAnswers: Set<String> = setOf()  // Add this property to the class
+    private var answeredQuestions = mutableListOf<AnsweredQuestion>()
+
+    data class AnsweredQuestion(
+        val question: Question,
+        val selectedOptions: Set<String>,
+        val itemPlacements: Map<String, String>,
+        val isCorrect: Boolean
+    )
 
     companion object {
         private const val QUESTION_LIMIT = 50 // Default number of questions per quiz
@@ -96,6 +110,7 @@ class QuizActivity : AppCompatActivity() {
             resultText = findViewById(R.id.resultText)
             explanationText = findViewById(R.id.explanationText)
             nextButton = findViewById(R.id.nextButton)
+            previousButton = findViewById(R.id.previousButton)
 
             // Configure PhotoView
             questionImage.apply {
@@ -546,6 +561,18 @@ class QuizActivity : AppCompatActivity() {
     }
 
     private fun showExplanation(explanation: String, reference: String, isCorrect: Boolean) {
+        // Store the current question state
+        currentQuestion?.let { question ->
+            answeredQuestions.add(
+                AnsweredQuestion(
+                    question = question,
+                    selectedOptions = selectedOptions,
+                    itemPlacements = itemPlacements.toMap(),
+                    isCorrect = isCorrect
+                )
+            )
+        }
+
         explanationCard.visibility = View.VISIBLE
         resultText.text = if (isCorrect) "Correct!" else "Incorrect"
         resultText.setTextColor(ContextCompat.getColor(this, 
@@ -560,27 +587,149 @@ class QuizActivity : AppCompatActivity() {
             append(reference)
         }.toString()
         
-        explanationText.text = formattedExplanation
-        
-        // Make sure next button is visible and properly styled
+        // Make URLs clickable
+        val spannableString = SpannableString(formattedExplanation)
+        val urlPattern = "(https?://\\S+)".toRegex()
+        urlPattern.findAll(formattedExplanation).forEach { match ->
+            val url = match.value
+            val start = match.range.first
+            val end = match.range.last + 1
+            spannableString.setSpan(
+                URLSpan(url),
+                start,
+                end,
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+            )
+        }
+
+        // Set the text with clickable links
+        explanationText.text = spannableString
+        explanationText.movementMethod = LinkMovementMethod.getInstance()
+        explanationText.setLinkTextColor(Color.BLUE)
+
+        // Show and configure navigation buttons
         nextButton.apply {
             visibility = View.VISIBLE
             backgroundTintList = ContextCompat.getColorStateList(context, android.R.color.holo_blue_dark)
             setTextColor(ContextCompat.getColor(context, android.R.color.white))
-            text = getString(R.string.next_question)
+            text = if (currentQuestionIndex < questions.size - 1) getString(R.string.next_question) else "Finish"
             isEnabled = true
-            bringToFront()
         }
-        
-        // Scroll to show the explanation and next button
-        findViewById<NestedScrollView>(R.id.mainScrollView).post {
-            findViewById<NestedScrollView>(R.id.mainScrollView).fullScroll(View.FOCUS_DOWN)
+
+        previousButton.apply {
+            visibility = if (currentQuestionIndex > 0) View.VISIBLE else View.GONE
+            setOnClickListener { showPreviousQuestion() }
         }
         
         nextButton.setOnClickListener {
-            currentQuestionIndex++
-            showQuestion()
+            if (currentQuestionIndex < questions.size - 1) {
+                currentQuestionIndex++
+                showQuestion()
+            } else {
+                showQuizComplete()
+            }
         }
+        
+        // Scroll to show the explanation and buttons
+        findViewById<NestedScrollView>(R.id.mainScrollView).post {
+            findViewById<NestedScrollView>(R.id.mainScrollView).fullScroll(View.FOCUS_DOWN)
+        }
+    }
+
+    private fun showPreviousQuestion() {
+        if (currentQuestionIndex > 0) {
+            currentQuestionIndex--
+            val previousAnswer = answeredQuestions[currentQuestionIndex]
+            
+            // Restore the previous question state
+            currentQuestion = previousAnswer.question
+            selectedOptions = previousAnswer.selectedOptions
+            itemPlacements = previousAnswer.itemPlacements.toMutableMap()
+            
+            // Show the question with previous answers
+            when (val question = currentQuestion) {
+                is Question.MultipleChoice -> {
+                    optionsContainer.visibility = View.VISIBLE
+                    dragDropContainer.visibility = View.GONE
+                    showMultipleChoiceQuestion(question)
+                    
+                    // Restore button states
+                    for (i in 0 until optionsContainer.childCount) {
+                        val button = optionsContainer.getChildAt(i) as? MaterialButton
+                        if (button != null) {
+                            val buttonLetter = button.text.toString().substringBefore(".")
+                            if (selectedOptions.contains(buttonLetter)) {
+                                button.backgroundTintList = ContextCompat.getColorStateList(this, 
+                                    if (previousAnswer.isCorrect) android.R.color.holo_green_light 
+                                    else android.R.color.holo_red_light)
+                                button.setTextColor(ContextCompat.getColor(this, android.R.color.white))
+                            }
+                            button.isEnabled = false
+                        }
+                    }
+                }
+                is Question.DragAndDrop -> {
+                    optionsContainer.visibility = View.GONE
+                    dragDropContainer.visibility = View.VISIBLE
+                    showDragAndDropQuestion(question)
+                    
+                    // Restore item placements
+                    itemPlacements.forEach { (item, category) ->
+                        val itemView = findItemViewByText(item)
+                        val categoryView = findCategoryViewByName(category)
+                        if (itemView != null && categoryView != null) {
+                            (itemView.parent as? ViewGroup)?.removeView(itemView)
+                            (categoryView as LinearLayout).addView(itemView)
+                        }
+                    }
+                }
+                null -> {
+                    // Handle null case
+                    Log.e("QuizActivity", "Question is null in showPreviousQuestion")
+                    showErrorDialog()
+                }
+            }
+            
+            // Show explanation
+            val explanation = when (val question = currentQuestion) {
+                is Question.MultipleChoice -> question.explanation
+                is Question.DragAndDrop -> question.explanation
+                null -> "Error: Question not found"
+            }
+            
+            val reference = when (val question = currentQuestion) {
+                is Question.MultipleChoice -> question.reference
+                is Question.DragAndDrop -> question.reference
+                null -> "Error: Question not found"
+            }
+            
+            showExplanation(explanation, reference, previousAnswer.isCorrect)
+        }
+    }
+
+    private fun findItemViewByText(text: String): View? {
+        for (i in 0 until itemsContainer.childCount) {
+            val view = itemsContainer.getChildAt(i)
+            if (view is MaterialCardView && view.getChildAt(0) is TextView) {
+                val textView = view.getChildAt(0) as TextView
+                if (textView.text == text) {
+                    return view
+                }
+            }
+        }
+        return null
+    }
+
+    private fun findCategoryViewByName(category: String): View? {
+        for (i in 0 until categoriesContainer.childCount) {
+            val categoryCard = categoriesContainer.getChildAt(i) as MaterialCardView
+            val categoryLayout = categoryCard.getChildAt(0) as LinearLayout
+            val headerText = categoryLayout.getChildAt(0) as TextView
+            if (headerText.text == category) {
+                return categoryLayout.getChildAt(1) // Return the drop area LinearLayout
+            }
+        }
+        return null
     }
 
     private fun updateProgress() {
