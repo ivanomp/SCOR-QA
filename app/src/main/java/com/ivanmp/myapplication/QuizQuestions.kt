@@ -287,6 +287,188 @@ object QuizQuestions {
                 explanation = "If sysopt permit-vpn is not enabled then an access control policy must be created to allow the VPN traffic through the FTD device. If sysopt permit-vpn is enabled skip creating an access control policy.",
                 reference = "https://www.cisco.com/c/en/us/support/docs/security-vpn/ipsec-negotiation-ike-protocols/215470-site-to-site-vpn-configuration-on-ftd-ma.html",
                 imageResourceName = "question_23_ipsec_output"
+            ),
+            Question.MultipleChoice(
+                question = "An attacker needs to perform reconnaissance on a target system to help gain access to it. The system has weak passwords, no encryption on the VPN links, and software bugs on the system's applications. Which vulnerability allows the attacker to see the passwords being transmitted in clear text?",
+                options = listOf(
+                    "A. weak passwords for authentication",
+                    "B. unencrypted links for traffic",
+                    "C. software bugs on applications",
+                    "D. improper file security"
+                ),
+                correct = setOf("B"),
+                explanation = "Unencrypted links for traffic allow attackers to see passwords being transmitted in clear text. This is a critical security vulnerability as it exposes sensitive information during transmission.",
+                reference = "https://www.cisco.com/c/en/us/support/docs/security-vpn/ipsec-negotiation-ike-protocols/14106-how-to-ipsec.html"
+            ),
+            Question.MultipleChoice(
+                question = "Using Cisco Firepower's Security Intelligence policies, upon which two criteria is Firepower block based? (Choose two)",
+                options = listOf(
+                    "A. URLs",
+                    "B. protocol IDs",
+                    "C. IP addresses",
+                    "D. MAC addresses",
+                    "E. port numbers"
+                ),
+                correct = setOf("A", "C"),
+                explanation = "Security Intelligence Sources can block specific IP addresses, URLs, or domain names using a manually-created list or feed. For IP addresses, you can also use network objects or groups.",
+                reference = "https://www.cisco.com/c/en/us/td/docs/security/firepower/623/configuration/guide/fpmc-config-guide-v623/security_intelligence_blacklisting.html"
+            ),
+            Question.MultipleChoice(
+                question = "Which Cisco platform ensures that machines that connect to organizational networks have the recommended antivirus definitions and patches to help prevent an organizational malware outbreak?",
+                options = listOf(
+                    "A. Cisco WiSM",
+                    "B. Cisco Secure Email Gateway",
+                    "C. Cisco ISE",
+                    "D. Cisco Prime Infrastructure"
+                ),
+                correct = setOf("C"),
+                explanation = "A posture policy is a collection of posture requirements, which are associated with one or more identity groups, and operating systems. We can configure ISE to check for the Windows patch at Work Centers > Posture > Posture Elements > Conditions > File.",
+                reference = "https://www.cisco.com/c/en/us/td/docs/security/ise/2-6/admin_guide/b_ise_admin_guide_26/b_ise_admin_guide_26_chapter_01100.html"
+            ),
+            Question.MultipleChoice(
+                question = "What are two benefits of Flexible NetFlow records? (Choose two)",
+                options = listOf(
+                    "A. They allow the user to configure flow information to perform customized traffic identification",
+                    "B. They provide attack prevention by dropping the traffic",
+                    "C. They provide accounting and billing enhancements",
+                    "D. They converge multiple accounting technologies into one accounting mechanism",
+                    "E. They provide monitoring of a wider range of IP packet information from Layer 2 to 4"
+                ),
+                correct = setOf("A", "D"),
+                explanation = "Key Advantages to using Flexible NetFlow: Flexibility, scalability of flow data beyond traditional NetFlow, user configurable flow information to perform customized traffic identification, and convergence of multiple accounting technologies into one accounting mechanism.",
+                reference = "https://www.cisco.com/c/en/us/products/collateral/ios-nx-os-software/flexible-netflow/product_data_sheet0900aecd804b590b.html"
+            ),
+            Question.MultipleChoice(
+                question = "How does DNS Tunneling exfiltrate data?",
+                options = listOf(
+                    "A. An attacker registers a domain that a client connects to based on DNS records and sends malware through that connection.",
+                    "B. An attacker opens a reverse DNS shell to get into the client's system and install malware on it.",
+                    "C. An attacker uses a non-standard DNS port to gain access to the organization's DNS servers in order to poison the resolutions.",
+                    "D. An attacker sends an email to the target with hidden DNS resolvers in it to redirect them to a malicious domain."
+                ),
+                correct = setOf("A"),
+                explanation = "DNS tunneling exfiltrates data by registering a domain that a client connects to based on DNS records and sending malware through that connection. This technique can bypass traditional security controls by using DNS traffic which is often allowed through firewalls.",
+                reference = "https://www.cisco.com/c/en/us/support/docs/security/email-security-appliance/118007-configure-esa-00.html"
+            ),
+            Question.MultipleChoice(
+                question = "A user has a device in the network that is receiving too many connection requests from multiple machines. Which type of attack is the device undergoing?",
+                options = listOf(
+                    "A. phishing",
+                    "B. slowloris",
+                    "C. pharming",
+                    "D. SYN flood"
+                ),
+                correct = setOf("D"),
+                explanation = "A SYN flood attack is a type of denial-of-service attack where an attacker sends a succession of SYN requests to a target's system in an attempt to consume enough server resources to make the system unresponsive to legitimate traffic.",
+                reference = "https://www.cisco.com/c/en/us/support/docs/security-vpn/ipsec-negotiation-ike-protocols/14106-how-to-ipsec.html"
+            ),
+            Question.MultipleChoice(
+                question = "An organization is receiving SPAM emails from a known malicious domain. What must be configured in order to prevent the session during the initial TCP communication?",
+                options = listOf(
+                    "A. Configure the Cisco Secure Email Gateway to drop the malicious emails",
+                    "B. Configure policies to quarantine malicious emails",
+                    "C. Configure policies to stop and reject communication",
+                    "D. Configure the Cisco Secure Email Gateway to reset the TCP connection"
+                ),
+                correct = setOf("C"),
+                explanation = "Each Mail Flow Policy has an access rule, such as ACCEPT, REJECT, RELAY, CONTINUE, and TCPREFUSE. A host that attempts to establish a connection to your Secure Email Gateway and matches a Sender Group using a TCPREFUSE access rule is not allowed to connect to your Secure Email Gateway.",
+                reference = "https://www.cisco.com/c/en/us/support/docs/security/email-security-appliance/118007-configure-esa-00.html"
+            ),
+            Question.MultipleChoice(
+                question = "A Cisco Firepower administrator needs to configure a rule to allow a new application that has never been seen on the network. Which two actions should be selected to allow the traffic to pass without inspection? (Choose two)",
+                options = listOf(
+                    "A. permit",
+                    "B. trust",
+                    "C. reset",
+                    "D. allow",
+                    "E. monitor"
+                ),
+                correct = setOf("B", "D"),
+                explanation = "Each rule also has an action, which determines whether you monitor, trust, block, or allow matching traffic. With action 'trust', Firepower does not do any more inspection on the traffic. There will be no intrusion protection and also no file-policy on this traffic.",
+                reference = "https://www.cisco.com/c/en/us/td/docs/security/firepower/623/configuration/guide/fpmc-config-guide-v623/access_control_policies.html"
+            ),
+            Question.MultipleChoice(
+                question = "An engineer needs behavioral analysis to detect malicious activity on the hosts, and is configuring the organization's public cloud to send telemetry using the cloud provider's mechanisms to a security device. Which mechanism should the engineer configure to accomplish this goal?",
+                options = listOf(
+                    "A. mirror port",
+                    "B. sFlow",
+                    "C. NetFlow",
+                    "D. VPC flow logs"
+                ),
+                correct = setOf("D"),
+                explanation = "AWS recently introduced VPC Flow Logs, which facilitate logging of all the IP traffic to, from, and across your network. These logs are stored as records in special Amazon CloudWatch log groups and provide the same kind of information as NetFlow data.",
+                reference = "https://www.cisco.com/c/en/us/products/collateral/security/stealthwatch-cloud/at-a-glance-c45-739851.html"
+            ),
+            Question.MultipleChoice(
+                question = "An engineer has enabled LDAP accept queries on a listener. Malicious actors must be prevented from quickly identifying all valid recipients. What must be done on the Cisco Secure Email Gateway to accomplish this goal?",
+                options = listOf(
+                    "A. Configure incoming content filters",
+                    "B. Use Bounce Verification",
+                    "C. Configure Directory Harvest Attack Prevention",
+                    "D. Bypass LDAP access queries in the recipient access table"
+                ),
+                correct = setOf("C"),
+                explanation = "A Directory Harvest Attack (DHA) is a technique used by spammers to find valid/existent email addresses at a domain either by using Brute force or by guessing valid e-mail addresses at a domain using different permutations of common username.",
+                reference = "https://www.cisco.com/c/en/us/support/docs/security/email-security-appliance/118007-configure-esa-00.html"
+            ),
+            Question.MultipleChoice(
+                question = "What is a feature of Cisco NetFlow Secure Event Logging for Cisco ASAs?",
+                options = listOf(
+                    "A. Multiple NetFlow collectors are supported",
+                    "B. Advanced NetFlow v9 templates and legacy v5 formatting are supported",
+                    "C. Secure NetFlow connections are optimized for Cisco Prime Infrastructure",
+                    "D. Flow-create events are delayed"
+                ),
+                correct = setOf("D"),
+                explanation = "The ASA and ASASM implementations of NetFlow Secure Event Logging (NSEL) provide the following major functions: Delays the export of flow-create events.",
+                reference = "https://www.cisco.com/c/en/us/td/docs/security/asa/asa92/configuration/general/asa-general-cli/monitor-nsel.pdf"
+            ),
+            Question.MultipleChoice(
+                question = "An engineer is configuring 802.1X authentication on Cisco switches in the network and is using CoA as a mechanism. Which port on the firewall must be opened to allow the CoA traffic to traverse the network?",
+                options = listOf(
+                    "A. TCP 6514",
+                    "B. UDP 1700",
+                    "C. TCP 49",
+                    "D. UDP 1812"
+                ),
+                correct = setOf("B"),
+                explanation = "CoA Messages are sent on two different udp ports depending on the platform. Cisco standardizes on UDP port 1700, while the actual RFC calls out using UDP port 3799.",
+                reference = "https://www.cisco.com/c/en/us/support/docs/security-vpn/ipsec-negotiation-ike-protocols/14106-how-to-ipsec.html"
+            ),
+            Question.MultipleChoice(
+                question = "Which public cloud provider supports the Cisco Next Generation Firewall Virtual?",
+                options = listOf(
+                    "A. Google Cloud Platform",
+                    "B. Red Hat Enterprise Visualization",
+                    "C. VMware ESXi",
+                    "D. Amazon Web Services"
+                ),
+                correct = setOf("D"),
+                explanation = "The Cisco NGFW virtual appliance is available in the AWS and Azure marketplaces. In AWS, it can be deployed in routed and passive modes. Passive mode design requires ERSPAN, the Encapsulated Remote Switched Port Analyzer, which is currently not available in Azure.",
+                reference = "https://www.cisco.com/c/en/us/products/collateral/security/adaptive-security-virtual-appliance-asav/white-paper-c11-740505.html"
+            ),
+            Question.DragAndDrop(
+                question = "Match the suspicious patterns for the Cisco Tetration platform with their correct definitions.",
+                items = listOf(
+                    "interesting file access",
+                    "file access from a different user",
+                    "user login suspicious behavior",
+                    "privilege escalation"
+                ),
+                categories = listOf(
+                    "Cisco Tetration platform can be armed to look at sensitive files",
+                    "Cisco Tetration platform learns the normal behavior of which file is accessed by which user",
+                    "Cisco Tetration platform watches user login failures and user login methods",
+                    "Watches for privilege changes in the process lineage tree"
+                ),
+                correctMapping = mapOf(
+                    "interesting file access" to "Cisco Tetration platform can be armed to look at sensitive files",
+                    "file access from a different user" to "Cisco Tetration platform learns the normal behavior of which file is accessed by which user",
+                    "user login suspicious behavior" to "Cisco Tetration platform watches user login failures and user login methods",
+                    "privilege escalation" to "Watches for privilege changes in the process lineage tree"
+                ),
+                explanation = "Cisco Tetration platform studies the behavior of various processes and applications in the workload, measuring them against known bad behavior sequences. It factors in process hashes and understands clear definitions of these building blocks to watch for suspicious patterns including shell code execution, privilege escalation, side channel attacks, raw socket creation, user login behavior, file access patterns, and unseen commands.",
+                reference = "https://www.cisco.com/c/en/us/products/collateral/data-center-analytics/tetration-analytics/white-paper-c11-740380.html"
             )
         ))
     }
