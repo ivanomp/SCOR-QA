@@ -105,26 +105,18 @@ class QuizActivity : AppCompatActivity() {
             }
 
             skipButton.setOnClickListener {
-                // Show a confirmation dialog before skipping
-                MaterialAlertDialogBuilder(this)
-                    .setTitle("Skip Question")
-                    .setMessage("Are you sure you want to skip this question? You can come back to it later.")
-                    .setPositiveButton("Skip") { _, _ ->
-                        // Add current question to skipped questions list if not already answered
-                        if (!answeredQuestions.any { it.questionIndex == currentQuestionIndex }) {
-                            currentQuestion?.let { question ->
-                                answeredQuestions.add(AnsweredQuestion(
-                                    questionIndex = currentQuestionIndex,
-                                    question = question,
-                                    selectedOptions = setOf(),
-                                    isSkipped = true
-                                ))
-                            }
-                        }
-                        showNextQuestion()
+                // Add current question to skipped questions list if not already answered
+                if (!answeredQuestions.any { it.questionIndex == currentQuestionIndex }) {
+                    currentQuestion?.let { question ->
+                        answeredQuestions.add(AnsweredQuestion(
+                            questionIndex = currentQuestionIndex,
+                            question = question,
+                            selectedOptions = setOf(),
+                            isSkipped = true
+                        ))
                     }
-                    .setNegativeButton("Cancel", null)
-                    .show()
+                }
+                showNextQuestion()
             }
 
             nextButton.setOnClickListener {
