@@ -40,25 +40,35 @@ class QuizActivity : AppCompatActivity() {
     private var score = 0
     private var questions = listOf<Question>()
     private var currentQuestion: Question? = null
-    private val selectedOptions = mutableSetOf<String>()
-    private val itemPlacements = mutableMapOf<String, String>() // item text to category
-    private lateinit var soundManager: SoundManager
+    private var selectedOptions = setOf<String>()
+    private var itemPlacements = mutableMapOf<String, String>() // item text to category
+    private var soundManager: SoundManager? = null
+
+    companion object {
+        private const val QUESTION_LIMIT = 50 // Default number of questions per quiz
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         try {
             super.onCreate(savedInstanceState)
             setContentView(R.layout.activity_quiz)
 
-            // Initialize managers
-            soundManager = SoundManager(this)
-
             // Initialize views
             initializeViews()
-
-            // Load questions
-            questions = QuizQuestions.questions
             
-            // Start quiz
+            // Initialize sound manager
+            soundManager = SoundManager(this)
+
+            // Get questions based on intent extras
+            val questionLimit = intent.getIntExtra("question_limit", QUESTION_LIMIT)
+            val category = intent.getStringExtra("category")
+            
+            questions = when {
+                category != null -> QuizQuestions.getQuestionsByCategory(category)
+                else -> QuizQuestions.getRandomQuestions(questionLimit)
+            }
+
+            // Show first question
             showQuestion()
         } catch (e: Exception) {
             Log.e("QuizActivity", "Error in onCreate", e)
@@ -90,7 +100,7 @@ class QuizActivity : AppCompatActivity() {
         try {
             if (currentQuestionIndex < questions.size) {
                 currentQuestion = questions[currentQuestionIndex]
-                selectedOptions.clear()
+                selectedOptions = setOf()
                 itemPlacements.clear()
                 
                 when (val question = currentQuestion) {
@@ -340,21 +350,21 @@ class QuizActivity : AppCompatActivity() {
             
             if (selectedOptions.contains(letter)) {
                 // Deselect option
-                selectedOptions.remove(letter)
+                selectedOptions = selectedOptions - letter
                 button.backgroundTintList = ContextCompat.getColorStateList(this, android.R.color.white)
                 button.setTextColor(ContextCompat.getColor(this, android.R.color.darker_gray))
             } else {
                 // Select option
                 if (question.correct.size == 1) {
                     // Single answer question - clear previous selection
-                    selectedOptions.clear()
+                    selectedOptions = setOf()
                     for (i in 0 until optionsContainer.childCount) {
                         val btn = optionsContainer.getChildAt(i) as MaterialButton
                         btn.backgroundTintList = ContextCompat.getColorStateList(this, android.R.color.white)
                         btn.setTextColor(ContextCompat.getColor(this, android.R.color.darker_gray))
                     }
                 }
-                selectedOptions.add(letter)
+                selectedOptions = selectedOptions + letter
                 button.backgroundTintList = ContextCompat.getColorStateList(this, android.R.color.holo_blue_light)
                 button.setTextColor(ContextCompat.getColor(this, android.R.color.white))
             }
@@ -416,10 +426,10 @@ class QuizActivity : AppCompatActivity() {
 
         // Play sound and update score based on result
         if (isCorrect) {
-            soundManager.playCorrectSound()
+            soundManager?.playCorrectSound()
             score++
         } else {
-            soundManager.playIncorrectSound()
+            soundManager?.playIncorrectSound()
         }
 
         // Show explanation
@@ -430,7 +440,7 @@ class QuizActivity : AppCompatActivity() {
         // First check if all items have been placed
         if (itemPlacements.size != question.items.size) {
             // Not all items have been placed
-            soundManager.playIncorrectSound()
+            soundManager?.playIncorrectSound()
             showExplanation(
                 "Please place all items into categories before submitting.",
                 question.reference,
@@ -452,10 +462,10 @@ class QuizActivity : AppCompatActivity() {
 
         // Play sound and update score based on result
         if (isCorrect) {
-            soundManager.playCorrectSound()
+            soundManager?.playCorrectSound()
             score++
         } else {
-            soundManager.playIncorrectSound()
+            soundManager?.playIncorrectSound()
         }
 
         // Show explanation
