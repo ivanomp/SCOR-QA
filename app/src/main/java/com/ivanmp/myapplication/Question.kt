@@ -1,5 +1,12 @@
 package com.ivanmp.myapplication
 
+enum class QuestionCategory {
+    NETWORK_SECURITY_FUNDAMENTALS,
+    SECURITY_TECHNOLOGIES,
+    SECURITY_MANAGEMENT,
+    ADVANCED_SECURITY
+}
+
 sealed class Question {
     data class MultipleChoice(
         val question: String,
@@ -7,6 +14,7 @@ sealed class Question {
         val correct: Set<String>,
         val explanation: String,
         val reference: String,
+        val category: QuestionCategory,
         val imageResourceName: String? = null
     ) : Question()
 
@@ -17,6 +25,7 @@ sealed class Question {
         val correctMapping: Map<String, String>, // item to category mapping
         val explanation: String,
         val reference: String,
+        val category: QuestionCategory,
         val imageResourceName: String? = null
     ) : Question()
 }
