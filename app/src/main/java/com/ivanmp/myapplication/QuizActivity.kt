@@ -31,6 +31,7 @@ import androidx.core.widget.NestedScrollView
 import com.github.chrisbanes.photoview.PhotoView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.ivanmp.myapplication.databinding.ActivityQuizBinding
+import android.widget.Toast
 
 class QuizActivity : AppCompatActivity() {
     private lateinit var progressIndicator: LinearProgressIndicator
@@ -45,27 +46,28 @@ class QuizActivity : AppCompatActivity() {
     private lateinit var explanationCard: MaterialCardView
     private lateinit var resultText: TextView
     private lateinit var explanationText: TextView
+    private lateinit var referenceText: TextView
     private lateinit var nextButton: MaterialButton
     private lateinit var previousButton: MaterialButton
     private lateinit var skipButton: MaterialButton
     private lateinit var binding: ActivityQuizBinding
     private var currentQuestionIndex = 0
     private var score = 0
-    private var questions = QuestionBank.questions
+    private var questions: List<Question> = emptyList()
     private var currentQuestion: Question? = null
     private var selectedOptions = setOf<String>()
     private var itemPlacements = mutableMapOf<String, String>() // item text to category
     private var soundManager: SoundManager? = null
     private var currentCorrectAnswers: Set<String> = setOf()
     private var answeredQuestions = mutableListOf<AnsweredQuestion>()
+    private var selectedAnswer: String? = null
 
     data class AnsweredQuestion(
-        val questionIndex: Int,
-        val question: Question,
-        val selectedOptions: Set<String>,
-        val itemPlacements: Map<String, String> = mapOf(),
-        val isCorrect: Boolean = false,
-        val isSkipped: Boolean = false
+        val questionId: Int,
+        val questionText: String,
+        val selectedAnswer: String,
+        val correctAnswer: String,
+        val isCorrect: Boolean
     )
 
     companion object {
@@ -74,64 +76,83 @@ class QuizActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityQuizBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        
-        setupUI()
-        showQuestion(currentQuestionIndex)
+        setContentView(R.layout.activity_quiz)
+
+        // Initialize views
+        questionText = findViewById(R.id.questionText)
+        questionImage = findViewById(R.id.questionImage)
+        optionsContainer = findViewById(R.id.optionsContainer)
+        explanationCard = findViewById(R.id.explanationCard)
+        explanationText = findViewById(R.id.explanationText)
+        referenceText = findViewById(R.id.referenceText)
+        nextButton = findViewById(R.id.nextButton)
+        previousButton = findViewById(R.id.previousButton)
+        submitButton = findViewById(R.id.submitButton)
+        progressIndicator = findViewById(R.id.progressIndicator)
+
+        // Get questions from intent
+        val category = intent.getStringExtra("category") ?: "general"
+        questions = QuestionBank.questions
+
+        // Initialize quiz state
+        currentQuestionIndex = 0
+        score = 0
+        selectedAnswer = null
+
+        // Set up click listeners
+        nextButton.setOnClickListener {
+            if (currentQuestionIndex < questions.size - 1) {
+                currentQuestionIndex++
+                showQuestion(questions[currentQuestionIndex])
+            } else {
+                finishQuiz()
+            }
+        }
+
+        previousButton.setOnClickListener {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--
+                showQuestion(questions[currentQuestionIndex])
+            }
+        }
+
+        submitButton.setOnClickListener {
+            val currentQuestion = questions[currentQuestionIndex] as? Question.MultipleChoice
+            if (currentQuestion != null && selectedAnswer != null) {
+                checkAnswer(selectedAnswer!!, currentQuestion)
+            }
+        }
+
+        // Show first question
+        if (questions.isNotEmpty()) {
+            showQuestion(questions[0])
+        }
     }
     
     private fun setupUI() {
         binding.nextButton.setOnClickListener {
             if (currentQuestionIndex < questions.size - 1) {
                 currentQuestionIndex++
-                showQuestion(currentQuestionIndex)
+                showQuestion(questions[currentQuestionIndex])
             }
         }
         
         binding.previousButton.setOnClickListener {
             if (currentQuestionIndex > 0) {
                 currentQuestionIndex--
-                showQuestion(currentQuestionIndex)
+                showQuestion(questions[currentQuestionIndex])
             }
         }
         
         binding.skipButton.setOnClickListener {
             if (currentQuestionIndex < questions.size - 1) {
                 currentQuestionIndex++
-                showQuestion(currentQuestionIndex)
+                showQuestion(questions[currentQuestionIndex])
             }
         }
     }
     
-    private fun showQuestion(index: Int) {
-        val question = questions[index]
-        currentQuestion = question
-        
-        // Update question number and progress
-        binding.questionNumberText.text = "Question ${when(question) {
-            is Question.MultipleChoice -> question.id
-            is Question.DragAndDrop -> question.id
-        }}"
-        binding.progressIndicator.progress = ((index + 1) * 100) / questions.size
-        
-        // Show question text
-        binding.questionText.text = when(question) {
-            is Question.MultipleChoice -> question.text
-            is Question.DragAndDrop -> question.text
-        }
-        
-        // Show/hide previous button
-        binding.previousButton.visibility = if (index > 0) View.VISIBLE else View.GONE
-        
-        // Update next button text for last question
-        binding.nextButton.text = if (index == questions.size - 1) "Finish" else "Next"
-        
-        // Clear previous state
-        binding.optionsContainer.visibility = View.GONE
-        binding.dragDropContainer.visibility = View.GONE
-        binding.explanationCard.visibility = View.GONE
-        
+    private fun showQuestion(question: Question) {
         when (question) {
             is Question.MultipleChoice -> showMultipleChoiceQuestion(question)
             is Question.DragAndDrop -> showDragAndDropQuestion(question)
@@ -139,29 +160,88 @@ class QuizActivity : AppCompatActivity() {
     }
     
     private fun showMultipleChoiceQuestion(question: Question.MultipleChoice) {
-        binding.optionsContainer.visibility = View.VISIBLE
-        binding.dragDropContainer.visibility = View.GONE
+        // Update question text
+        questionText.text = question.text
         
-        // Clear previous options
-        binding.optionsContainer.removeAllViews()
+        // Handle question image
+        if (question.imageResourceName != null) {
+            val imageResId = resources.getIdentifier(
+                question.imageResourceName,
+                "drawable",
+                packageName
+            )
+            if (imageResId != 0) {
+                questionImage.setImageResource(imageResId)
+                questionImage.visibility = View.VISIBLE
+            } else {
+                questionImage.visibility = View.GONE
+            }
+        } else {
+            questionImage.visibility = View.GONE
+        }
         
-        // Add options
-        question.options.forEachIndexed { index, option ->
-            val button = MaterialButton(this, null, com.google.android.material.R.attr.materialButtonOutlinedStyle).apply {
-                text = "${('A' + index)}. $option"
+        optionsContainer.removeAllViews()
+        explanationCard.visibility = View.GONE
+        nextButton.visibility = View.GONE
+        submitButton.visibility = View.GONE
+
+        // Animate question text
+        val slideIn = AnimationUtils.loadAnimation(this, android.R.anim.slide_in_left)
+        slideIn.duration = 500
+        questionText.startAnimation(slideIn)
+
+        // Create a map of original options to track correct answers
+        val originalOptions = question.options.associateBy { it.substringBefore(".") }
+        
+        // Shuffle only the content, keeping letters in order
+        val shuffledContents = question.options.map { it.substringAfter(". ").trim() }.shuffled()
+        val letters = ('A'..'E').take(question.options.size)
+        
+        // Create new options with ordered letters but shuffled content
+        val newOptions = letters.zip(shuffledContents).map { (letter, content) -> "$letter. $content" }
+        
+        // Create a mapping of new options to determine correct answers
+        val newCorrectAnswers = setOf(question.correctAnswer.substringBefore("."))
+
+        newOptions.forEach { option ->
+            val letter = option.substringBefore(".")
+            val text = option.substringAfter(". ").trim()
+            
+            val button = MaterialButton(this).apply {
+                this.text = option
+                isAllCaps = false
                 textSize = 16f
+                textAlignment = View.TEXT_ALIGNMENT_VIEW_START
+                backgroundTintList = ContextCompat.getColorStateList(context, android.R.color.white)
+                setTextColor(ContextCompat.getColor(context, android.R.color.darker_gray))
+                elevation = 4f
+                strokeColor = ContextCompat.getColorStateList(context, android.R.color.darker_gray)
+                strokeWidth = 1
+                cornerRadius = resources.getDimensionPixelSize(android.R.dimen.notification_large_icon_height) / 8
+
                 layoutParams = LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT,
                     LinearLayout.LayoutParams.WRAP_CONTENT
                 ).apply {
-                    setMargins(0, 0, 0, 16.dpToPx())
+                    setMargins(0, 8, 0, 8)
                 }
-                setOnClickListener {
-                    checkAnswer(option, question.correctAnswer)
-                }
+                setPadding(32, 24, 32, 24)
+                setOnClickListener { onOptionSelected(this, letter) }
             }
-            binding.optionsContainer.addView(button)
+            optionsContainer.addView(button)
+            
+            // Animate each option button
+            val fadeIn = AnimationUtils.loadAnimation(this, android.R.anim.fade_in)
+            fadeIn.duration = 500
+            button.startAnimation(fadeIn)
         }
+
+        // Store the new correct answers for checking later
+        selectedOptions = setOf()
+        currentCorrectAnswers = newCorrectAnswers
+
+        // Ensure the question is visible by scrolling to top
+        findViewById<NestedScrollView>(R.id.mainScrollView).smoothScrollTo(0, 0)
     }
     
     private fun showDragAndDropQuestion(question: Question.DragAndDrop) {
@@ -172,26 +252,45 @@ class QuizActivity : AppCompatActivity() {
         // This will be implemented later
     }
     
-    private fun checkAnswer(selectedAnswer: String, correctAnswer: String) {
-        val question = currentQuestion as? Question.MultipleChoice ?: return
-        binding.explanationCard.visibility = View.VISIBLE
-        
-        val isCorrect = selectedAnswer == correctAnswer
-        
-        binding.resultText.text = if (isCorrect) "Correct!" else "Incorrect"
-        binding.resultText.setTextColor(getColor(if (isCorrect) R.color.success else R.color.error))
-        
-        // Show explanation
-        val explanationText = buildString {
-            append(question.explanation)
-            if (!question.reference.isNullOrBlank()) {
-                append("\n\nReference: ${question.reference}")
-            }
+    private fun checkAnswer(selectedAnswer: String, question: Question.MultipleChoice) {
+        // Disable all option buttons
+        for (i in 0 until optionsContainer.childCount) {
+            val button = optionsContainer.getChildAt(i) as? MaterialButton
+            button?.isEnabled = false
         }
-        binding.explanationText.text = explanationText
-        
+
+        // Show explanation
+        explanationText.text = question.explanation
+        explanationCard.visibility = View.VISIBLE
+
+        // Show reference if available
+        if (question.reference != null) {
+            referenceText.text = "Reference: ${question.reference}"
+            referenceText.visibility = View.VISIBLE
+        } else {
+            referenceText.visibility = View.GONE
+        }
+
         // Show next button
-        binding.nextButton.visibility = View.VISIBLE
+        nextButton.visibility = View.VISIBLE
+
+        // Animate explanation card
+        val slideIn = AnimationUtils.loadAnimation(this, android.R.anim.slide_in_left)
+        slideIn.duration = 500
+        explanationCard.startAnimation(slideIn)
+
+        // Check if answer is correct
+        val isCorrect = selectedAnswer == question.correctAnswer.substringBefore(".")
+        if (isCorrect) {
+            score++
+            showToast("Correct!")
+        } else {
+            showToast("Incorrect. The correct answer was: ${question.correctAnswer.substringBefore(".")}")
+        }
+
+        // Update progress
+        currentQuestionIndex++
+        updateProgress()
     }
     
     private fun Int.dpToPx(): Int {
@@ -213,5 +312,50 @@ class QuizActivity : AppCompatActivity() {
             .setMessage("An error occurred. Please try again.")
             .setPositiveButton("OK") { _, _ -> finish() }
             .show()
+    }
+
+    private fun onOptionSelected(button: MaterialButton, selectedLetter: String) {
+        // Deselect all buttons
+        for (i in 0 until optionsContainer.childCount) {
+            val optionButton = optionsContainer.getChildAt(i) as? MaterialButton
+            optionButton?.setBackgroundColor(getColor(android.R.color.white))
+            optionButton?.setTextColor(getColor(android.R.color.darker_gray))
+        }
+
+        // Select the clicked button
+        button.setBackgroundColor(getColor(R.color.primary))
+        button.setTextColor(getColor(android.R.color.white))
+
+        // Show submit button
+        submitButton.visibility = View.VISIBLE
+
+        // Store selected answer
+        selectedAnswer = selectedLetter
+    }
+
+    private fun finishQuiz() {
+        val intent = Intent(this, QuizCompleteActivity::class.java).apply {
+            putExtra("score", score)
+            putExtra("totalQuestions", questions.size)
+            putExtra("category", intent.getStringExtra("category"))
+        }
+        startActivity(intent)
+        finish()
+    }
+
+    private fun updateProgress() {
+        val progress = ((currentQuestionIndex + 1) * 100) / questions.size
+        progressIndicator.progress = progress
+        
+        // Update question number text
+        findViewById<TextView>(R.id.questionNumberText).text = "Question ${currentQuestionIndex + 1} of ${questions.size}"
+        
+        // Update navigation buttons
+        previousButton.visibility = if (currentQuestionIndex > 0) View.VISIBLE else View.GONE
+        nextButton.text = if (currentQuestionIndex == questions.size - 1) "Finish" else "Next"
+    }
+
+    private fun showToast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 } 

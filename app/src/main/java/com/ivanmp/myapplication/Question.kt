@@ -26,41 +26,145 @@ sealed class Question {
 object QuestionBank {
     val questions = listOf(
         Question.MultipleChoice(
-            id = 38,
-            text = "What is the purpose of the My Devices Portal in a Cisco ISE environment?",
+            id = 1,
+            text = "What is a characteristic of a bridge group in ASA Firewall transparent mode?",
             options = listOf(
-                "to register new laptops and mobile devices",
-                "to request a newly provisioned mobile device",
-                "to provision userless and agentless systems",
-                "to manage and deploy antivirus definitions and patches on systems owned by the end user"
+                "A. It allows the ASA to act as a Layer 2 device",
+                "B. It requires IP addresses on the bridge group interfaces",
+                "C. It supports dynamic routing protocols",
+                "D. It can only be used with VLANs"
             ),
-            correctAnswer = "to register new laptops and mobile devices",
-            explanation = "Depending on your company policy, you might be able to use your mobile phones, tablets, printers, Internet radios, and other network devices on your company's network. You can use the My Devices portal to register and manage these devices on your company's network.",
-            reference = "https://www.cisco.com/c/en/us/td/docs/security/ise/2-4/mydevices/b_mydevices_2x.html"
+            correctAnswer = "A. It allows the ASA to act as a Layer 2 device",
+            explanation = "A bridge group in transparent mode allows the ASA to act as a Layer 2 device, forwarding traffic based on MAC addresses rather than IP addresses.",
+            reference = "CCNP And CCIE Security Core SCOR 350-701 Official Cert Guide"
+        ),
+        Question.DragAndDrop(
+            id = 2,
+            text = "Categorize the following capabilities into either Cisco Firepower or Cisco AMP:",
+            items = listOf(
+                "Network-based malware protection",
+                "File reputation and sandboxing",
+                "Endpoint visibility and control",
+                "Application visibility and control",
+                "Network access control",
+                "Threat intelligence integration"
+            ),
+            categories = listOf("Cisco Firepower", "Cisco AMP"),
+            correctMapping = mapOf(
+                "Network-based malware protection" to "Cisco Firepower",
+                "File reputation and sandboxing" to "Cisco AMP",
+                "Endpoint visibility and control" to "Cisco AMP",
+                "Application visibility and control" to "Cisco Firepower",
+                "Network access control" to "Cisco Firepower",
+                "Threat intelligence integration" to "Cisco Firepower"
+            ),
+            explanation = "Cisco Firepower provides network-focused security features like network-based malware protection, application control, and network access control. Cisco AMP focuses on endpoint security with features like file reputation, sandboxing, and endpoint visibility.",
+            reference = "CCNP And CCIE Security Core SCOR 350-701 Official Cert Guide"
         ),
         Question.MultipleChoice(
-            id = 39,
-            text = "An organization is using DHCP Snooping within their network. A user on VLAN 41 on a new switch is complaining that an IP address is not being obtained. Which command should be configured on the switch interface in order to provide the user with network connectivity?",
+            id = 3,
+            text = "When Cisco and other industry organizations publish and inform users of known security findings and vulnerabilities, which name is used?",
             options = listOf(
-                "ip dhcp snooping verify mac-address",
-                "ip dhcp snooping limit 41",
-                "ip dhcp snooping vlan 41",
-                "ip dhcp snooping trust"
+                "A. Common Security Exploits",
+                "B. Common Vulnerabilities and Exposures",
+                "C. Common Exploits and Vulnerabilities",
+                "D. Common Vulnerabilities, Exploits and Threats"
             ),
-            correctAnswer = "ip dhcp snooping trust",
-            explanation = "The port connected to a DHCP server should be configured as trusted port with the \"ip dhcp snooping trust\" command. Other ports connecting to hosts are untrusted ports by default."
+            correctAnswer = "B. Common Vulnerabilities and Exposures",
+            explanation = "The industry standard identifier for public vulnerability disclosure is the Common Vulnerabilities and Exposures (CVE), sponsored by US-CERT.",
+            reference = "CCNP And CCIE Security Core SCOR 350-701 Official Cert Guide"
         ),
         Question.MultipleChoice(
-            id = 40,
-            text = "What is the purpose of the certificate signing request when adding a new certificate for a server?",
+            id = 4,
+            text = "Which two fields are defined in the NetFlow flow? (Choose two)",
             options = listOf(
-                "It is the password for the certificate that is needed to install it with.",
-                "It provides the server information so a certificate can be created and signed",
-                "It provides the certificate client information so the server can authenticate against it when installing",
-                "It is the certificate that will be loaded onto the server"
+                "A. type of service byte",
+                "B. class of service bits",
+                "C. Layer 4 protocol type",
+                "D. destination port",
+                "E. output logical interface"
             ),
-            correctAnswer = "It provides the server information so a certificate can be created and signed",
-            explanation = "A certificate signing request (CSR) is one of the first steps towards getting your own SSL Certificate. Generated on the same server you plan to install the certificate on, the CSR contains information (e.g. common name, organization, country) that the Certificate Authority (CA) will use to create your certificate. It also contains the public key that will be included in your certificate and is signed with the corresponding private key."
+            correctAnswer = "A. type of service byte",
+            explanation = "NetFlow v5 defines a flow with seven key fields including the type of service byte and the destination port, among others.",
+            reference = "CCNP And CCIE Security Core SCOR 350-701 Official Cert Guide"
+        ),
+        Question.MultipleChoice(
+            id = 5,
+            text = "What provides the ability to program and monitor networks from somewhere other than the DNAC GUI?",
+            options = listOf(
+                "A. NetFlow",
+                "B. Desktop client",
+                "C. ASDM",
+                "D. API"
+            ),
+            correctAnswer = "D. API",
+            explanation = "APIs enable network management and monitoring programmatically outside the default DNAC GUI environment.",
+            reference = "CCNP And CCIE Security Core SCOR 350-701 Official Cert Guide"
+        ),
+        Question.MultipleChoice(
+            id = 6,
+            text = "Which Cisco security solution provides network visibility and threat detection through deep packet inspection?",
+            options = listOf(
+                "A. Cisco ISE",
+                "B. Cisco Stealthwatch",
+                "C. Cisco Umbrella",
+                "D. Cisco ESA"
+            ),
+            correctAnswer = "B. Cisco Stealthwatch",
+            explanation = "Cisco Stealthwatch provides network visibility and threat detection through deep packet inspection and NetFlow analysis.",
+            reference = "CCNP And CCIE Security Core SCOR 350-701 Official Cert Guide"
+        ),
+        Question.MultipleChoice(
+            id = 7,
+            text = "What is the primary function of Cisco ISE?",
+            options = listOf(
+                "A. Network monitoring",
+                "B. Access control and policy enforcement",
+                "C. Email security",
+                "D. Web security"
+            ),
+            correctAnswer = "B. Access control and policy enforcement",
+            explanation = "Cisco ISE (Identity Services Engine) is primarily used for network access control, policy enforcement, and identity management.",
+            reference = "CCNP And CCIE Security Core SCOR 350-701 Official Cert Guide"
+        ),
+        Question.MultipleChoice(
+            id = 8,
+            text = "Which security feature is NOT typically associated with Cisco Umbrella?",
+            options = listOf(
+                "A. DNS security",
+                "B. Cloud-delivered firewall",
+                "C. Network access control",
+                "D. Threat intelligence"
+            ),
+            correctAnswer = "C. Network access control",
+            explanation = "Cisco Umbrella provides DNS security, cloud-delivered firewall, and threat intelligence, but not network access control (which is handled by ISE).",
+            reference = "CCNP And CCIE Security Core SCOR 350-701 Official Cert Guide"
+        ),
+        Question.MultipleChoice(
+            id = 9,
+            text = "What is the main purpose of Cisco ESA (Email Security Appliance)?",
+            options = listOf(
+                "A. Network monitoring",
+                "B. Email security and spam filtering",
+                "C. Web security",
+                "D. Access control"
+            ),
+            correctAnswer = "B. Email security and spam filtering",
+            explanation = "Cisco ESA is specifically designed for email security, including spam filtering, malware protection, and email encryption.",
+            reference = "CCNP And CCIE Security Core SCOR 350-701 Official Cert Guide"
+        ),
+        Question.MultipleChoice(
+            id = 10,
+            text = "Which Cisco security solution provides cloud-based web security and data protection?",
+            options = listOf(
+                "A. Cisco WSA",
+                "B. Cisco Cloudlock",
+                "C. Cisco ESA",
+                "D. Cisco ISE"
+            ),
+            correctAnswer = "B. Cisco Cloudlock",
+            explanation = "Cisco Cloudlock provides cloud-based web security and data protection for cloud applications and services.",
+            reference = "CCNP And CCIE Security Core SCOR 350-701 Official Cert Guide"
         )
     )
 }
