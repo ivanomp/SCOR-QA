@@ -3,7 +3,7 @@ package com.ivanmp.myapplication
 object QuizQuestions {
     private val allQuestions = mutableListOf<Question>()
     private var currentBatchStart = 0
-    private const val BATCH_SIZE = 50
+    private const val BATCH_SIZE = 100
 
     // Initialize questions
     init {
@@ -626,6 +626,268 @@ object QuizQuestions {
                 ),
                 correct = setOf("C", "E"),
                 explanation = "Cryptographic algorithms defined for use with IPsec include:\n+ HMAC-SHA1/SHA2 for integrity protection and authenticity.\n+ TripleDES-CBC for confidentiality\n+ AES-CBC and AES-CTR for confidentiality.\n+ AES-GCM and ChaCha20-Poly1305 providing confidentiality and authentication together efficiently.",
+                reference = "CCNP And CCIE Security Core SCOR 350-701 Official Cert Guide"
+            ),
+            Question.DragAndDrop(
+                question = "Match the descriptions with the appropriate encryption algorithm type (Symmetric or Asymmetric):",
+                items = listOf(
+                    "requires more time",
+                    "requires secret keys",
+                    "3DES",
+                    "Diffie-Hellman exchange"
+                ),
+                categories = listOf(
+                    "Asymmetric",
+                    "Symmetric"
+                ),
+                correctMapping = mapOf(
+                    "requires more time" to "Asymmetric",
+                    "requires secret keys" to "Symmetric",
+                    "3DES" to "Symmetric",
+                    "Diffie-Hellman exchange" to "Asymmetric"
+                ),
+                explanation = "Symmetric encryption uses a single key that needs to be shared among the people who need to receive the message while asymmetric encryption uses a pair of public key and a private key to encrypt and decrypt messages when communicating. Asymmetric encryption takes relatively more time than the symmetric encryption. Diffie Hellman algorithm is an asymmetric algorithm used to establish a shared secret for a symmetric key algorithm. Triple DES (3DES), a symmetric-key algorithm for the encryption of electronic data, is the successor of DES (Data Encryption Standard) and provides more secure encryption then DES.",
+                reference = "CCNP And CCIE Security Core SCOR 350-701 Official Cert Guide"
+            ),
+            Question.MultipleChoice(
+                question = "In which type of attack does the attacker insert their machine between two hosts that are communicating with each other?",
+                options = listOf(
+                    "A. LDAP injection",
+                    "B. man-in-the-middle",
+                    "C. cross-site scripting",
+                    "D. insecure API"
+                ),
+                correct = setOf("B"),
+                explanation = "In a man-in-the-middle (MITM) attack, the attacker secretly positions themselves between two communicating hosts, intercepting and potentially modifying the communication between them.",
+                reference = "CCNP And CCIE Security Core SCOR 350-701 Official Cert Guide"
+            ),
+            Question.MultipleChoice(
+                question = "Which Dos attack uses fragmented packets to crash a target machine?",
+                options = listOf(
+                    "A. smurf",
+                    "B. MITM",
+                    "C. teardrop",
+                    "D. LAND"
+                ),
+                correct = setOf("C"),
+                explanation = "A teardrop attack is a denial-of-service (DoS) attack that involves sending fragmented packets to a target machine. Since the machine receiving such packets cannot reassemble them due to a bug in TCP/IP fragmentation reassembly, the packets overlap one another, crashing the target network device. This generally happens on older operating systems such as Windows 3.1x, Windows 95, Windows NT and versions of the Linux kernel prior to 2.1.63.",
+                reference = "CCNP And CCIE Security Core SCOR 350-701 Official Cert Guide"
+            ),
+            Question.MultipleChoice(
+                question = "Why is it important to have logical security controls on endpoints even though the users are trained to spot security threats and the network devices already help prevent them?",
+                options = listOf(
+                    "A. to prevent theft of the endpoints",
+                    "B. because defense-in-depth stops at the network",
+                    "C. to expose the endpoint to more threats",
+                    "D. because human error or insider threats will still exist"
+                ),
+                correct = setOf("D"),
+                explanation = "Even with well-trained users and network security devices in place, logical security controls on endpoints are crucial because human error and insider threats remain significant risks that need to be mitigated at the endpoint level.",
+                reference = "CCNP And CCIE Security Core SCOR 350-701 Official Cert Guide"
+            ),
+            Question.MultipleChoice(
+                question = "Which type of API is being used when a security application notifies a controller within a software-defined network architecture about a specific security threat? (Choose two)",
+                options = listOf(
+                    "A. westbound AP",
+                    "B. southbound API",
+                    "C. northbound API",
+                    "D. eastbound API"
+                ),
+                correct = setOf("B", "C"),
+                explanation = "In a software-defined network architecture, northbound APIs are used for communication between applications and the controller, while southbound APIs are used for communication between the controller and network devices. When a security application notifies a controller about a threat, both northbound and southbound APIs are involved in the process.",
+                reference = "CCNP And CCIE Security Core SCOR 350-701 Official Cert Guide"
+            ),
+            Question.DragAndDrop(
+                question = "Match each security threat with its corresponding example:",
+                items = listOf(
+                    "A stolen customer database that contained social security numbers and was published online",
+                    "A phishing site appearing to be a legitimate login page captures user login information",
+                    "An application attack using botnets from multiple remote locations that flood a web application causing a degraded performance or a complete outage",
+                    "A malicious user gained access to an organization's database from a cloud-based application programming interface that lacked strong authentication controls"
+                ),
+                categories = listOf(
+                    "data breach",
+                    "compromised credentials",
+                    "DoS/DDoS",
+                    "Insecure APIs"
+                ),
+                correctMapping = mapOf(
+                    "A stolen customer database that contained social security numbers and was published online" to "data breach",
+                    "A phishing site appearing to be a legitimate login page captures user login information" to "compromised credentials",
+                    "An application attack using botnets from multiple remote locations that flood a web application causing a degraded performance or a complete outage" to "DoS/DDoS",
+                    "A malicious user gained access to an organization's database from a cloud-based application programming interface that lacked strong authentication controls" to "Insecure APIs"
+                ),
+                explanation = "A data breach is the intentional or unintentional release of secure or private/confidential information to an untrusted environment. When your credentials have been compromised, it means someone other than you may be in possession of your account information, such as your username and/or password. A DoS/DDoS attack uses multiple sources to flood a target with traffic, causing service degradation or outage. Insecure APIs lacking proper authentication can allow unauthorized access to systems and data.",
+                reference = "CCNP And CCIE Security Core SCOR 350-701 Official Cert Guide"
+            ),
+            Question.MultipleChoice(
+                question = "When planning a VPN deployment, for which reason does an engineer opt for an active/active FlexVPN configuration as opposed to DMVPN?",
+                options = listOf(
+                    "A. Multiple routers or VRFs are required.",
+                    "B. Traffic is distributed statically by default.",
+                    "C. Floating static routes are required.",
+                    "D. HSRP is used for fallover."
+                ),
+                correct = setOf("B"),
+                explanation = "In an active/active FlexVPN configuration, traffic is distributed statically by default, which is a key differentiator from DMVPN.",
+                reference = "CCNP And CCIE Security Core SCOR 350-701 Official Cert Guide"
+            ),
+            Question.MultipleChoice(
+                question = "Which algorithm provides asymmetric encryption?",
+                options = listOf(
+                    "A. RC4",
+                    "B. AES",
+                    "C. RSA",
+                    "D. 3DES"
+                ),
+                correct = setOf("C"),
+                explanation = "RSA (Rivest-Shamir-Adleman) is an asymmetric encryption algorithm that uses a pair of keys (public and private) for encryption and decryption. RC4, AES, and 3DES are symmetric encryption algorithms.",
+                reference = "CCNP And CCIE Security Core SCOR 350-701 Official Cert Guide"
+            ),
+            Question.MultipleChoice(
+                question = "What are two functions of secret key cryptography? (Choose two)",
+                options = listOf(
+                    "A. key selection without integer factorization",
+                    "B. utilization of different keys for encryption and decryption",
+                    "C. utilization of large prime number iterations",
+                    "D. provides the capability to only know the key on one side",
+                    "E. utilization of less memory"
+                ),
+                correct = setOf("A", "E"),
+                explanation = "Secret key cryptography (symmetric cryptography) uses the same key for encryption and decryption. It uses less memory than public-key cryptography and allows key selection without integer factorization. The secret key must be shared between sender and receiver.",
+                reference = "https://www.jigsawacademy.com/blogs/cyber-security/secret-key-cryptography/"
+            ),
+            Question.MultipleChoice(
+                question = "For Cisco IOS PKI, which two types of Servers are used as a distribution point for CRLs? (Choose two)",
+                options = listOf(
+                    "A. SDP",
+                    "B. LDAP",
+                    "C. subordinate CA",
+                    "D. SCP",
+                    "E. HTTP"
+                ),
+                correct = setOf("B", "E"),
+                explanation = "Cisco IOS PKI uses LDAP and HTTP as distribution mechanisms for certificate revocation lists (CRLs).",
+                reference = "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_conn_pki/configuration/15-mt/sec-pki-15-mt-book/sec-pki-overview.html"
+            ),
+            Question.MultipleChoice(
+                question = "Which attack type attempts to shut down a machine or network so that users are not able to access it?",
+                options = listOf(
+                    "A. smurf",
+                    "B. bluesnarfing",
+                    "C. MAC spoofing",
+                    "D. IP spoofing"
+                ),
+                correct = setOf("A"),
+                explanation = "The Smurf attack is a DDoS attack in which large numbers of ICMP packets with the intended victim's spoofed source IP are broadcast to a computer network using an IP broadcast address, attempting to shut down the target network or machine.",
+                reference = "CCNP And CCIE Security Core SCOR 350-701 Official Cert Guide"
+            ),
+            Question.MultipleChoice(
+                question = "What is a difference between DMVPN and sVTI?",
+                options = listOf(
+                    "A. DMVPN supports tunnel encryption, whereas sVTI does not.",
+                    "B. DMVPN supports dynamic tunnel establishment, whereas sVTI does not.",
+                    "C. DMVPN supports static tunnel establishment, whereas sVTI does not.",
+                    "D. DMVPN provides interoperability with other vendors, whereas sVTI does not."
+                ),
+                correct = setOf("B"),
+                explanation = "A key difference between DMVPN and sVTI is that DMVPN supports dynamic tunnel establishment while sVTI requires static configuration.",
+                reference = "CCNP And CCIE Security Core SCOR 350-701 Official Cert Guide"
+            ),
+            Question.MultipleChoice(
+                question = "What features does Cisco FTDv provide over ASAv?",
+                options = listOf(
+                    "A. Cisco FTDv runs on VMWare while ASAv does not",
+                    "B. Cisco FTDv provides 1GB of firewall throughput while Cisco ASAv does not",
+                    "C. Cisco FTDv runs on AWS while ASAv does not",
+                    "D. Cisco FTDv supports URL filtering while ASAv does not"
+                ),
+                correct = setOf("D"),
+                explanation = "Cisco Firepower Threat Defense Virtual (FTDv) provides URL filtering capabilities that are not available in ASAv.",
+                reference = "CCNP And CCIE Security Core SCOR 350-701 Official Cert Guide"
+            ),
+            Question.MultipleChoice(
+                question = "In which situation should an Endpoint Detection and Response solution be chosen versus an Endpoint Protection Platform?",
+                options = listOf(
+                    "A. when there is a need for traditional anti-malware detection",
+                    "B. when there is no need to have the solution centrally managed",
+                    "C. when there is no firewall on the network",
+                    "D. when there is a need to have more advanced detection capabilities"
+                ),
+                correct = setOf("D"),
+                explanation = "EDR solutions provide more advanced detection capabilities compared to EPP. While EPP acts as the first line of defense against known threats, EDR enables security analysts to perform threat hunting and identify more subtle threats to the endpoint.",
+                reference = "CCNP And CCIE Security Core SCOR 350-701 Official Cert Guide"
+            ),
+            Question.MultipleChoice(
+                question = "Which type of API is being used when a controller within a software-defined network architecture dynamically makes configuration changes on switches within the network?",
+                options = listOf(
+                    "A. westbound AP",
+                    "B. southbound API",
+                    "C. northbound API",
+                    "D. eastbound API"
+                ),
+                correct = setOf("B"),
+                explanation = "Southbound APIs enable SDN controllers to dynamically make changes based on real-time demands and scalability needs.",
+                reference = "CCNP And CCIE Security Core SCOR 350-701 Official Cert Guide"
+            ),
+            Question.MultipleChoice(
+                question = "An organization has two systems in their DMZ that have an unencrypted link between them for communication. The organization does not have a defined password policy and uses several default accounts on the systems. The application used on those systems also have not gone through stringent code reviews. Which vulnerability would help an attacker brute force their way into the systems?",
+                options = listOf(
+                    "A. weak passwords",
+                    "B. lack of input validation",
+                    "C. missing encryption",
+                    "D. lack of file permission"
+                ),
+                correct = setOf("A"),
+                explanation = "Weak passwords, especially default accounts without a defined password policy, make systems vulnerable to brute force attacks where attackers can systematically attempt different password combinations to gain access.",
+                reference = "CCNP And CCIE Security Core SCOR 350-701 Official Cert Guide"
+            ),
+            Question.MultipleChoice(
+                question = "What is the purpose of a Netflow version 9 template record?",
+                options = listOf(
+                    "A. It specifies the data format of NetFlow processes.",
+                    "B. It provides a standardized set of information about an IP flow.",
+                    "C. It defines the format of data records.",
+                    "D. It serves as a unique identification number to distinguish individual data records"
+                ),
+                correct = setOf("C"),
+                explanation = "The version 9 export format uses templates to provide access to observations of IP packet flows in a flexible and extensible manner. A template defines a collection of fields, with corresponding descriptions of structure and semantics.",
+                reference = "https://tools.ietf.org/html/rfc3954"
+            ),
+            Question.MultipleChoice(
+                question = "What is provided by the Secure Hash Algorithm in a VPN?",
+                options = listOf(
+                    "A. integrity",
+                    "B. key exchange",
+                    "C. encryption",
+                    "D. authentication"
+                ),
+                correct = setOf("A"),
+                explanation = "The HMAC-SHA-1-96 (also known as HMAC-SHA-1) encryption technique is used by IPSec to ensure that a message has not been altered. HMAC-SHA-1 uses the SHA-1 specified in FIPS-190-1, combined with HMAC (as per RFC 2104), and is described in RFC 2404.",
+                reference = "https://www.ciscopress.com/articles/article.asp?p=24833&seqNum=4"
+            ),
+            Question.MultipleChoice(
+                question = "A network engineer is deciding whether to use stateful or stateless failover when configuring two ASAs for high availability. What is the connection status in both cases?",
+                options = listOf(
+                    "A. need to be reestablished with stateful failover and preserved with stateless failover",
+                    "B. preserved with stateful failover and need to be reestablished with stateless failover",
+                    "C. preserved with both stateful and stateless failover",
+                    "D. need to be reestablished with both stateful and stateless failover"
+                ),
+                correct = setOf("B"),
+                explanation = "In stateful failover, the active ASA continually passes connection state information to the standby unit, allowing existing connections to be maintained when a failover occurs. With stateless failover, all active connections must be reestablished when a failover occurs.",
+                reference = "CCNP And CCIE Security Core SCOR 350-701 Official Cert Guide"
+            ),
+            Question.MultipleChoice(
+                question = "Which type of protection encrypts RSA keys when they are exported and imported?",
+                options = listOf(
+                    "A. file",
+                    "B. passphrase",
+                    "C. NGE",
+                    "D. nonexportable"
+                ),
+                correct = setOf("B"),
+                explanation = "When exporting and importing RSA keys, a passphrase is used to encrypt the keys for protection during the transfer process. This ensures the security of the keys during export and import operations.",
                 reference = "CCNP And CCIE Security Core SCOR 350-701 Official Cert Guide"
             )
         ))

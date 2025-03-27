@@ -68,7 +68,7 @@ class QuizActivity : AppCompatActivity() {
     )
 
     companion object {
-        private const val QUESTION_LIMIT = 50 // Default number of questions per quiz
+        private const val QUESTION_LIMIT = 100 // Default number of questions per quiz
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
