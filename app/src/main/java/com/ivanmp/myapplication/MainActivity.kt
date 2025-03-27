@@ -33,7 +33,10 @@ class MainActivity : AppCompatActivity() {
                 startOffset = 1000
             })
             setOnClickListener {
-                startActivity(Intent(this@MainActivity, QuizActivity::class.java))
+                val intent = Intent(this@MainActivity, QuizActivity::class.java).apply {
+                    putExtra("question_limit", QuizQuestions.getTotalQuestions())
+                }
+                startActivity(intent)
             }
         }
     }

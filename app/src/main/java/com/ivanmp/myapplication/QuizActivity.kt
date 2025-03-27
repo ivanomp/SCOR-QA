@@ -86,10 +86,15 @@ class QuizActivity : AppCompatActivity() {
             val questionLimit = intent.getIntExtra("question_limit", QUESTION_LIMIT)
             val category = intent.getStringExtra("category")
             
+            Log.d("QuizActivity", "Question limit: $questionLimit")
+            Log.d("QuizActivity", "Total questions available: ${QuizQuestions.getTotalQuestions()}")
+            
             questions = when {
                 category != null -> QuizQuestions.getQuestionsByCategory(category)
                 else -> QuizQuestions.getRandomQuestions(questionLimit)
             }
+            
+            Log.d("QuizActivity", "Questions loaded: ${questions.size}")
 
             // Show first question
             showQuestion()
