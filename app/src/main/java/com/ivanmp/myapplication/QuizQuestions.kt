@@ -256,6 +256,102 @@ The exhibit shows a successful TLS connection from the remote host (reception) i
                 "https://www.cisco.com/c/en/us/support/docs/security/email-security-appliance/118844-technote-esa-00.html",
                 QuestionCategory.SECURITY_TECHNOLOGIES,
                 "smtp_auth_logs"
+            ),
+            Question.MultipleChoice(
+                "An organization received a large amount of SPAM messages over a short time period. In order to take action on the messages, it must be determined how harmful the messages are and this needs to happen dynamically. What must be configured to accomplish this?",
+                listOf(
+                    "A. Configure the Cisco Secure Web Appliance to modify policies based on the traffic seen",
+                    "B. Configure the Cisco Secure Email Gateway to receive real-time updates from Talos",
+                    "C. Configure the Cisco Secure Web Appliance to receive real-time updates from Talos",
+                    "D. Configure the Cisco Secure Email Gateway to modify policies based on the traffic seen"
+                ),
+                setOf("B"),
+                "In order to fight spams dynamically, the best way is to configure Secure Email Gateway to receive real-time updates from Talos.",
+                "CCNP And CCIE Security Core SCOR 350-701 Official Cert Guide",
+                QuestionCategory.SECURITY_TECHNOLOGIES
+            ),
+            Question.MultipleChoice(
+                "Which product allows Cisco FMC to push security intelligence observable to its sensors from other products?",
+                listOf(
+                    "A. Encrypted Traffic Analytics",
+                    "B. Threat Intelligence Director",
+                    "C. Cognitive Threat Analytics",
+                    "D. Cisco Talos Intelligence"
+                ),
+                setOf("B"),
+                "Threat Intelligence Director allows Cisco FMC to push security intelligence observable to its sensors from other products.",
+                "CCNP And CCIE Security Core SCOR 350-701 Official Cert Guide",
+                QuestionCategory.SECURITY_TECHNOLOGIES
+            ),
+            Question.MultipleChoice(
+                "What are two differences between a Cisco WSA that is running in transparent mode and one running in explicit mode? (Choose two)",
+                listOf(
+                    "A. When the Cisco WSA is running in transparent mode, it uses the WSA's own IP address as the HTTP request destination.",
+                    "B. The Cisco WSA responds with its own IP address only if it is running in explicit mode.",
+                    "C. The Cisco WSA is configured in a web browser only if it is running in transparent mode.",
+                    "D. The Cisco WSA uses a Layer 3 device to redirect traffic only if it is running in transparent mode.",
+                    "E. The Cisco WSA responds with its own IP address only if it is running in transparent mode."
+                ),
+                setOf("B", "D"),
+                """The Cisco Web Security Appliance (WSA) includes a web proxy, a threat analytics engine, antimalware engine, policy management, and reporting in a single physical or virtual appliance. The main use of the Cisco WSA is to protect users from accessing malicious websites and being infected by malware.
+
+When requests are being redirected to the WSA transparently, the WSA must pretend to be the OCS (origin content server), since the client is unaware of the existence of a proxy. On the contrary, if a request is explicitly sent to the WSA, the WSA will respond with it's own IP information.
+
+In transparent mode, network infrastructure devices redirect web traffic to the proxy using policy-based routing (PBR) or Web Cache Communication Protocol (WCCP) on Cisco ASA, routers, or switches.""",
+                "https://www.cisco.com/c/en/us/tech/content-networking/web-cache-communications-protocol-wccp/index.html",
+                QuestionCategory.SECURITY_TECHNOLOGIES
+            ),
+            Question.MultipleChoice(
+                "After a recent breach, an organization determined that phishing was used to gain initial access to the network before regaining persistence. The information gained from the phishing attack was a result of users visiting known malicious websites. What must be done in order to prevent this from happening in the future?",
+                listOf(
+                    "A. Modify an access policy",
+                    "B. Modify identification profiles",
+                    "C. Modify outbound malware scanning policies",
+                    "D. Modify web proxy settings"
+                ),
+                setOf("A"),
+                """URL conditions in access control rules allow you to limit the websites that users on your network can access. This feature is called URL filtering. There are two ways you can use access control to specify URLs you want to block:
+- With any license, you can manually specify individual URLs, groups of URLs, and URL lists and feeds to achieve granular, custom control over web traffic.
+- With a URL Filtering license, you can also control access to websites based on the URL's general classification, or category, and risk level, or reputation.
+
+Using category and reputation data simplifies policy creation and administration and ensures that the system uses up-to-date information to filter requested URLs. Malicious sites that represent security threats such as malware, spam, botnets, and phishing may appear and disappear faster than you can update and deploy new policies.""",
+                "https://www.cisco.com/c/en/us/td/docs/security/firepower/60/configuration/guide/fpmc-config-guide-v60/Access_Control_Rules__URL_Filtering.html",
+                QuestionCategory.SECURITY_TECHNOLOGIES
+            ),
+            Question.MultipleChoice(
+                "What is the function of SDN southbound API protocols?",
+                listOf(
+                    "A. to allow for the dynamic configuration of control plane applications",
+                    "B. to enable the controller to make changes",
+                    "C. to enable the controller to use REST",
+                    "D. to allow for the static configuration of control plane applications"
+                ),
+                setOf("B"),
+                "Southbound APIs enable SDN controllers to dynamically make changes based on real-time demands and scalability needs.",
+                "https://www.ciscopress.com/articles/article.asp?p=3004581&seqNum=2",
+                QuestionCategory.SECURITY_TECHNOLOGIES
+            ),
+            Question.MultipleChoice(
+                "Refer to the exhibit.\n\nTraffic is not passing through IPsec site-to-site VPN on the Firepower Threat Defense appliance. What is causing this issue?",
+                listOf(
+                    "A. No split-tunnel policy is defined on the Firepower Threat Defense appliance.",
+                    "B. The access control policy is not allowing VPN traffic in.",
+                    "C. Site-to-site VPN peers are using different encryption algorithms.",
+                    "D. Site-to-site VPN preshared keys are mismatched."
+                ),
+                setOf("B"),
+                """If sysopt permit-vpn is not enabled then an access control policy must be created to allow the VPN traffic through the FTD device. If sysopt permit-vpn is enabled skip creating an access control policy.
+
+Looking at the exhibit, we can see:
+- The crypto map and access lists are properly configured
+- The IPsec parameters like encryption (B6F5EA53) and SPI (84348DEE) are established
+- There are no decryption/encryption failures (#pkts decrypt/encrypt failures: 0)
+- The peers are successfully communicating (current_peer shows the remote IP)
+
+This indicates the VPN tunnel itself is working correctly, but traffic is being blocked by access control policies.""",
+                "https://www.cisco.com/c/en/us/support/docs/security-vpn/ipsec-negotiation-ike-protocols/215470-site-to-site-vpn-configuration-on-ftd-ma.html",
+                QuestionCategory.SECURITY_TECHNOLOGIES,
+                "q23_ipsec_vpn_output"
             )
         ))
     }
