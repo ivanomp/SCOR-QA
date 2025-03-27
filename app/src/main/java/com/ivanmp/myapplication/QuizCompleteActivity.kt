@@ -62,8 +62,7 @@ class QuizCompleteActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        // Go back to MainActivity instead of previous question
-        startActivity(Intent(this, MainActivity::class.java))
+        super.onBackPressed()
         finish()
     }
 } 

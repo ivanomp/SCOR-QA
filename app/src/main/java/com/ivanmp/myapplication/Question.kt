@@ -4,9 +4,10 @@ sealed class Question {
     data class MultipleChoice(
         val question: String,
         val options: List<String>,
-        val correct: List<String>,
+        val correct: Set<String>,
         val explanation: String,
-        val reference: String
+        val reference: String,
+        val imageResourceName: String? = null
     ) : Question()
 
     data class DragAndDrop(
@@ -15,7 +16,8 @@ sealed class Question {
         val categories: List<String>,
         val correctMapping: Map<String, String>, // item to category mapping
         val explanation: String,
-        val reference: String
+        val reference: String,
+        val imageResourceName: String? = null
     ) : Question()
 }
 

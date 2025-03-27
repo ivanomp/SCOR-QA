@@ -3,16 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F5F5F5"
     android:padding="16dp">
 
     <com.google.android.material.progressindicator.LinearProgressIndicator
         android:id="@+id/progressIndicator"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:progress="0"
-        app:indicatorColor="#FF9800"
-        app:trackColor="#E0E0E0"
+        android:layout_marginTop="16dp"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -20,127 +17,136 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:textColor="#757575"
         android:textSize="16sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/progressIndicator" />
 
-    <TextView
-        android:id="@+id/questionText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:textColor="#212121"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@id/questionNumberText" />
-
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/mainScrollView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toTopOf="@id/submitButton"
-        app:layout_constraintTop_toBottomOf="@id/questionText">
+        android:fillViewport="true"
+        app:layout_constraintTop_toBottomOf="@id/questionNumberText"
+        app:layout_constraintBottom_toTopOf="@id/nextButton">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <!-- Container for multiple choice options -->
+            <TextView
+                android:id="@+id/questionText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:lineSpacingExtra="4dp" />
+
+            <com.github.chrisbanes.photoview.PhotoView
+                android:id="@+id/questionImage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:adjustViewBounds="true"
+                android:visibility="gone"
+                android:contentDescription="@string/question_image_description" />
+
             <LinearLayout
                 android:id="@+id/optionsContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" />
+                android:orientation="vertical"
+                android:layout_marginTop="16dp" />
 
-            <!-- Container for drag and drop -->
             <LinearLayout
                 android:id="@+id/dragDropContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 android:visibility="gone"
-                android:baselineAligned="false">
+                android:layout_marginTop="16dp">
 
-                <!-- Left column for draggable items -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/drag_drop_instruction"
+                    android:textStyle="italic"
+                    android:layout_marginBottom="16dp" />
+
                 <LinearLayout
                     android:id="@+id/itemsContainer"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:layout_marginEnd="8dp" />
+                    android:orientation="vertical" />
 
-                <!-- Right column for categories -->
                 <LinearLayout
                     android:id="@+id/categoriesContainer"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:orientation="vertical"
-                    android:layout_marginStart="8dp" />
-
+                    android:layout_marginTop="16dp" />
             </LinearLayout>
-        </LinearLayout>
-    </ScrollView>
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/submitButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:backgroundTint="#FF9800"
-        android:padding="16dp"
-        android:text="Submit Answer"
-        android:textColor="#FFFFFF"
-        android:visibility="gone"
-        app:cornerRadius="8dp"
-        app:layout_constraintBottom_toTopOf="@id/explanationCard" />
-
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/explanationCard"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        app:cardCornerRadius="8dp"
-        app:cardElevation="4dp"
-        app:layout_constraintBottom_toTopOf="@id/nextButton">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp">
-
-            <TextView
-                android:id="@+id/resultText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/explanationText"
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/submitButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:textColor="#757575"
-                android:textSize="14sp" />
+                android:layout_marginTop="16dp"
+                android:text="@string/submit_answer"
+                android:visibility="gone" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/explanationCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:visibility="gone"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="4dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:id="@+id/resultText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="8dp" />
+
+                    <TextView
+                        android:id="@+id/explanationText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:lineSpacingExtra="4dp" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
         </LinearLayout>
-    </com.google.android.material.card.MaterialCardView>
+    </androidx.core.widget.NestedScrollView>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/nextButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="#FF9800"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp"
         android:padding="16dp"
-        android:text="Next Question"
-        android:textColor="#FFFFFF"
-        android:visibility="gone"
+        android:text="@string/next_question"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        android:backgroundTint="@android:color/holo_blue_dark"
         app:cornerRadius="8dp"
-        app:layout_constraintBottom_toBottomOf="parent" />
-
+        app:elevation="4dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout> 
