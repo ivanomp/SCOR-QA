@@ -29,6 +29,7 @@ import com.google.android.material.card.MaterialCardView
 import com.google.android.material.progressindicator.LinearProgressIndicator
 import androidx.core.widget.NestedScrollView
 import com.github.chrisbanes.photoview.PhotoView
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class QuizActivity : AppCompatActivity() {
     private lateinit var progressIndicator: LinearProgressIndicator
@@ -45,6 +46,7 @@ class QuizActivity : AppCompatActivity() {
     private lateinit var explanationText: TextView
     private lateinit var nextButton: MaterialButton
     private lateinit var previousButton: MaterialButton
+    private lateinit var skipButton: MaterialButton
 
     private var currentQuestionIndex = 0
     private var score = 0
@@ -57,10 +59,12 @@ class QuizActivity : AppCompatActivity() {
     private var answeredQuestions = mutableListOf<AnsweredQuestion>()
 
     data class AnsweredQuestion(
+        val questionIndex: Int,
         val question: Question,
         val selectedOptions: Set<String>,
-        val itemPlacements: Map<String, String>,
-        val isCorrect: Boolean
+        val itemPlacements: Map<String, String> = mapOf(),
+        val isCorrect: Boolean = false,
+        val isSkipped: Boolean = false
     )
 
     companion object {
@@ -89,6 +93,38 @@ class QuizActivity : AppCompatActivity() {
 
             // Show first question
             showQuestion()
+
+            // Set up button click listeners
+            previousButton.setOnClickListener {
+                showPreviousQuestion()
+            }
+
+            skipButton.setOnClickListener {
+                // Show a confirmation dialog before skipping
+                MaterialAlertDialogBuilder(this)
+                    .setTitle("Skip Question")
+                    .setMessage("Are you sure you want to skip this question? You can come back to it later.")
+                    .setPositiveButton("Skip") { _, _ ->
+                        // Add current question to skipped questions list if not already answered
+                        if (!answeredQuestions.any { it.questionIndex == currentQuestionIndex }) {
+                            currentQuestion?.let { question ->
+                                answeredQuestions.add(AnsweredQuestion(
+                                    questionIndex = currentQuestionIndex,
+                                    question = question,
+                                    selectedOptions = setOf(),
+                                    isSkipped = true
+                                ))
+                            }
+                        }
+                        showNextQuestion()
+                    }
+                    .setNegativeButton("Cancel", null)
+                    .show()
+            }
+
+            nextButton.setOnClickListener {
+                showNextQuestion()
+            }
         } catch (e: Exception) {
             Log.e("QuizActivity", "Error in onCreate", e)
             showErrorDialog()
@@ -111,6 +147,7 @@ class QuizActivity : AppCompatActivity() {
             explanationText = findViewById(R.id.explanationText)
             nextButton = findViewById(R.id.nextButton)
             previousButton = findViewById(R.id.previousButton)
+            skipButton = findViewById(R.id.skipButton)
 
             // Configure PhotoView
             questionImage.apply {
@@ -150,6 +187,19 @@ class QuizActivity : AppCompatActivity() {
 
                 // Update progress
                 updateProgress()
+
+                // Update button states
+                previousButton.visibility = if (currentQuestionIndex > 0) View.VISIBLE else View.GONE
+                skipButton.visibility = if (!answeredQuestions.any { 
+                    it.questionIndex == currentQuestionIndex && !it.isSkipped 
+                }) View.VISIBLE else View.GONE
+                
+                // Update next button text based on question state
+                nextButton.text = when {
+                    currentQuestionIndex == questions.size - 1 -> "Finish"
+                    answeredQuestions.any { it.questionIndex == currentQuestionIndex } -> "Next"
+                    else -> "Next"
+                }
             } else {
                 showQuizComplete()
             }
@@ -565,6 +615,7 @@ class QuizActivity : AppCompatActivity() {
         currentQuestion?.let { question ->
             answeredQuestions.add(
                 AnsweredQuestion(
+                    questionIndex = currentQuestionIndex,
                     question = question,
                     selectedOptions = selectedOptions,
                     itemPlacements = itemPlacements.toMap(),
@@ -756,5 +807,14 @@ class QuizActivity : AppCompatActivity() {
             .setMessage("An error occurred. Please try again.")
             .setPositiveButton("OK") { _, _ -> finish() }
             .show()
+    }
+
+    private fun showNextQuestion() {
+        if (currentQuestionIndex < questions.size - 1) {
+            currentQuestionIndex++
+            showQuestion()
+        } else {
+            showQuizComplete()
+        }
     }
 } 
