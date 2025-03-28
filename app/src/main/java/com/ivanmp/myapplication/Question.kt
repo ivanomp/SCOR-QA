@@ -1,10 +1,13 @@
 package com.ivanmp.myapplication
 
 enum class QuestionCategory {
-    NETWORK_SECURITY_FUNDAMENTALS,
-    SECURITY_TECHNOLOGIES,
-    SECURITY_MANAGEMENT,
-    ADVANCED_SECURITY
+    SCOR_PART_1,
+    SCOR_PART_2,
+    SCOR_PART_3,
+    SCOR_PART_4,
+    SCOR_PART_5,
+    SCOR_PART_6,
+    SCOR_PART_7
 }
 
 sealed class Question {

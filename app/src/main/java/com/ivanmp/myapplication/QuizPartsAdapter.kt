@@ -54,10 +54,13 @@ class QuizPartsAdapter(
 
     private fun getCategoryDescription(category: QuestionCategory): String {
         return when (category) {
-            QuestionCategory.NETWORK_SECURITY_FUNDAMENTALS -> "Basic concepts and principles of network security"
-            QuestionCategory.SECURITY_TECHNOLOGIES -> "Security technologies and their implementations"
-            QuestionCategory.SECURITY_MANAGEMENT -> "Security management and monitoring"
-            QuestionCategory.ADVANCED_SECURITY -> "Advanced security concepts and implementations"
+            QuestionCategory.SCOR_PART_1 -> "New SCOR Questions - Part 1"
+            QuestionCategory.SCOR_PART_2 -> "New SCOR Questions - Part 2"
+            QuestionCategory.SCOR_PART_3 -> "New SCOR Questions - Part 3"
+            QuestionCategory.SCOR_PART_4 -> "New SCOR Questions - Part 4"
+            QuestionCategory.SCOR_PART_5 -> "New SCOR Questions - Part 5"
+            QuestionCategory.SCOR_PART_6 -> "New SCOR Questions - Part 6"
+            QuestionCategory.SCOR_PART_7 -> "New SCOR Questions - Part 7"
         }
     }
 } 

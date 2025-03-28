@@ -50,7 +50,8 @@ class MainActivity : AppCompatActivity() {
 
         // Set up start button
         findViewById<MaterialButton>(R.id.startButton).setOnClickListener {
-            startActivity(Intent(this, QuizActivity::class.java))
+            val intent = Intent(this, QuizPartsActivity::class.java)
+            startActivity(intent)
         }
     }
 

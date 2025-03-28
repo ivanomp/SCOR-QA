@@ -57,6 +57,7 @@ class QuizActivity : AppCompatActivity() {
     private var soundManager: SoundManager? = null
     private var currentCorrectAnswers: Set<String> = setOf()  // Add this property to the class
     private var answeredQuestions = mutableListOf<AnsweredQuestion>()
+    private var currentCategory: QuestionCategory? = null
 
     data class AnsweredQuestion(
         val questionIndex: Int,
@@ -84,14 +85,24 @@ class QuizActivity : AppCompatActivity() {
 
             // Get questions based on intent extras
             val questionLimit = intent.getIntExtra("question_limit", QUESTION_LIMIT)
-            val category = intent.getStringExtra("category")
+            val categoryName = intent.getStringExtra("category")
             
             Log.d("QuizActivity", "Question limit: $questionLimit")
-            Log.d("QuizActivity", "Total questions available: ${QuizQuestions.getTotalQuestions()}")
             
-            questions = when {
-                category != null -> QuizQuestions.getQuestionsByCategory(category)
-                else -> QuizQuestions.getRandomQuestions(questionLimit)
+            // Parse category from intent
+            currentCategory = try {
+                QuestionCategory.valueOf(categoryName ?: "")
+            } catch (e: IllegalArgumentException) {
+                null
+            }
+            
+            if (currentCategory != null) {
+                Log.d("QuizActivity", "Total questions available for ${currentCategory!!.name}: ${QuizQuestions.getTotalQuestions(currentCategory!!)}")
+                questions = QuizQuestions.getRandomQuestions(currentCategory!!, questionLimit)
+            } else {
+                Log.e("QuizActivity", "Invalid category: $categoryName")
+                showErrorDialog()
+                return
             }
             
             Log.d("QuizActivity", "Questions loaded: ${questions.size}")
@@ -121,6 +132,15 @@ class QuizActivity : AppCompatActivity() {
 
             nextButton.setOnClickListener {
                 showNextQuestion()
+            }
+
+            submitButton.setOnClickListener {
+                currentQuestion?.let { question ->
+                    when (question) {
+                        is Question.MultipleChoice -> submitMultipleChoiceAnswer(question)
+                        is Question.DragAndDrop -> submitDragAndDropAnswer(question)
+                    }
+                }
             }
         } catch (e: Exception) {
             Log.e("QuizActivity", "Error in onCreate", e)
@@ -793,6 +813,7 @@ class QuizActivity : AppCompatActivity() {
         val intent = Intent(this, QuizCompleteActivity::class.java).apply {
             putExtra("score", score)
             putExtra("total", questions.size)
+            currentCategory?.let { putExtra("category", it.name) }
         }
         startActivity(intent)
         finish()

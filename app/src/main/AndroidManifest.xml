@@ -16,16 +16,16 @@
             android:name=".QuizActivity"
             android:exported="false"
             android:label="@string/app_name"
-            android:theme="@style/Theme.SCORQA">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:theme="@style/Theme.SCORQA" />
         <activity
             android:name=".QuizCompleteActivity"
             android:exported="false"
             android:label="@string/app_name"
+            android:theme="@style/Theme.SCORQA" />
+        <activity
+            android:name=".QuizPartsActivity"
+            android:exported="false"
+            android:label="Quiz Parts"
             android:theme="@style/Theme.SCORQA" />
         <activity
             android:name=".MainActivity"
