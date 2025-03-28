@@ -1888,6 +1888,30 @@ By using the "storm-control broadcast level [falling-threshold]" we can limit th
                 "When Dynamic ARP Inspection (DAI) is enabled on a switch, it validates ARP packets against the DHCP snooping binding table. If a spoofed ARP response is received on a trusted interface, the switch will drop the packet after validating it against the IP and MAC binding table.",
                 "CCNP And CCIE Security Core SCOR 350-701 Official Cert Guide",
                 QuestionCategory.SCOR_PART_2
+            ),
+            Question.DragAndDrop(
+                question = "Drag and drop the NetFlow export formats from the left onto the descriptions on the right.",
+                items = listOf(
+                    "Version 1",
+                    "Version 5",
+                    "Version 8",
+                    "Version 9"
+                ),
+                categories = listOf(
+                    "appropriate only for the main cache",
+                    "introduced support for aggregation caches",
+                    "appropriate only for legacy systems",
+                    "introduced extensibility"
+                ),
+                correctMapping = mapOf(
+                    "Version 1" to "appropriate only for legacy systems",
+                    "Version 5" to "appropriate only for the main cache",
+                    "Version 8" to "introduced support for aggregation caches",
+                    "Version 9" to "introduced extensibility"
+                ),
+                explanation = "The Version 1 format was the initially released version. Do not use the Version 1 format unless you are using a legacy collection system that requires it. Use Version 9 or Version 5 export format.\nVersion 5 export format is suitable only for the main cache; it cannot be expanded to support new features.\nVersion 8 export format is available only for aggregation caches; it cannot be expanded to support new features.",
+                reference = "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/netflow/configuration/15-mt/nf-15-mt-book/cfg-nflow-data-expt.html",
+                category = QuestionCategory.SCOR_PART_2
             )
         )
         questionSets[QuestionCategory.SCOR_PART_3] = mutableListOf()
