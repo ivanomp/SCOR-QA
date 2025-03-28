@@ -1912,6 +1912,54 @@ By using the "storm-control broadcast level [falling-threshold]" we can limit th
                 explanation = "The Version 1 format was the initially released version. Do not use the Version 1 format unless you are using a legacy collection system that requires it. Use Version 9 or Version 5 export format.\nVersion 5 export format is suitable only for the main cache; it cannot be expanded to support new features.\nVersion 8 export format is available only for aggregation caches; it cannot be expanded to support new features.",
                 reference = "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/netflow/configuration/15-mt/nf-15-mt-book/cfg-nflow-data-expt.html",
                 category = QuestionCategory.SCOR_PART_2
+            ),
+            Question.DragAndDrop(
+                question = "Drag and drop the solutions from the left onto the solution's benefits on the right.",
+                items = listOf(
+                    "Cisco Stealthwatch",
+                    "Cisco ISE",
+                    "Cisco TrustSec",
+                    "Cisco Umbrella"
+                ),
+                categories = listOf(
+                    "software-defined segmentation that uses SGTs and allows administrators to quickly scale and enforce policies across the network",
+                    "rapidly collects and analyzes NetFlow and telemetry data to deliver in-depth visibility and understanding of network traffic",
+                    "secure Internet gateway in the cloud that provides a security solution that protects endpoints on and off the network against threats on the Internet by using DNS",
+                    "obtains contextual identity and profiles for all the users and devices connected on a network"
+                ),
+                correctMapping = mapOf(
+                    "Cisco TrustSec" to "software-defined segmentation that uses SGTs and allows administrators to quickly scale and enforce policies across the network",
+                    "Cisco Stealthwatch" to "rapidly collects and analyzes NetFlow and telemetry data to deliver in-depth visibility and understanding of network traffic",
+                    "Cisco Umbrella" to "secure Internet gateway in the cloud that provides a security solution that protects endpoints on and off the network against threats on the Internet by using DNS",
+                    "Cisco ISE" to "obtains contextual identity and profiles for all the users and devices connected on a network"
+                ),
+                explanation = "Each Cisco security solution provides specific benefits:\n- Cisco TrustSec enables software-defined segmentation using Security Group Tags (SGTs) for policy enforcement\n- Cisco Stealthwatch provides network visibility through NetFlow analysis\n- Cisco Umbrella offers cloud-based security using DNS for threat protection\n- Cisco ISE manages network access through identity and device profiling",
+                reference = "https://www.cisco.com/c/en/us/products/security/index.html",
+                category = QuestionCategory.SCOR_PART_2
+            ),
+            Question.DragAndDrop(
+                question = "Drag and drop the common security threats from left onto the definitions on the right.",
+                items = listOf(
+                    "botnet",
+                    "worm",
+                    "phishing",
+                    "spam"
+                ),
+                categories = listOf(
+                    "group of computers connected to the Internet that have been compromised by a hacker using a virus or Trojan horse",
+                    "a software program that copies itself from one computer to another, without human interaction",
+                    "fraudulent attempts by cyber criminals to obtain private information",
+                    "unwanted messages in an email inbox"
+                ),
+                correctMapping = mapOf(
+                    "botnet" to "group of computers connected to the Internet that have been compromised by a hacker using a virus or Trojan horse",
+                    "worm" to "a software program that copies itself from one computer to another, without human interaction",
+                    "phishing" to "fraudulent attempts by cyber criminals to obtain private information",
+                    "spam" to "unwanted messages in an email inbox"
+                ),
+                explanation = "Understanding different types of security threats is crucial:\n- A botnet is a network of compromised computers controlled by hackers\n- A worm is self-replicating malware that spreads automatically\n- Phishing involves deceptive attempts to steal sensitive information\n- Spam refers to unsolicited bulk email messages",
+                reference = "CCNP And CCIE Security Core SCOR 350-701 Official Cert Guide",
+                category = QuestionCategory.SCOR_PART_2
             )
         )
         questionSets[QuestionCategory.SCOR_PART_3] = mutableListOf()
