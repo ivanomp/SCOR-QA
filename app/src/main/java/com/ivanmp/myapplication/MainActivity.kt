@@ -2,15 +2,23 @@ package com.ivanmp.myapplication
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.view.animation.AnimationUtils
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import com.google.android.material.button.MaterialButton
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        // Set up toolbar
+        val toolbar = findViewById<Toolbar>(R.id.toolbar)
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
 
         // Animate title and description
         findViewById<TextView>(R.id.titleText).startAnimation(
@@ -40,18 +48,24 @@ class MainActivity : AppCompatActivity() {
             }
         )
 
-        // Set up start quiz button with animation
-        findViewById<MaterialButton>(R.id.startButton).apply {
-            startAnimation(AnimationUtils.loadAnimation(this@MainActivity, android.R.anim.fade_in).apply {
-                duration = 1000
-                startOffset = 1000
-            })
-            setOnClickListener {
-                val intent = Intent(this@MainActivity, QuizActivity::class.java).apply {
-                    putExtra("question_limit", QuizQuestions.getTotalQuestions())
-                }
-                startActivity(intent)
+        // Set up start button
+        findViewById<MaterialButton>(R.id.startButton).setOnClickListener {
+            startActivity(Intent(this, QuizActivity::class.java))
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.main_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_about -> {
+                startActivity(Intent(this, AboutActivity::class.java))
+                true
             }
+            else -> super.onOptionsItemSelected(item)
         }
     }
 }
