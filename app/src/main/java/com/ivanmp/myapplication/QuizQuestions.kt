@@ -1359,7 +1359,8 @@ By using the "storm-control broadcast level [falling-threshold]" we can limit th
                 setOf("B"),
                 "In order to use AAA along with an external token authentication mechanism, the 'Method' field in the Authentication section must be set to 'Both'. This allows the ASA to use both certificate-based authentication and external token authentication simultaneously. The other options are not directly related to the authentication method configuration:\n- Group Policy controls access policies and VPN attributes\n- SAML Server is for Single Sign-On integration\n- DHCP Servers handle IP address assignment to VPN clients",
                 "CCNP and CCIE Security Core SCOR 350-701 Official Cert Guide",
-                QuestionCategory.SCOR_PART_1
+                QuestionCategory.SCOR_PART_1,
+                "question_34_asa_config"
             )
         ))
 
@@ -1985,7 +1986,8 @@ By using the "storm-control broadcast level [falling-threshold]" we can limit th
                 setOf("B"),
                 "In order to use AAA along with an external token authentication mechanism, the 'Method' field in the Authentication section must be set to 'Both'. This allows the ASA to use both certificate-based authentication and external token authentication simultaneously. The other options are not directly related to the authentication method configuration:\n- Group Policy controls access policies and VPN attributes\n- SAML Server is for Single Sign-On integration\n- DHCP Servers handle IP address assignment to VPN clients",
                 "CCNP and CCIE Security Core SCOR 350-701 Official Cert Guide",
-                QuestionCategory.SCOR_PART_2
+                QuestionCategory.SCOR_PART_2,
+                "question_34_asa_config"
             ),
             Question.MultipleChoice(
                 "An administrator is adding a new Cisco FTD device to their network and wants to manage it with Cisco FMC. The Cisco FTD is not behind a NAT device. Which command is needed to enable this on the Cisco FTD?",
