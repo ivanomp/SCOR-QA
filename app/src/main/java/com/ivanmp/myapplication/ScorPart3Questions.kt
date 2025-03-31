@@ -309,6 +309,177 @@ PAC files are used to support explicit proxy deployments in which client browser
                 "",
                 "",
                 QuestionCategory.SCOR_PART_3
+            ),
+            Question.MultipleChoice(
+                "An administrator is establishing a new site-to-site VPN connection on a Cisco IOS router. The organization needs to ensure that the ISAKMP key on the hub is used only for terminating traffic from the IP address of 172.19.20.24. Which command on the hub will allow the administrator to accomplish this?",
+                listOf(
+                    "A. crypto ca identity 172.19.20.24",
+                    "B. crypto isakmp key Cisco0123456789 172.19.20.24",
+                    "C. crypto enrollment peer address 172.19.20.24",
+                    "D. crypto isakmp identity address 172.19.20.24"
+                ),
+                setOf("B"),
+                """The command "crypto isakmp identity address 172.19.20.24" is not valid. We can only use "crypto isakmp identity {address | hostname}. The following example uses preshared keys at two peers and sets both their ISAKMP identities to the IP address.
+At the local peer (at 10.0.0.1) the ISAKMP identity is set and the preshared key is specified:
+crypto isakmp identity address
+crypto isakmp key sharedkeystring address 192.168.1.33
+At the remote peer (at 192.168.1.33) the ISAKMP identity is set and the same preshared key is specified:
+crypto isakmp identity address
+crypto isakmp key sharedkeystring address 10.0.0.1
+Reference: https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/security/a1/sec-a1-cr-book/sec-cr-c4.html#wp3880782430
+The command "crypto enrollment peer address" is not valid either.
+The command "crypto ca identity …" is only used to declare a trusted CA for the router and puts you in the ca-identity configuration mode. Also it should be followed by a name, not an IP address. For example: "crypto ca identity CA-Server" -> Answer A is not correct.
+Only answer B is the best choice left.""",
+                "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/security/a1/sec-a1-cr-book/sec-cr-c4.html#wp3880782430",
+                QuestionCategory.SCOR_PART_3
+            ),
+            Question.MultipleChoice(
+                "What is a difference between an XSS attack and an SQL injection attack?",
+                listOf(
+                    "A. SQL injection is a hacking method used to attack SQL databases, whereas XSS attacks can exist in many different types of applications",
+                    "B. XSS is a hacking method used to attack SQL databases, whereas SQL injection attacks can exist in many different types of applications",
+                    "C. SQL injection attacks are used to steal information from databases whereas XSS attacks are used to redirect users to websites where attackers can steal data from them",
+                    "D. XSS attacks are used to steal information from databases whereas SQL injection attacks are used to redirect users to websites where attackers can steal data from them"
+                ),
+                setOf("C"),
+                """In XSS, an attacker will try to inject his malicious code (usually malicious links) into a database. When other users follow his links, their web browsers are redirected to websites where attackers can steal data from them. In a SQL Injection, an attacker will try to inject SQL code (via his browser) into forms, cookies, or HTTP headers that do not use data sanitizing or validation methods of GET/POST parameters.""",
+                "",
+                QuestionCategory.SCOR_PART_3
+            ),
+            Question.MultipleChoice(
+                "An engineer has been tasked with configuring a Cisco FTD to analyze protocol fields and detect anomalies in the traffic from industrial systems. What must be done to meet these requirements?",
+                listOf(
+                    "A. Implement pre-filter policies for the CIP preprocessor",
+                    "B. Enable traffic analysis in the Cisco FTD",
+                    "C. Configure intrusion rules for the DNP3 preprocessor",
+                    "D. Modify the access control policy to trust the industrial traffic"
+                ),
+                setOf("C"),
+                """The Modbus, DNP3, and CIP SCADA preprocessors detect traffic anomalies and provide data to intrusion rules. Therefore in this question only answer A or answer C is correct.
+The DNP3 preprocessor detects anomalies in DNP3 traffic and decodes the DNP3 protocol for processing by the rules engine, which uses DNP3 keywords to access certain protocol fields.
+The Common Industrial Protocol (CIP) is a widely used application protocol that supports industrial automation applications. EtherNet/IP is an implementation of CIP that is used on Ethernet-based networks. The CIP preprocessor detects CIP and ENIP traffic running on TCP or UDP and sends it to the intrusion rules engine. You can use CIP and ENIP keywords in custom intrusion rules to detect attacks in CIP and ENIP traffic.
+Reference: https://www.cisco.com/c/en/us/td/docs/security/firepower/630/configuration/guide/fpmc-config-guide-v63/scada_preprocessors.html
+Both DNP3 and CIP preprocessors can be used to detect anomalies but we choose DNP3 as pre-filter policies cannot be used to detect anomalies. To detect anomalies we need to use intrusion rules.
+Note:
++ An intrusion rule is a specified set of keywords and arguments that the system uses to detect attempts to exploit vulnerabilities in your network. As the system analyzes network traffic, it compares packets against the conditions specified in each rule, and triggers the rule if the data packet meets all the conditions specified in the rule.
++ Preprocessor rules, which are rules associated with preprocessors and packet decoder detection options in the network analysis policy. Most preprocessor rules are disabled by default.""",
+                "https://www.cisco.com/c/en/us/td/docs/security/firepower/630/configuration/guide/fpmc-config-guide-v63/scada_preprocessors.html",
+                QuestionCategory.SCOR_PART_3
+            ),
+            Question.MultipleChoice(
+                "Which posture assessment requirement provides options to the client for remediation and requires the remediation within a certain timeframe?",
+                listOf(
+                    "A. Audit",
+                    "B. Mandatory",
+                    "C. Optional",
+                    "D. Visibility"
+                ),
+                setOf("B"),
+                """A posture requirement is a set of compound conditions with an associated remediation action that can be linked with a role and an operating system. All the clients connecting to your network must meet mandatory requirements during posture evaluation to become compliant on the network.
+Posture-policy requirements can be set to mandatory, optional, or audit types in posture policies. If requirements are optional and clients fail these requirements, then the clients have an option to continue during posture evaluation of endpoints.
+Mandatory Requirements
+During policy evaluation, the agent provides remediation options to clients who fail to meet the mandatory requirements defined in the posture policy. End users must remediate to meet the requirements within the time specified in the remediation timer settings.
+For example, you have specified a mandatory requirement with a user-defined condition to check the existence of C:\\temp\\text.file in the absolute path. If the file does not exist, the mandatory requirement fails and the user will be moved to Non-Compliant state.
+Reference: https://www.cisco.com/c/en/us/td/docs/security/ise/1-4/admin_guide/b_ise_admin_guide_14/b_ise_admin_guide_14_chapter_010111.html""",
+                "https://www.cisco.com/c/en/us/td/docs/security/ise/1-4/admin_guide/b_ise_admin_guide_14/b_ise_admin_guide_14_chapter_010111.html",
+                QuestionCategory.SCOR_PART_3
+            ),
+            Question.MultipleChoice(
+                "Which attribute has the ability to change during the RADIUS CoA?",
+                listOf(
+                    "A. NTP",
+                    "B. authorization",
+                    "C. accessibility",
+                    "D. membership"
+                ),
+                setOf("B"),
+                """The RADIUS Change of Authorization (CoA) feature provides a mechanism to change the attributes of an authentication, authorization, and accounting (AAA) session after it is authenticated.
+Reference: https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_usr_aaa/configuration/15-sy/sec-usr-aaa-15-sy-book/sec-rad-coa.html""",
+                "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_usr_aaa/configuration/15-sy/sec-usr-aaa-15-sy-book/sec-rad-coa.html",
+                QuestionCategory.SCOR_PART_3
+            ),
+            Question.MultipleChoice(
+                "With Cisco Secure Endpoint, which option shows a list of all files that have been executed in your environment?",
+                listOf(
+                    "A. prevalence",
+                    "B. file analysis",
+                    "C. detections",
+                    "D. vulnerable software",
+                    "E. threat root cause"
+                ),
+                setOf("A"),
+                """Prevalence allows you to view files that have been executed in your deployment.
+Note: Threat Root Cause shows how malware is getting onto your computers.
+Reference: https://docs.amp.cisco.com/en/A4E/AMP%20for%20Endpoints%20User%20Guide.pdf""",
+                "https://docs.amp.cisco.com/en/A4E/AMP%20for%20Endpoints%20User%20Guide.pdf",
+                QuestionCategory.SCOR_PART_3
+            ),
+            Question.MultipleChoice(
+                "A company discovered an attack propagating through their network via a file. A custom file policy was created in order to track this in the future and ensure no other endpoints execute the infected file. In addition, it was discovered during testing that the scans are not detecting the file as an indicator of compromise. What must be done in order to ensure that the created is functioning as it should?",
+                listOf(
+                    "A. Create an IP block list for the website from which the file was downloaded",
+                    "B. Block the application that the file was using to open",
+                    "C. Upload the hash for the file into the policy",
+                    "D. Send the file to Cisco Threat Grid for dynamic analysis"
+                ),
+                setOf("C"),
+                "",
+                "",
+                QuestionCategory.SCOR_PART_3
+            ),
+            Question.MultipleChoice(
+                "A network engineer is trying to figure out whether FlexVPN or DMVPN would fit better in their environment. They have a requirement for more stringent security multiple security associations for the connections, more efficient VPN establishment as well consuming less bandwidth. Which solution would be best for this and why?",
+                listOf(
+                    "A. DMVPN because it supports IKEv2 and FlexVPN does not.",
+                    "B. FlexVPN because it supports IKEv2 and DMVPN does not.",
+                    "C. FlexVPN because it uses multiple SAs and DMVPN does not.",
+                    "D. DMVPN because it uses multiple SAs and FlexVPN does not."
+                ),
+                setOf("C"),
+                """FlexVPN supports IKEv2 -> Answer A is not correct.
+DMVPN supports both IKEv1 & IKEv2 -> Answer B is not correct.
+FlexVPN support multiple SAs -> Answer D is not correct.
+Therefore answer C is the best choice left.""",
+                "",
+                QuestionCategory.SCOR_PART_3
+            ),
+            Question.MultipleChoice(
+                "How does Cisco Workload Optimization Manager help mitigate application performance issues?",
+                listOf(
+                    "A. It deploys an AWS Lambda system",
+                    "B. It automates resource resizing",
+                    "C. It optimizes a flow path",
+                    "D. It sets up a workload forensic score"
+                ),
+                setOf("B"),
+                """Cisco Workload Optimization Manager provides specific real-time actions that ensure workloads get the resources they need when they need them, enabling continuous placement, resizing, and capacity decisions that can be automated, driving continuous health in the environment. You can automate the software's decisions according to your level of comfort: recommend (view only), manual (select and apply), or automated (executed in real time by software).
+Reference: https://www.cisco.com/c/dam/en/us/solutions/collateral/data-center-virtualization/one-enterprise-suite/solution-overview-c22-739078.pdf""",
+                "https://www.cisco.com/c/dam/en/us/solutions/collateral/data-center-virtualization/one-enterprise-suite/solution-overview-c22-739078.pdf",
+                QuestionCategory.SCOR_PART_3
+            ),
+            Question.MultipleChoice(
+                "An organization configures Cisco Umbrella to be used for its DNS services. The organization must be able to block traffic based on the subnet that the endpoint is on but it sees only the requests from its public IP address instead of each internal IP address. What must be done to resolve this issue?",
+                listOf(
+                    "A. Set up a Cisco Umbrella virtual appliance to internally field the requests and see the traffic of each IP address",
+                    "B. Use the tenant control features to identify each subnet being used and track the connections within the Cisco Umbrella dashboard",
+                    "C. Install the Microsoft Active Directory Connector to give IP address information stitched to the requests in the Cisco Umbrella dashboard",
+                    "D. Configure an internal domain within Cisco Umbrella to help identify each address and create policy from the domains"
+                ),
+                setOf("A"),
+                """Umbrella virtual appliances (VAs) are lightweight virtual machines that are compatible with VMWare ESX/ESXi, Windows Hyper-V, and KVM hypervisors and the Microsoft Azure, Google Cloud Platform, and Amazon Web Services cloud platforms. When utilized as conditional DNS forwarders on your network, Umbrella VAs record the internal IP address information of DNS requests for usage in reports, security enforcement, and category filtering policies.
+VAs act as conditional DNS forwarders in your network, intelligently forwarding public DNS queries to Cisco Umbrella's global network, and local DNS queries to your existing local DNS servers and forwarders. Every public DNS query sent to Umbrella is encrypted, authenticated, and includes the client's internal IP address.
+ 
+Reference: https://docs.umbrella.com/deployment-umbrella/docs/1-introduction
+If you're already pointing DNS to Umbrella, or plan to, all the DNS traffic visible in your Umbrella reports come from a single Network identity. The VAs provide internal IP visibility, allowing you to track down malicious or inappropriate traffic within your network to a specific IP address.
+Without Virtual Appliances
+Security and DNS traffic-related investigations cannot be traced back to an individual computer or IP address.
+ 
+With Virtual Appliances
+VAs record the internal IP address of every DNS request. Security and DNS traffic-related investigations allow you to associate traffic to an individual, internal IP address.
+ 
+Reference: https://docs.umbrella.com/deployment-umbrella/docs/1-introduction""",
+                "https://docs.umbrella.com/deployment-umbrella/docs/1-introduction",
+                QuestionCategory.SCOR_PART_3
             )
         )
     }
