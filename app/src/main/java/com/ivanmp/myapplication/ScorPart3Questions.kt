@@ -879,6 +879,352 @@ A. The platform supports the following use cases:
 Reference: https://www.cisco.com/c/en/us/products/collateral/data-center-analytics/tetration-analytics/q-and-a-c67-737402.html""",
                 "https://www.cisco.com/c/en/us/products/collateral/data-center-analytics/tetration-analytics/q-and-a-c67-737402.html",
                 QuestionCategory.SCOR_PART_3
+            ),
+            Question.MultipleChoice(
+                "Which portion of the network do EPP solutions solely focus on and EDR solutions do not?",
+                listOf(
+                    "A. server farm",
+                    "B. perimeter",
+                    "C. core",
+                    "D. East-West gateways"
+                ),
+                setOf("B"),
+                "",
+                "",
+                QuestionCategory.SCOR_PART_3
+            ),
+            Question.MultipleChoice(
+                "What is a benefit of using Cisco CWS compared to an on-premises Cisco Secure Web Appliance?",
+                listOf(
+                    "A. Cisco CWS eliminates the need to backhaul traffic through headquarters for remote workers whereas Cisco Secure Web Appliance does not",
+                    "B. Cisco CWS minimizes the load on the internal network and security infrastructure as compared to Cisco Secure Web Appliance.",
+                    "C. URL categories are updated more frequently on Cisco CWS than they are on Cisco Secure Web Appliance",
+                    "D. Content scanning for SAAS cloud applications is available through Cisco CWS and not available through Cisco Secure Web Appliance"
+                ),
+                setOf("A"),
+                """Malware can enter the Cisco network when an infected user PC connects over a direct link in the office or a VPN link from a remote location. For these connections, Cisco IT uses the Cisco Web Security Appliance (WSA) to protect the network from malware intrusion. However, WSA protection is not available when a user connects to the Internet directly, without connecting via the Cisco network, such as when using a public Wi-Fi service in a coffee shop. In this case, the user's PC can become infected with malware, which may disrupt the user's activity, spread to other networks and devices, and present the risk of a data security or privacy breach. Cisco IT uses the Cisco Cloud Web Security (CWS) solution to help protect user PCs from these malware infections.
+The Cisco CWS solution, previously known as Cisco Scan Safe, enforces secure communication to and from the Internet. It uses the Cisco AnyConnect Secure Mobility Client 3.0 to provide remote workers the same level of security as onsite employees when using a laptop issued by Cisco.
+Reference: https://www.cisco.com/c/dam/en_us/about/ciscoitatwork/borderless_networks/docs/Cloud_Web_Security_IT_Methods.pdf
+Cisco ISR with Cloud Web Security Connector:
+…
+Eliminates the need to backhaul Internet traffic from branch offices, so offices can access the web directly, without losing control of or visibility into web usage.
+Reference: https://www.cisco.com/c/en/us/products/collateral/security/router-security/data_sheet_c78-655324.pdf""",
+                "https://www.cisco.com/c/en/us/products/collateral/security/router-security/data_sheet_c78-655324.pdf",
+                QuestionCategory.SCOR_PART_3
+            ),
+            Question.MultipleChoice(
+                "An organization wants to improve its cybersecurity processes and to add intelligence to its data. The organization wants to utilize the most current intelligence data for URL filtering, reputations, and vulnerability information that can be integrated with the Cisco FTD and Cisco WSA. What must be done to accomplish these objectives?",
+                listOf(
+                    "A. Create a Cisco pxGrid connection to NIST to import this information into the security products for policy use",
+                    "B. Create an automated download of the Internet Storm Center intelligence feed into the Cisco FTD and Cisco WSA databases to tie to the dynamic access control policies.",
+                    "C. Download the threat intelligence feed from the IETF and import it into the Cisco FTD and Cisco WSA databases",
+                    "D. Configure the integrations with Talos Intelligence to take advantage of the threat intelligence that it provides"
+                ),
+                setOf("D"),
+                """We need an automated solution to deal with the rapid change of cybersecurity so answer A and C are not correct.
+According to the following facts about Talos, we believe answer D is the best choice:
+Cisco WSA detects and correlates threats in real time by tapping into the largest threat-detection network in the world, Cisco Talos. To discover where threats are hiding, Cisco Talos pulls massive quantities of information across multiple vectors – firewall, IPS, web, email, and VPN. Cisco Talos constantly refreshes information every 3 to 5 minutes – adding intelligence to and receiving intelligence from Cisco WSA and other network security devices. This enables Cisco WSA to deliver industry-leading defense hours and even days ahead of competitors.
+Reference: https://www.cisco.com/c/en/us/products/collateral/security/web-security-appliance/solution-overview-c22-732948.html
+Talos' threat intelligence supports a two-way flow of telemetry and protection across market-leading security solutions including Next-Generation Intrusion Prevention System (NGIPS), Next-Generation Firewall (NGFW), Advanced Malware Protection (AMP), Email Security Appliance (ESA), Cloud Email Security (CES), Cloud Web Security (CWS), Web Security Appliance (WSA), Umbrella, and ThreatGrid, as well as numerous open-source and commercial threat protection systems.
+Reference: https://www.talosintelligence.com/docs/Talos_WhitePaper.pdf""",
+                "https://www.talosintelligence.com/docs/Talos_WhitePaper.pdf",
+                QuestionCategory.SCOR_PART_3
+            ),
+            Question.MultipleChoice(
+                "Cisco SensorBase gathers threat information from a variety of Cisco products and services and performs analytics to find patterns on threats. Which term describes this process?",
+                listOf(
+                    "A. deployment",
+                    "B. consumption",
+                    "C. authoring",
+                    "D. sharing"
+                ),
+                setOf("A"),
+                "",
+                "",
+                QuestionCategory.SCOR_PART_3
+            ),
+            Question.MultipleChoice(
+                "An organization has a requirement to collect full metadata information about the traffic going through their AWS cloud services. They want to use this information for behavior analytics and statistics. Which two actions must be taken to implement this requirement? (Choose two)",
+                listOf(
+                    "A. Configure Cisco ACI to ingest AWS information",
+                    "B. Configure Cisco Thousand Eyes to ingest AWS information",
+                    "C. Send syslog from AWS to Cisco Stealthwatch Cloud",
+                    "D. Send VPC Flow Logs to Cisco Stealthwatch Cloud",
+                    "E. Configure Cisco Stealthwatch Cloud to ingest AWS information"
+                ),
+                setOf("D", "E"),
+                "",
+                "",
+                QuestionCategory.SCOR_PART_3
+            ),
+            Question.MultipleChoice(
+                "An engineer is configuring their router to send NetfFow data to Stealthwatch which has an IP address of 1.1.1.1 using the flow record Steathwatch406397954 command. Which additional command is required to complete the flow record?",
+                listOf(
+                    "A. transport udp 2055",
+                    "B. match ipv4 ttl",
+                    "C. cache timeout active 60",
+                    "D. destination 1.1.1.1"
+                ),
+                setOf("B"),
+                """The "transport udp …" command can only be used under flow exporter. The "cache timeout active …" command can only be used under flow monitor.
+Under flow record, we cannot type "destination 1.1.1.1". This command can only be used under flow exporter. We can only use the "match ipv4 ttl" command under flow record in this question.
+Good reference: https://www.cisco.com/c/dam/en/us/td/docs/security/stealthwatch/netflow/config-trouble-netflow-stealth.pdf""",
+                "https://www.cisco.com/c/dam/en/us/td/docs/security/stealthwatch/netflow/config-trouble-netflow-stealth.pdf",
+                QuestionCategory.SCOR_PART_3
+            ),
+            Question.MultipleChoice(
+                "An engineer needs to add protection for data in transit and have headers in the email message. Which configuration is needed to accomplish this goal?",
+                listOf(
+                    "A. Provision the email appliance",
+                    "B. Deploy an encryption appliance",
+                    "C. Map sender IP addresses to a host interface",
+                    "D. Enable flagged message handling"
+                ),
+                setOf("B"),
+                "",
+                "",
+                QuestionCategory.SCOR_PART_3
+            ),
+            Question.MultipleChoice(
+                "An administrator is adding a new switch onto the network and has configured AAA for network access control. When testing the configuration, the RADIUS authenticates to Cisco ISE but is being rejected. Why is the ip radius source-interface command needed for this configuration?",
+                listOf(
+                    "A. Only requests that originate from a configured NAS IP are accepted by a RADIUS server",
+                    "B. The RADIUS authentication key is transmitted only from the defined RADIUS source interface",
+                    "C. RADIUS requests are generated only by a router if a RADIUS source interface is defined",
+                    "D. Encrypted RADIUS authentication requires the RADIUS source interface be defined"
+                ),
+                setOf("A"),
+                """The source IP address of the RADIUS packets must match the NAS IP address configured on the RADIUS server. A mismatch leads to RADIUS packet timeout and the server gets marked "DEAD".
+Reference: https://www.cisco.com/c/en/us/products/collateral/ios-nx-os-software/identity-based-networking-services/whitepaper_C11-731907.html""",
+                "https://www.cisco.com/c/en/us/products/collateral/ios-nx-os-software/identity-based-networking-services/whitepaper_C11-731907.html",
+                QuestionCategory.SCOR_PART_3
+            ),
+            Question.MultipleChoice(
+                "Refer to the exhibit.\ninterface GigabitEthernet1/0/18\n switchport access vlan 41\n switchport mode access\n switchport voice vlan 44\n device-tracking attach-policy IPDT_MAX_10\n authentication periodic\n authentication timer reauthenticate server\n access-session host-mode multi-domain\n access-session port-control auto\n dot1x pae authenticator\n dot1x timeout tx-period 7\n dot1x max-reauth-req 3\n spanning-tree portfast\n service-policy type control subscriber POLICY_Gi1/0/18\nA Cisco ISE administrator adds a new switch to an 802.1X deployment and has difficulty with some endpoints gaining access. Most PCs and IP phones can connect and authenticate using their machine certificate credentials. However printer and video cameras cannot based on the interface configuration provided. What must be to get these devices on to the network using Cisco ISE for authentication and authorization while maintaining security controls?",
+                listOf(
+                    "A. Change the default policy in Cisco ISE to allow all devices not using machine authentication",
+                    "B. Enable insecure protocols within Cisco ISE in the allowed protocols configuration",
+                    "C. Configure authentication event fail retry 2 action authorize vlan 41 on the interface",
+                    "D. Add mab to the interface configuration"
+                ),
+                setOf("D"),
+                """What is MAB? MAB stands for MAC Authentication Bypass, this is a form of network authentication that ISE supports by using the endpoints MAC Address to authenticate against an ISE policy set. MAB is used for devices that don't have the capability to support 802.1x e.g. certain printers and other legacy devices.
+Reference: https://www.allthingsnetworking.net/ise-mab-wired-configuration/""",
+                "https://www.allthingsnetworking.net/ise-mab-wired-configuration/",
+                QuestionCategory.SCOR_PART_3
+            ),
+            Question.MultipleChoice(
+                "What is the function of the crypto isakmp key cisc406397954 address 0.0.0.0 0.0.0.0 command when establishing an IPsec VPN tunnel?",
+                listOf(
+                    "A. It defines what data is going to be encrypted via the VPN",
+                    "B. It configures the pre-shared authentication key",
+                    "C. It prevents all IP addresses from connecting to the VPN server.",
+                    "D. It configures the local address for the VPN server."
+                ),
+                setOf("B"),
+                """Note:
++ "address 0.0.0.0 0.0.0.0" means remote peer is any -> any destination can try to negotiate with this router.
++ The Phase 1 password is "cisc406397954".""",
+                "",
+                QuestionCategory.SCOR_PART_3
+            ),
+            Question.MultipleChoice(
+                "An engineer is adding a Cisco DUO solution to the current TACACS+ deployment using Cisco ISE. The engineer wants to authenticate users using their account when they log into network devices. Which action accomplishes this task?",
+                listOf(
+                    "A. Configure Cisco DUO with the external Active Directory connector and tie it to the policy set within Cisco ISE",
+                    "B. Install and configure the Cisco DUO Authentication Proxy and configure the identity source sequence within Cisco ISE",
+                    "C. Create an identity policy within Cisco ISE to send all authentication requests to Cisco DUO",
+                    "D. Modify the current policy with the condition MFASourceSequence DUO=true in the authorization conditions within Cisco ISE"
+                ),
+                setOf("B"),
+                """Duo MFA Integration with ISE for TACACS+ Device Administration with Local/Internal (ISE) Users
+In this setup, ISE will forward the TACACS+ authentication requests to the Duo Authentication proxy. The proxy will then punt the requests back to ISE for local user authentication. This can be a little bit confusing but it is necessary for organizations that want to utilize the local user database on ISE and not relay on external identity sources such as Active Directory, LDAP, etc. If the authentication is successful, the end user/admin will be send a "DUO Push." If the local ISE authentication fails, then the process will stop and no "Duo Push" will occur.
+1. Admin user initiates a shell connection to a network device where he/she uses Active Directory based credentials
+2. Network device forwards the request to the TACACS+ server (ISE)
+3. ISE sends the authentication request to Duo's Authentication Proxy
+4. The proxy forwards the request back to ISE for the 1st factor authentication
+5. ISE informs the Authentication Proxy if the local authentication was successful
+6. Upon successful ISE authentication, the Authentication Proxy sends an authentication request to Duo cloud for 2nd factor authentication
+7. Duo cloud sends a "push" to the admin user
+8. Admin user "approves" the "push"
+9. Duo informs the Authentication Proxy of the successful push
+10. Authentication proxy informs ISE of a successful Authentication
+11. ISE Authorizes the admin user
+
+Therefore answer B is the best choice.""",
+                "",
+                QuestionCategory.SCOR_PART_3
+            ),
+            Question.MultipleChoice(
+                "An organization is selecting a cloud architecture and does not want to be responsible for patch management of the operating systems. Why should the organization select either Platform as a Service or Infrastructure as a Service for this environment?",
+                listOf(
+                    "A. Platform as a Service because the customer manages the operating system",
+                    "B. Infrastructure as a Service because the customer manages the operating system",
+                    "C. Platform as a Service because the service provider manages the operating system",
+                    "D. Infrastructure as a Service because the service provider manages the operating system"
+                ),
+                setOf("C"),
+                """We don't want to manage the OS so we should choose PaaS or SaaS. But this question only wants to compare between PaaS and IaaS so we must choose PaaS.""",
+                "",
+                QuestionCategory.SCOR_PART_3
+            ),
+            Question.MultipleChoice(
+                "How does a cloud access security broker function?",
+                listOf(
+                    "A. It is an authentication broker to enable single sign-on and multi-factor authentication for a cloud solution",
+                    "B. It integrates with other cloud solutions via APIs and monitors and creates incidents based on events from the cloud solution",
+                    "C. It acts as a security information and event management solution and receives syslog from other cloud solutions",
+                    "D. It scans other cloud solutions being used within the network and identifies vulnerabilities"
+                ),
+                setOf("B"),
+                "",
+                "",
+                QuestionCategory.SCOR_PART_3
+            ),
+            Question.MultipleChoice(
+                "A Cisco Secure Endpoint administrator configures a custom detection policy to add specific MD5 signatures. The configuration is created in the simple detection policy section, but it does not work. What is the reason for this failure?",
+                listOf(
+                    "A. The administrator must upload the file instead of the hash for Cisco AMP to use",
+                    "B. The MD5 hash uploaded to the simple detection policy is in the incorrect format",
+                    "C. The APK must be uploaded for the application that the detection is intended",
+                    "D. Detections for MD5 signatures must be configured in the advanced custom detection policies"
+                ),
+                setOf("D"),
+                "",
+                "",
+                QuestionCategory.SCOR_PART_3
+            ),
+            Question.MultipleChoice(
+                "What is the difference between a vulnerability and an exploit?",
+                listOf(
+                    "A. A vulnerability is a hypothetical event for an attacker to exploit",
+                    "B. A vulnerability is a weakness that can be exploited by an attacker",
+                    "C. An exploit is a weakness that can cause a vulnerability in the network",
+                    "D. An exploit is a hypothetical event that causes a vulnerability in the network"
+                ),
+                setOf("B"),
+                """A vulnerability is a weakness in a software system. And an exploit is an attack that leverages that vulnerability.""",
+                "",
+                QuestionCategory.SCOR_PART_3
+            ),
+            Question.MultipleChoice(
+    "An engineer integrates Cisco FMC and Cisco ISE using pxGrid. Which role is assigned for Cisco FMC?",
+    listOf(
+        "A. client",
+        "B. server",
+        "C. publisher",
+        "D. controller"
+    ),
+    setOf("C"),
+    """pxGrid stands for Platform Exchange Grid, and it is a technology that allows integrating multiple vendors security products together and grouping them in an ecosystem domain. The main purpose of using pxGrid is to share contextual data between the integrated partners.
+pxGrid uses a built-in API in ISE and it is comprised of three main components which are the controller, publisher and the subscriber. The controller is the core component to make everything working and as said is going to be ISE. The publisher instead is the partner that has some contextual data to be shared with the other partners. And finally the subscriber is the partner that is interested in parsing some contextual data from the other partners.
+Reference: https://bluenetsec.com/fmc-pxgrid-integration-with-ise/
+In fact, according to figure 6-5 of this link https://www.ciscopress.com/articles/article.asp?p=2963461&seqNum=2, FMC is a subscriber but we have no such option so the best answer here is "publisher".""",
+    "https://bluenetsec.com/fmc-pxgrid-integration-with-ise/",
+    QuestionCategory.SCOR_PART_3
+),
+Question.MultipleChoice(
+    "A network security engineer must export packet captures from the Cisco FMC web browser while troubleshooting an issue. When navigating to the address https://<FMC IP>/capure/CAPI/pcap/test.pcap, an error 403: Forbidden is given instead of the PCAP file. Which action must the engineer take to resolve this issue?",
+    listOf(
+        "A. Disable the proxy setting on the browser",
+        "B. Disable the HTTPS server and use HTTP instead",
+        "C. Use the Cisco FTD IP address as the proxy server setting on the browser",
+        "D. Enable the HTTPS server for the device platform policy"
+    ),
+    setOf("D"),
+    """When you see this HTTP RESPONSE in a packet capture (PCAP), it's likely that proxy is denying the request.
+To verify this, get a policy trace, and look for the exact HTTP REQUEST sent by the client, and match it with the policy rules. You will find either a DENY or Denied by Exception result.
+You can then modify the rule to allow this HTTP REQUEST, if appropriate.
+Reference: https://knowledge.broadcom.com/external/article/167567/why-do-my-pcaps-show-an-http-response-fr.html
+Therefore we should modify the policy to allow HTTPS request.""",
+    "https://knowledge.broadcom.com/external/article/167567/why-do-my-pcaps-show-an-http-response-fr.html",
+    QuestionCategory.SCOR_PART_3
+),
+Question.MultipleChoice(
+    "Which security solution protects users leveraging DNS-layer security?",
+    listOf(
+        "A. Cisco Umbrella",
+        "B. Cisco ISE",
+        "C. Cisco ASA",
+        "D. Cisco FTD"
+    ),
+    setOf("A"),
+    "",
+    "",
+    QuestionCategory.SCOR_PART_3
+),
+Question.MultipleChoice(
+    "What is the result of the\nACME-Router(config)#login block-for 100 attempts 4 within 60\ncommand on a Cisco IOS router?",
+    listOf(
+        "A. After four unsuccessful log in attempts, the line is blocked for 100 seconds and only permit IP addresses A are permitted in ACL 60",
+        "B. After four unsuccessful log in attempts, the line is blocked for 60 seconds and only permit IP addresses C are permitted in ACL 100",
+        "C. If four log in attempts fail in 100 seconds, wait for 60 seconds to next log in prompt",
+        "D. If four failures occur in 60 seconds, the router goes to quiet mode for 100 seconds"
+    ),
+    setOf("D"),
+    """The following example shows how to configure your router to enter a 100 second quiet period if 15 failed login attempts is exceeded within 100 seconds; all login requests will be denied during the quiet period except hosts from the ACL "myacl."
+Router(config)# login block-for 100 attempts 15 within 100
+Router(config)# login quiet-mode access-class myacl
+Reference: https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_usr_cfg/configuration/xe-16/sec-usr-cfg-xe-16-book/sec-login-enhance.html""",
+    "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_usr_cfg/configuration/xe-16/sec-usr-cfg-xe-16-book/sec-login-enhance.html",
+    QuestionCategory.SCOR_PART_3
+),
+Question.MultipleChoice(
+    "What is an advantage of network telemetry over SNMP pulls?",
+    listOf(
+        "A. scalability",
+        "B. security",
+        "C. encapsulation",
+        "D. accuracy"
+    ),
+    setOf("A"),
+    """SNMP uses the pull model when retrieving data from a switch. This model cannot scale for today's high-density platforms, and offers very limited extensibility. The pull model is based on a client sending a request to the switch, then the switch responds to that request. On average, network operators using SNMP poll data every five to thirty minutes. But with today's speeds and scale that's not enough to capture important network events.
+…
+These traditional models also impose limits like scale and efficiency -> So we can deduce network telemetry is more scalable than SNMP pulls.
+Reference: https://blogs.cisco.com/developer/its-time-to-move-away-from-snmp-and-cli-and-use-model-driven-telemetry""",
+    "https://blogs.cisco.com/developer/its-time-to-move-away-from-snmp-and-cli-and-use-model-driven-telemetry",
+    QuestionCategory.SCOR_PART_3
+),
+Question.MultipleChoice(
+    "What is a benefit of using a multifactor authentication strategy?",
+    listOf(
+        "A. It provides secure remote access for applications",
+        "B. It provides an easy, single sign-on experience against multiple applications",
+        "C. It protects data by enabling the use of a second validation of identity",
+        "D. It provides visibility into devices to establish device trust"
+    ),
+    setOf("C"),
+    """Multi-factor Authentication (MFA) is an authentication method that requires the user to provide two or more verification factors to gain access to a resource. MFA requires means of verification that unauthorized users won't have.
+Note: Single sign-on (SSO) is a property of identity and access management that enables users to securely authenticate with multiple applications and websites by logging in only once with just one set of credentials (username and password). With SSO, the application or website that the user is trying to access relies on a trusted third party to verify that users are who they say they are.""",
+    "",
+    QuestionCategory.SCOR_PART_3
+),
+            Question.MultipleChoice(
+                "Which feature is leveraged by advanced antimalware capabilities to be an effective endpoint protection platform?",
+                listOf(
+                    "A. big data",
+                    "B. storm centers",
+                    "C. sandboxing",
+                    "D. blocklisting"
+                ),
+                setOf("C"),
+                "",
+                "",
+                QuestionCategory.SCOR_PART_3
+            ),
+            Question.MultipleChoice(
+                "Which system facilitates deploying microsegmentation and multi-tenancy services with a policy-based container?",
+                listOf(
+                    "A. SDLC",
+                    "B. Docker",
+                    "C. Lambda",
+                    "D. Contiv"
+                ),
+                setOf("D"),
+                """Contiv is an open source project that allows you to deploy micro-segmentation policy-based services in container environments. It offers a higher level of networking abstraction for microservices by providing a policy framework. Contiv has built-in service discovery and service routing functions to allow you to scale out services.
+Reference: https://www.ciscopress.com/articles/article.asp?p=3004581&seqNum=2""",
+                "https://www.ciscopress.com/articles/article.asp?p=3004581&seqNum=2",
+                QuestionCategory.SCOR_PART_3
             )
         )
     }
