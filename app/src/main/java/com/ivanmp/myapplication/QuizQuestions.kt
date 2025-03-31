@@ -2000,7 +2000,8 @@ By using the "storm-control broadcast level [falling-threshold]" we can limit th
                 setOf("D"),
                 "The 'Add device' dialog shown in the exhibit is from the FMC when adding a new FTD. To let FMC manage FTD, first we need to add manager from the FTD and assign a registration key using the command 'configure manager add <FMC IP address> <registration key>' (for example: configure manager add 1.1.1.1 the_registration_key_you_want, where 1.1.1.1 is the IP address of the FMC). You must use the same registration key in FMC when adding this FTD as a managed device.\n\nImportant notes about NAT configurations:\n- If the FMC is behind NAT: Use 'configure manager add DONTRESOLVE regkey natid'\n- If the FTD is behind NAT: Use 'configure manager add <FMC IP> regkey natid'\n- In this case, since the question states FTD is not behind NAT and we assume FMC is also not behind NAT, we use the basic command format without NAT ID.",
                 "https://cyruslab.net/2019/09/03/ciscocisco-firepower-lab-setup/",
-                QuestionCategory.SCOR_PART_2
+                QuestionCategory.SCOR_PART_2,
+                "question_ftd_config"
             )
         )
         questionSets[QuestionCategory.SCOR_PART_3] = mutableListOf()
