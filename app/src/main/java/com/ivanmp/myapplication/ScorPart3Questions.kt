@@ -762,6 +762,123 @@ Reference: https://www.cisco.com/c/en/us/td/docs/security/firepower/misc/fmc-ftd
                 "",
                 "",
                 QuestionCategory.SCOR_PART_3
+            ),
+            Question.MultipleChoice(
+                "Refer to the exhibit.\nntp authentication-key 10 md5 cisco123\nntp trusted-key 10\nA network engineer is testing NTP authentication and realizes that any device synchronizes time with this router and that NTP authentication is not enforced. What is the cause of this issue?",
+                listOf(
+                    "A. The hashing algorithm that was used was MD5 which is unsupported.",
+                    "B. The key was configured in plain text.",
+                    "C. NTP authentication is not enabled.",
+                    "D. The router was not rebooted after the NTP configuration updated"
+                ),
+                setOf("C"),
+                """In order to enable NTP, we need an additional command "ntp authenticate".""",
+                "",
+                QuestionCategory.SCOR_PART_3
+            ),
+            Question.MultipleChoice(
+                "An administrator is adding a new Cisco ISE node to an existing deployment. What must be done to ensure that the addition of the node will be successful when inputting the FQDN?",
+                listOf(
+                    "A. Change the IP address of the new Cisco ISE node to the same network as the others",
+                    "B. Make the new Cisco ISE node a secondary PAN before registering it with the primary",
+                    "C. Open port 8905 on the firewall between the Cisco ISE nodes",
+                    "D. Add the DNS entry for the new Cisco ISE node into the DNS server"
+                ),
+                setOf("D"),
+                """You can register Cisco ISE nodes to the primary PAN to form a multinode deployment. Nodes in a deployment other than the primary PAN are referred to as secondary nodes.
+…
+Ensure that the primary PAN and the node being registered are DNS resolvable to each other.
+…
+Step 4. Enter the DNS-resolvable fully qualified domain name (FQDN) of the standalone node that you are going to register (in the format hostname.domain-name, for example, abc.xyz.com). The FQDN of the primary PAN and the node being registered must be resolvable from each other.
+Reference: https://www.cisco.com/c/en/us/td/docs/security/ise/2-7/admin_guide/b_ise_27_admin_guide/b_ISE_admin_27_deployment.html""",
+                "https://www.cisco.com/c/en/us/td/docs/security/ise/2-7/admin_guide/b_ise_27_admin_guide/b_ISE_admin_27_deployment.html",
+                QuestionCategory.SCOR_PART_3
+            ),
+            Question.MultipleChoice(
+                "Refer to the exhibit.\ncrypto ikev2 name-mangler MANGLER\n dn organization-unit\nAn engineer is implementing a certificate based VPN. What is the result of the existing configuration?",
+                listOf(
+                    "A. The OU of the IKEv2 peer certificate is used as the identity when matching an IKEv2 authorization policy",
+                    "B. Only an IKEv2 peer that has an OU certificate attribute set to MANGLER establishes an IKEv2 SA successfully",
+                    "C. The OU of the IKEv2 peer certificate is encrypted when the OU is set to MANGLER",
+                    "D. The OU of the IKEv2 peer certificate is set to MANGLER"
+                ),
+                setOf("A"),
+                "",
+                "",
+                QuestionCategory.SCOR_PART_3
+            ),
+            Question.MultipleChoice(
+                "An organization wants to implement a cloud-delivered and SaaS-based solution to provide visibility and threat detection across the AWS network. The solution must be deployed without software agents and rely on AWS VPC flow logs instead. Which solution meets these requirements?",
+                listOf(
+                    "A. Cisco Stealthwatch Cloud",
+                    "B. Cisco Umbrella",
+                    "C. NetFlow collectors",
+                    "D. Cisco Cloudlock"
+                ),
+                setOf("A"),
+                "",
+                "",
+                QuestionCategory.SCOR_PART_3
+            ),
+            Question.MultipleChoice(
+                "How is data sent out to the attacker during a DNS tunneling attack?",
+                listOf(
+                    "A. as part of the UDP'53 packet payload",
+                    "B. as part of the domain name",
+                    "C. as part of the TCP/53 packet header",
+                    "D. as part of the DNS response packet"
+                ),
+                setOf("B"),
+                "",
+                "",
+                QuestionCategory.SCOR_PART_3
+            ),
+            Question.MultipleChoice(
+                "A network engineer must configure a Cisco Secure Email Gateway to prompt users to enter two forms of information before gaining access. The Cisco Secure Email Gateway must also join a cluster machine using preshared keys. What must be configured to meet these requirements?",
+                listOf(
+                    "A. Enable two-factor authentication through a RADIUS server and then join the cluster by using the Cisco Secure Email Gateway CLI",
+                    "B. Enable two-factor authentication through a RADIUS server and then join the cluster by using the Cisco Secure Email Gateway GUI",
+                    "C. Enable two-factor authentication through a TACACS+ server and then join the cluster by using the Cisco Secure Email Gateway GUI",
+                    "D. Enable two-factor authentication through a TACACS+ server and then join the cluster by using the Cisco Secure Email Gateway CLI"
+                ),
+                setOf("A"),
+                """You cannot create or join a cluster from the Graphical User Interface (GUI). You must use the Command Line Interface (CLI) to create, join, or configure clusters of machines. Once you have created a cluster, you can change configuration settings from either the GUI or the CLI.
+Reference: https://www.cisco.com/c/en/us/td/docs/security/esa/esa11-0/user_guide_fs/b_ESA_Admin_Guide_11_0/b_ESA_Admin_Guide_chapter_0100111.html
+Cisco Secure Email Gateway does not support TACACS+ server.""",
+                "https://www.cisco.com/c/en/us/td/docs/security/esa/esa11-0/user_guide_fs/b_ESA_Admin_Guide_11_0/b_ESA_Admin_Guide_chapter_0100111.html",
+                QuestionCategory.SCOR_PART_3
+            ),
+            Question.MultipleChoice(
+                "What is the term for having information about threats and threat actors that helps mitigate harmful events that would otherwise compromise networks or systems?",
+                listOf(
+                    "A. trusted automated exchange",
+                    "B. Indicators of Compromise",
+                    "C. The Exploit Database",
+                    "D. threat intelligence"
+                ),
+                setOf("D"),
+                """Threat intelligence is referred to as the knowledge about an existing or emerging threat to assets, including networks and systems. Threat intelligence includes context, mechanisms, indicators of compromise (IoCs), implications, and actionable advice. Threat intelligence is referred to as the information about the observables, IoCs intent, and capabilities of internal and external threat actors and their attacks.
+Reference: CCNP and CCIE Security Core SCOR 350-701 Official Cert Guide.""",
+                "",
+                QuestionCategory.SCOR_PART_3
+            ),
+            Question.MultipleChoice(
+                "Which Cisco platform processes behavior baselines, monitors for deviations, and reviews for malicious processes in data center traffic and servers while performing software vulnerability detection?",
+                listOf(
+                    "A. Cisco Secure Workload",
+                    "B. Cisco ISE",
+                    "C. Cisco AMP for Network",
+                    "D. Cisco Secure Client"
+                ),
+                setOf("A"),
+                """What use cases are supported by the Cisco Secure Workload platform (formerly Tetration)?
+A. The platform supports the following use cases:
+…
++ Process behavior baseline and deviation: Collect the complete process inventory along with the process hash information, baseline the behavior, and identify deviations.
++ Software inventory and vulnerability detection: Identify all the software packages and versions installed on the servers. Using the Common Vulnerabilities and Exposures (CVE) database and additional data feeds, detect if there are any associated vulnerabilities or exposures and take action to protect against active exploit.
+Reference: https://www.cisco.com/c/en/us/products/collateral/data-center-analytics/tetration-analytics/q-and-a-c67-737402.html""",
+                "https://www.cisco.com/c/en/us/products/collateral/data-center-analytics/tetration-analytics/q-and-a-c67-737402.html",
+                QuestionCategory.SCOR_PART_3
             )
         )
     }
