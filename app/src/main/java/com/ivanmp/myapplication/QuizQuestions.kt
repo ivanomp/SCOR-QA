@@ -1347,6 +1347,19 @@ By using the "storm-control broadcast level [falling-threshold]" we can limit th
                 "Passphrase protection encrypts RSA keys when they are exported and imported, providing an additional layer of security for key management.",
                 "CCNP And CCIE Security Core SCOR 350-701 Official Cert Guide",
                 category = QuestionCategory.SCOR_PART_1
+            ),
+            Question.MultipleChoice(
+                "Refer to the exhibit showing an AnyConnect Connection Profile configuration. When configuring a remote access VPN solution terminating on the Cisco ASA, an administrator would like to utilize an external token authentication mechanism in conjunction with AAA authentication using machine certificates. Which configuration item must be modified to allow this?",
+                listOf(
+                    "A. Group Policy",
+                    "B. Method",
+                    "C. SAML Server",
+                    "D. DHCP Servers"
+                ),
+                setOf("B"),
+                "In order to use AAA along with an external token authentication mechanism, the 'Method' field in the Authentication section must be set to 'Both'. This allows the ASA to use both certificate-based authentication and external token authentication simultaneously. The other options are not directly related to the authentication method configuration:\n- Group Policy controls access policies and VPN attributes\n- SAML Server is for Single Sign-On integration\n- DHCP Servers handle IP address assignment to VPN clients",
+                "CCNP and CCIE Security Core SCOR 350-701 Official Cert Guide",
+                QuestionCategory.SCOR_PART_1
             )
         ))
 
@@ -1960,6 +1973,19 @@ By using the "storm-control broadcast level [falling-threshold]" we can limit th
                 explanation = "Understanding different types of security threats is crucial:\n- A botnet is a network of compromised computers controlled by hackers\n- A worm is self-replicating malware that spreads automatically\n- Phishing involves deceptive attempts to steal sensitive information\n- Spam refers to unsolicited bulk email messages",
                 reference = "CCNP And CCIE Security Core SCOR 350-701 Official Cert Guide",
                 category = QuestionCategory.SCOR_PART_2
+            ),
+            Question.MultipleChoice(
+                "Refer to the exhibit showing an AnyConnect Connection Profile configuration. When configuring a remote access VPN solution terminating on the Cisco ASA, an administrator would like to utilize an external token authentication mechanism in conjunction with AAA authentication using machine certificates. Which configuration item must be modified to allow this?",
+                listOf(
+                    "A. Group Policy",
+                    "B. Method",
+                    "C. SAML Server",
+                    "D. DHCP Servers"
+                ),
+                setOf("B"),
+                "In order to use AAA along with an external token authentication mechanism, the 'Method' field in the Authentication section must be set to 'Both'. This allows the ASA to use both certificate-based authentication and external token authentication simultaneously. The other options are not directly related to the authentication method configuration:\n- Group Policy controls access policies and VPN attributes\n- SAML Server is for Single Sign-On integration\n- DHCP Servers handle IP address assignment to VPN clients",
+                "CCNP and CCIE Security Core SCOR 350-701 Official Cert Guide",
+                QuestionCategory.SCOR_PART_2
             )
         )
         questionSets[QuestionCategory.SCOR_PART_3] = mutableListOf()
