@@ -480,6 +480,288 @@ VAs record the internal IP address of every DNS request. Security and DNS traffi
 Reference: https://docs.umbrella.com/deployment-umbrella/docs/1-introduction""",
                 "https://docs.umbrella.com/deployment-umbrella/docs/1-introduction",
                 QuestionCategory.SCOR_PART_3
+            ),
+            Question.MultipleChoice(
+                "What is a difference between a DoS attack and a DDoS attack?",
+                listOf(
+                    "A. A DoS attack is where a computer is used to flood a server with TCP and UDP packets whereas a DDoS attack is where multiple systems target a single system with a DoS attack.",
+                    "B. A DoS attack is where a computer is used to flood a server with TCP and UDP packets whereas a DDoS attack is where a computer is used to flood multiple servers that are distributed over a LAN",
+                    "C. A DoS attack is where a computer is used to flood a server with UDP packets whereas a DDoS attack is where a computer is used to flood a server with TCP packets",
+                    "D. A DoS attack is where a computer is used to flood a server with TCP packets whereas a DDoS attack is where a computer is used to flood a server with UDP packets"
+                ),
+                setOf("A"),
+                "",
+                "",
+                QuestionCategory.SCOR_PART_3
+            ),
+            Question.MultipleChoice(
+                "Which two capabilities of Integration APIs are utilized with Cisco DNA center? (Choose two)",
+                listOf(
+                    "A. Automatically deploy new virtual routers",
+                    "B. Upgrade software on switches and routers",
+                    "C. Third party reporting",
+                    "D. Connect to ITSM Platforms",
+                    "E. Create new SSIDs on a wireless LAN controller"
+                ),
+                setOf("C", "D"),
+                """Integration API (Westbound)
+Integration capabilities are part of Westbound interfaces. To meet the need to scale and accelerate operations in modern data centers, IT operators require intelligent, end-to-end work flows built with open APIs. The Cisco DNA Center platform provides mechanisms for integrating Cisco DNA Assurance workflows and data with third-party IT Service Management (ITSM) solutions.
+Reference: https://developer.cisco.com/docs/dna-center/#!cisco-dna-center-platform-overview/events-and-notifications-eastbound
+-> Therefore answer D is correct.
+Westbound—Integration APIs
+Cisco DNA Center platform can power end-to-end IT processes across the value chain by integrating various domains such as ITSM, IPAM, and reporting. By leveraging the REST-based Integration Adapter APIs, bi-directional interfaces can be built to allow the exchange of contextual information between Cisco DNA Center and the external, third-party IT systems. The westbound APIs provide the capability to publish the network data, events and notifications to the external systems and consume information in Cisco DNA Center from the connected systems.
+Reference: https://blogs.cisco.com/networking/with-apis-cisco-dna-center-can-improve-your-competitive-advantage
+-> Answer C is correct.""",
+                "https://developer.cisco.com/docs/dna-center/#!cisco-dna-center-platform-overview/events-and-notifications-eastbound",
+                QuestionCategory.SCOR_PART_3
+            ),
+            Question.MultipleChoice(
+                "Which kind of API that is used with Cisco DNA Center provisions SSIDs, QoS policies, and update software versions on switches?",
+                listOf(
+                    "A. integration",
+                    "B. intent",
+                    "C. event",
+                    "D. multivendor"
+                ),
+                setOf("B"),
+                """Northbound-Intent APIs
+Intent APIs enable developers to access Cisco DNA Center Automation and Assurance workflows. Through this access, you can simplify the process of creating workflows that consolidate multiple network actions.
+Say, for instance, you're configuring an SSID on a wireless network. Using Cisco DNA Center and the intent APIs, you can offload the process of setting WLAN and security settings. This saves time and provides greater consistency. You can do the same for QoS policies, software images running on the network devices, and application health.
+Reference: https://www.publicnow.com/view/3057F243685FA76A88EFC1651CAAFD66B5B849FE?1603802892""",
+                "https://www.publicnow.com/view/3057F243685FA76A88EFC1651CAAFD66B5B849FE?1603802892",
+                QuestionCategory.SCOR_PART_3
+            ),
+            Question.MultipleChoice(
+                "What is the purpose of CA in a PKI?",
+                listOf(
+                    "A. to issue and revoke digital certificates.",
+                    "B. to validate the authenticity of a digital certificate",
+                    "C. to create the private key for a digital certificate.",
+                    "D. to certify the ownership of a public key by the named subject"
+                ),
+                setOf("A"),
+                """A trusted CA is the only entity that can issue trusted digital certificates. This is extremely important because while PKI manages more of the encryption side of these certificates, authentication is vital to understanding which entities own what keys. Without a trusted CA, anyone can issue their own keys, authentication goes out the window and chaos ensues.
+Reference: https://cheapsslsecurity.com/blog/understanding-the-role-of-certificate-authorities-in-pki/""",
+                "https://cheapsslsecurity.com/blog/understanding-the-role-of-certificate-authorities-in-pki/",
+                QuestionCategory.SCOR_PART_3
+            ),
+            Question.MultipleChoice(
+                "Which DevSecOps implementation process gives a weekly or daily update instead of monthly or quarterly in the applications?",
+                listOf(
+                    "A. orchestration",
+                    "B. CI/CD pipeline",
+                    "C. container",
+                    "D. security"
+                ),
+                setOf("B"),
+                """Unlike the traditional software life cycle, the CI/CD implementation process gives a weekly or daily update instead of monthly or quarterly. The fun part is customers won't even realize the update is in their applications, as they happen on the fly.
+Reference: https://devops.com/how-to-implement-an-effective-ci-cd-pipeline/""",
+                "https://devops.com/how-to-implement-an-effective-ci-cd-pipeline/",
+                QuestionCategory.SCOR_PART_3
+            ),
+            Question.MultipleChoice(
+                "Which parameter is required when configuring a Netflow exporter on a Cisco Router?",
+                listOf(
+                    "A. DSCP value",
+                    "B. source interface",
+                    "C. exporter name",
+                    "D. exporter description"
+                ),
+                setOf("C"),
+                """An example of configuring a NetFlow exporter is shown below:
+flow exporter Exporter
+ destination 192.168.100.22
+ transport udp 2055
+!""",
+                "",
+                QuestionCategory.SCOR_PART_3
+            ),
+            Question.MultipleChoice(
+                "Which category includes Dos Attacks?",
+                listOf(
+                    "A. virus attacks",
+                    "B. trojan attacks",
+                    "C. flood attacks",
+                    "D. phishing attacks"
+                ),
+                setOf("C"),
+                "",
+                "",
+                QuestionCategory.SCOR_PART_3
+            ),
+            Question.MultipleChoice(
+                "What are two advantages of using Cisco Any connect over DMVPN? (Choose two)",
+                listOf(
+                    "A. It provides spoke-to-spoke communications without traversing the hub",
+                    "B. It allows different routing protocols to work over the tunnel",
+                    "C. It allows customization of access policies based on user identity",
+                    "D. It allows multiple sites to connect to the data center",
+                    "E. It enables VPN access for individual users from their machines"
+                ),
+                setOf("C", "E"),
+                "",
+                "",
+                QuestionCategory.SCOR_PART_3
+            ),
+            Question.MultipleChoice(
+                "When choosing an algorithm to us, what should be considered about Diffie Hellman and RSA for key establishment?",
+                listOf(
+                    "A. RSA is an asymmetric key establishment algorithm intended to output symmetric keys.",
+                    "B. RSA is a symmetric key establishment algorithm intended to output asymmetric keys.",
+                    "C. DH is a symmetric key establishment algorithm intended to output asymmetric keys.",
+                    "D. DH is on asymmetric key establishment algorithm intended to output symmetric keys."
+                ),
+                setOf("D"),
+                """Diffie Hellman (DH) uses a private-public key pair to establish a shared secret, typically a symmetric key. DH is not a symmetric algorithm – it is an asymmetric algorithm used to establish a shared secret for a symmetric key algorithm.""",
+                "",
+                QuestionCategory.SCOR_PART_3
+            ),
+            Question.MultipleChoice(
+                "Which type of DNS abuse exchanges data between two computers even when there is no direct connection?",
+                listOf(
+                    "A. malware installation",
+                    "B. command-and-control communication",
+                    "C. network footprinting",
+                    "D. data exfiltration"
+                ),
+                setOf("D"),
+                """Malware installation: This may be done by hijacking DNS queries and responding with malicious IP addresses.
+Command & Control communication: As part of lateral movement, after an initial compromise, DNS communications is abused to communicate with a C2 server. This typically involves making periodic DNS queries from a computer in the target network for a domain controlled by the adversary. The responses contain encoded messages that may be used to perform unauthorized actions in the target network.
+Network footprinting: Adversaries use DNS queries to build a map of the network. Attackers live off the terrain so developing a map is important to them.
+Data theft (exfiltration): Abuse of DNS to transfer data; this may be performed by tunneling other protocols like FTP, SSH through DNS queries and responses. Attackers make multiple DNS queries from a compromised computer to a domain owned by the adversary. DNS tunneling can also be used for executing commands and transferring malware into the target network.
+Reference: https://www.netsurion.com/articles/5-types-of-dns-attacks-and-how-to-detect-them""",
+                "https://www.netsurion.com/articles/5-types-of-dns-attacks-and-how-to-detect-them",
+                QuestionCategory.SCOR_PART_3
+            ),
+            Question.MultipleChoice(
+                "What is a difference between GETVPN and IPsec?",
+                listOf(
+                    "A. GETVPN reduces latency and provides encryption over MPLS without the use of a central hub",
+                    "B. GETVPN provides key management and security association management",
+                    "C. GETVPN is based on IKEv2 and does not support IKEv1",
+                    "D. GETVPN is used to build a VPN network with multiple sites without having to statically configure all devices"
+                ),
+                setOf("A"),
+                """By using GETVPN together with DMVPN, the delay caused by IPsec tunnel negotiation is eliminated because connections are static.
+Reference: Network Security Technologies and Solutions (CCIE Professional Development) Book
+Moreover, GETVPN is a site-to-site VPN so it does not require a central hub.""",
+                "",
+                QuestionCategory.SCOR_PART_3
+            ),
+            Question.MultipleChoice(
+                "What is a benefit of using telemetry over SNMP to configure new routers for monitoring purposes?",
+                listOf(
+                    "A. Telemetry uses a pull, method which makes it more reliable than SNMP",
+                    "B. Telemetry uses push and pull, which makes it more scalable than SNMP",
+                    "C. Telemetry uses push and pull which makes it more secure than SNMP",
+                    "D. Telemetry uses a push method which makes it faster than SNMP"
+                ),
+                setOf("D"),
+                """SNMP polling can often be in the order of 5-10 minutes, CLIs are unstructured and prone to change which can often break scripts.
+The traditional use of the pull model, where the client requests data from the network does not scale when what you want is near real-time data.
+Moreover, in some use cases, there is the need to be notified only when some data changes, like interfaces status, protocol neighbors change etc.
+Model-Driven Telemetry is a new approach for network monitoring in which data is streamed from network devices continuously using a push model and provides near real-time access to operational statistics.
+Referfence: https://developer.cisco.com/docs/ios-xe/#!streaming-telemetry-quick-start-guide/streaming-telemetry""",
+                "https://developer.cisco.com/docs/ios-xe/#!streaming-telemetry-quick-start-guide/streaming-telemetry",
+                QuestionCategory.SCOR_PART_3
+            ),
+            Question.MultipleChoice(
+                "An organization wants to use Cisco FTD or Cisco ASA devices. Specific URLs must be blocked from being accessed via the firewall which requires that the administrator input the bad URL categories that the organization wants blocked into the access policy. Which solution should be used to meet this requirement?",
+                listOf(
+                    "A. Cisco ASA because it enables URL filtering and blocks malicious URLs by default, whereas Cisco FTD does not",
+                    "B. Cisco ASA because it includes URL filtering in the access control policy capabilities, whereas Cisco FTD does not",
+                    "C. Cisco FTD because it includes URL filtering in the access control policy capabilities, whereas Cisco ASA does not",
+                    "D. Cisco FTD because it enables URL filtering and blocks malicious URLs by default, whereas Cisco ASA does not"
+                ),
+                setOf("C"),
+                "",
+                "",
+                QuestionCategory.SCOR_PART_3
+            ),
+            Question.MultipleChoice(
+                "An administrator configures a Cisco WSA to receive redirected traffic over ports 80 and 443. The organization requires that a network device with specific WSA integration capabilities be configured to send the traffic to the WSA to proxy the requests and increase visibility, while making this invisible to the users. What must be done on the Cisco WSA to support these requirements?",
+                listOf(
+                    "A. Configure transparent traffic redirection using WCCP in the Cisco WSA and on the network device",
+                    "B. Configure active traffic redirection using WPAD in the Cisco WSA and on the network device",
+                    "C. Use the Layer 4 setting in the Cisco WSA to receive explicit forward requests from the network device",
+                    "D. Use PAC keys to allow only the required network devices to send the traffic to the Cisco WSA"
+                ),
+                setOf("A"),
+                "",
+                "",
+                QuestionCategory.SCOR_PART_3
+            ),
+            Question.MultipleChoice(
+                "An administrator configures new authorization policies within Cisco ISE and has difficulty profiling the devices. Attributes for the new Cisco IP phones that are profiled based on the RADIUS authentication are seen however the attributes for CDP or DHCP are not. What should the administrator do to address this issue?",
+                listOf(
+                    "A. Configure the ip dhcp snooping trust command on the DHCP interfaces to get the information to Cisco ISE",
+                    "B. Configure the authentication port-control auto feature within Cisco ISE to identify the devices that are trying to connect",
+                    "C. Configure a service template within the switch to standardize the port configurations so that the correct information is sent to Cisco ISE",
+                    "D. Configure the device sensor feature within the switch to send the appropriate protocol information"
+                ),
+                setOf("D"),
+                """Device sensor is a feature of access devices. It allows to collect information about connected endpoints. Mostly, information collected by Device Sensor can come from the following protocols:
++ Cisco Discovery Protocol (CDP)
++ Link Layer Discovery Protocol (LLDP)
++ Dynamic Host Configuration Protocol (DHCP)
+Reference: https://www.cisco.com/c/en/us/support/docs/security/identity-services-engine/200292-Configure-Device-Sensor-for-ISE-Profilin.html""",
+                "https://www.cisco.com/c/en/us/support/docs/security/identity-services-engine/200292-Configure-Device-Sensor-for-ISE-Profilin.html",
+                QuestionCategory.SCOR_PART_3
+            ),
+            Question.MultipleChoice(
+                "A network engineer must monitor user and device behavior within the on-premises network. This data must be sent to the Cisco Stealthwatch Cloud analytics platform for analysis. What must be done to meet this requirement using the Ubuntu-based VM appliance deployed in a VMware-based hypervisor?",
+                listOf(
+                    "A. Configure a Cisco FMC to send syslogs to Cisco Stealthwatch Cloud",
+                    "B. Deploy the Cisco Stealthwatch Cloud PNM sensor that sends data to Cisco Stealthwatch Cloud",
+                    "C. Deploy a Cisco FTD sensor to send network events to Cisco Stealthwatch Cloud",
+                    "D. Configure a Cisco FMC to send NetFlow to Cisco Stealthwatch Cloud"
+                ),
+                setOf("B"),
+                """The Stealthwatch Cloud Private Network Monitoring (PNM) Sensor is an extremely flexible piece of technology, capable of being utilized in a number of different deployment scenarios. It can be deployed as a complete Ubuntu based virtual appliance on different hypervisors (e.g. –VMware, VirtualBox). It can be deployed on hardware running a number of different Linux-based operating systems.
+Reference: https://www.ciscolive.com/c/dam/r/ciscolive/us/docs/2019/pdf/5eU6DfQV/LTRSEC-2240-LG2.pdf""",
+                "https://www.ciscolive.com/c/dam/r/ciscolive/us/docs/2019/pdf/5eU6DfQV/LTRSEC-2240-LG2.pdf",
+                QuestionCategory.SCOR_PART_3
+            ),
+            Question.MultipleChoice(
+                "An organization uses Cisco FMC to centrally manage multiple Cisco FTD devices. The default management port conflicts with other communications on the network and must be changed. What must be done to ensure that all devices can communicate together?",
+                listOf(
+                    "A. Manually change the management port on Cisco FMC and all managed Cisco FTD devices",
+                    "B. Set the tunnel to go through the Cisco FTD",
+                    "C. Change the management port on Cisco FMC so that it pushes the change to all managed Cisco FTD devices",
+                    "D. Set the tunnel port to 8305"
+                ),
+                setOf("A"),
+                """The FMC and managed devices communicate using a two-way, SSL-encrypted communication channel, which by default is on port 8305.
+Cisco strongly recommends that you keep the default settings for the remote management port, but if the management port conflicts with other communications on your network, you can choose a different port. If you change the management port, you must change it for all devices in your deployment that need to communicate with each other.
+Reference: https://www.cisco.com/c/en/us/td/docs/security/firepower/misc/fmc-ftd-mgmt-nw/fmc-ftd-mgmt-nw.html""",
+                "https://www.cisco.com/c/en/us/td/docs/security/firepower/misc/fmc-ftd-mgmt-nw/fmc-ftd-mgmt-nw.html",
+                QuestionCategory.SCOR_PART_3
+            ),
+            Question.MultipleChoice(
+                "Which service allows a user export application usage and performance statistics with Cisco Application Visibility and control?",
+                listOf(
+                    "A. SNORT",
+                    "B. NetFlow",
+                    "C. SNMP",
+                    "D. 802.1X"
+                ),
+                setOf("B"),
+                """Application Visibility and control (AVC) supports NetFlow to export application usage and performance statistics. This data can be used for analytics, billing, and security policies.""",
+                "",
+                QuestionCategory.SCOR_PART_3
+            ),
+            Question.MultipleChoice(
+                "An engineer adds a custom detection policy to a Cisco AMP deployment and encounters issues with the configuration. The simple detection mechanism is configured, but the dashboard indicates that the hash is not 64 characters and is non-zero. What is the issue?",
+                listOf(
+                    "A. The engineer is attempting to upload a hash created using MD5 instead of SHA-256",
+                    "B. The file being uploaded is incompatible with simple detections and must use advanced detections",
+                    "C. The hash being uploaded is part of a set in an incorrect format",
+                    "D. The engineer is attempting to upload a file instead of a hash"
+                ),
+                setOf("A"),
+                "",
+                "",
+                QuestionCategory.SCOR_PART_3
             )
         )
     }
