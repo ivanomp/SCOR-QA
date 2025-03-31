@@ -675,6 +675,9 @@ class QuizActivity : AppCompatActivity() {
         explanationText.movementMethod = LinkMovementMethod.getInstance()
         explanationText.setLinkTextColor(Color.BLUE)
 
+        // Hide skip button after submitting
+        skipButton.visibility = View.GONE
+
         // Show and configure navigation buttons
         nextButton.apply {
             visibility = View.VISIBLE
@@ -707,33 +710,57 @@ class QuizActivity : AppCompatActivity() {
     private fun showPreviousQuestion() {
         if (currentQuestionIndex > 0) {
             currentQuestionIndex--
-            val previousAnswer = answeredQuestions[currentQuestionIndex]
+            val previousAnswer = answeredQuestions.find { it.questionIndex == currentQuestionIndex }
             
-            // Restore the previous question state
-            currentQuestion = previousAnswer.question
-            selectedOptions = previousAnswer.selectedOptions
-            itemPlacements = previousAnswer.itemPlacements.toMutableMap()
+            // Get the question from the questions list
+            currentQuestion = questions[currentQuestionIndex]
             
-            // Show the question with previous answers
+            // Reset the state
+            selectedOptions = setOf()
+            itemPlacements.clear()
+            
+            // If we have a previous answer and it's not skipped, restore it
+            if (previousAnswer != null && !previousAnswer.isSkipped) {
+                selectedOptions = previousAnswer.selectedOptions
+                itemPlacements = previousAnswer.itemPlacements.toMutableMap()
+            }
+            
+            // Show the question with previous answers if they exist
             when (val question = currentQuestion) {
                 is Question.MultipleChoice -> {
                     optionsContainer.visibility = View.VISIBLE
                     dragDropContainer.visibility = View.GONE
                     showMultipleChoiceQuestion(question)
                     
-                    // Restore button states
-                    for (i in 0 until optionsContainer.childCount) {
-                        val button = optionsContainer.getChildAt(i) as? MaterialButton
-                        if (button != null) {
-                            val buttonLetter = button.text.toString().substringBefore(".")
-                            if (selectedOptions.contains(buttonLetter)) {
-                                button.backgroundTintList = ContextCompat.getColorStateList(this, 
-                                    if (previousAnswer.isCorrect) android.R.color.holo_green_light 
-                                    else android.R.color.holo_red_light)
-                                button.setTextColor(ContextCompat.getColor(this, android.R.color.white))
+                    // Restore button states if we have a previous answer and it's not skipped
+                    if (previousAnswer != null && !previousAnswer.isSkipped) {
+                        for (i in 0 until optionsContainer.childCount) {
+                            val button = optionsContainer.getChildAt(i) as? MaterialButton
+                            if (button != null) {
+                                val buttonLetter = button.text.toString().substringBefore(".")
+                                if (selectedOptions.contains(buttonLetter)) {
+                                    button.backgroundTintList = ContextCompat.getColorStateList(this, 
+                                        if (previousAnswer.isCorrect) android.R.color.holo_green_light 
+                                        else android.R.color.holo_red_light)
+                                    button.setTextColor(ContextCompat.getColor(this, android.R.color.white))
+                                }
+                                button.isEnabled = false
                             }
-                            button.isEnabled = false
                         }
+                        
+                        // Show explanation if we have a previous answer and it's not skipped
+                        showExplanation(question.explanation, question.reference, previousAnswer.isCorrect)
+                    } else {
+                        // Reset button states for unanswered or skipped question
+                        for (i in 0 until optionsContainer.childCount) {
+                            val button = optionsContainer.getChildAt(i) as? MaterialButton
+                            if (button != null) {
+                                button.backgroundTintList = ContextCompat.getColorStateList(this, android.R.color.white)
+                                button.setTextColor(ContextCompat.getColor(this, android.R.color.darker_gray))
+                                button.isEnabled = true
+                            }
+                        }
+                        explanationCard.visibility = View.GONE
                     }
                 }
                 is Question.DragAndDrop -> {
@@ -741,37 +768,41 @@ class QuizActivity : AppCompatActivity() {
                     dragDropContainer.visibility = View.VISIBLE
                     showDragAndDropQuestion(question)
                     
-                    // Restore item placements
-                    itemPlacements.forEach { (item, category) ->
-                        val itemView = findItemViewByText(item)
-                        val categoryView = findCategoryViewByName(category)
-                        if (itemView != null && categoryView != null) {
-                            (itemView.parent as? ViewGroup)?.removeView(itemView)
-                            (categoryView as LinearLayout).addView(itemView)
+                    // Restore item placements if we have a previous answer and it's not skipped
+                    if (previousAnswer != null && !previousAnswer.isSkipped) {
+                        itemPlacements.forEach { (item, category) ->
+                            val itemView = findItemViewByText(item)
+                            val categoryView = findCategoryViewByName(category)
+                            if (itemView != null && categoryView != null) {
+                                (itemView.parent as? ViewGroup)?.removeView(itemView)
+                                (categoryView as LinearLayout).addView(itemView)
+                            }
                         }
+                        
+                        // Show explanation if we have a previous answer and it's not skipped
+                        showExplanation(question.explanation, question.reference, previousAnswer.isCorrect)
+                    } else {
+                        explanationCard.visibility = View.GONE
                     }
                 }
                 null -> {
-                    // Handle null case
                     Log.e("QuizActivity", "Question is null in showPreviousQuestion")
                     showErrorDialog()
                 }
             }
             
-            // Show explanation
-            val explanation = when (val question = currentQuestion) {
-                is Question.MultipleChoice -> question.explanation
-                is Question.DragAndDrop -> question.explanation
-                null -> "Error: Question not found"
-            }
+            // Update button states
+            previousButton.visibility = if (currentQuestionIndex > 0) View.VISIBLE else View.GONE
+            skipButton.visibility = if (!answeredQuestions.any { 
+                it.questionIndex == currentQuestionIndex && !it.isSkipped 
+            }) View.VISIBLE else View.GONE
             
-            val reference = when (val question = currentQuestion) {
-                is Question.MultipleChoice -> question.reference
-                is Question.DragAndDrop -> question.reference
-                null -> "Error: Question not found"
+            // Update next button text
+            nextButton.text = when {
+                currentQuestionIndex == questions.size - 1 -> "Finish"
+                answeredQuestions.any { it.questionIndex == currentQuestionIndex } -> "Next"
+                else -> "Next"
             }
-            
-            showExplanation(explanation, reference, previousAnswer.isCorrect)
         }
     }
 
