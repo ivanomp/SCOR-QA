@@ -42,6 +42,11 @@
             android:exported="false"
             android:label="About"
             android:theme="@style/Theme.SCORQA" />
+        <activity
+            android:name=".AddScorPart3QuestionsActivity"
+            android:exported="false"
+            android:label="Add SCOR PART 3 Questions"
+            android:theme="@style/Theme.SCORQA" />
     </application>
 
 </manifest>
