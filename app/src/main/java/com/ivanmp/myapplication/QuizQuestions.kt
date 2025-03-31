@@ -1986,6 +1986,19 @@ By using the "storm-control broadcast level [falling-threshold]" we can limit th
                 "In order to use AAA along with an external token authentication mechanism, the 'Method' field in the Authentication section must be set to 'Both'. This allows the ASA to use both certificate-based authentication and external token authentication simultaneously. The other options are not directly related to the authentication method configuration:\n- Group Policy controls access policies and VPN attributes\n- SAML Server is for Single Sign-On integration\n- DHCP Servers handle IP address assignment to VPN clients",
                 "CCNP and CCIE Security Core SCOR 350-701 Official Cert Guide",
                 QuestionCategory.SCOR_PART_2
+            ),
+            Question.MultipleChoice(
+                "An administrator is adding a new Cisco FTD device to their network and wants to manage it with Cisco FMC. The Cisco FTD is not behind a NAT device. Which command is needed to enable this on the Cisco FTD?",
+                listOf(
+                    "A. configure manager add DONTRESOLVE <registration key>",
+                    "B. configure manager add <FMC IP address> <registration key> 16",
+                    "C. configure manager add DONTRESOLVE <registration key> FTD123",
+                    "D. configure manager add <FMC IP address> <registration key>"
+                ),
+                setOf("D"),
+                "The 'Add device' dialog shown in the exhibit is from the FMC when adding a new FTD. To let FMC manage FTD, first we need to add manager from the FTD and assign a registration key using the command 'configure manager add <FMC IP address> <registration key>' (for example: configure manager add 1.1.1.1 the_registration_key_you_want, where 1.1.1.1 is the IP address of the FMC). You must use the same registration key in FMC when adding this FTD as a managed device.\n\nImportant notes about NAT configurations:\n- If the FMC is behind NAT: Use 'configure manager add DONTRESOLVE regkey natid'\n- If the FTD is behind NAT: Use 'configure manager add <FMC IP> regkey natid'\n- In this case, since the question states FTD is not behind NAT and we assume FMC is also not behind NAT, we use the basic command format without NAT ID.",
+                "https://cyruslab.net/2019/09/03/ciscocisco-firepower-lab-setup/",
+                QuestionCategory.SCOR_PART_2
             )
         )
         questionSets[QuestionCategory.SCOR_PART_3] = mutableListOf()
