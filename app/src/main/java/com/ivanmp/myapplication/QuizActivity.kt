@@ -628,6 +628,10 @@ class QuizActivity : AppCompatActivity() {
     }
 
     private fun showExplanation(explanation: String, reference: String, isCorrect: Boolean) {
+        // Hide submit button and skip button
+        submitButton.visibility = View.GONE
+        skipButton.visibility = View.GONE
+        
         // Store the current question state
         currentQuestion?.let { question ->
             answeredQuestions.add(
