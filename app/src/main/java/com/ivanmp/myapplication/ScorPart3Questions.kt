@@ -1593,6 +1593,36 @@ An identity list cannot be an address as Umbrella uses the following identities:
 Reference: https://www.cisco.com/c/dam/en/us/solutions/collateral/enterprise/design-zone-security/umbrella-design-guide.pdf""",
                 "https://docs.umbrella.com/deployment-umbrella/docs/customize-your-policies-1",
                 QuestionCategory.SCOR_PART_3
+            ),
+            Question.DragAndDrop(
+                question = "Drag and drop the cloud security assessment components from the left onto the definitions on the right.",
+                items = listOf(
+                    "cloud data protection assessment",
+                    "cloud security strategy workshop",
+                    "cloud security architecture assessment",
+                    "user entity behavior assessment"
+                ),
+                categories = listOf(
+                    "understand the security posture of the data or activity taking place in public cloud deployments",
+                    "develop a cloud security strategy and roadmap aligned to business priorities",
+                    "identify strengths and areas for improvement in the current security architecture during onboarding",
+                    "detect potential anomalies in user behavior that suggest malicious behavior in a Software-as-a-Service application"
+                ),
+                correctMapping = mapOf(
+                    "cloud data protection assessment" to "understand the security posture of the data or activity taking place in public cloud deployments",
+                    "cloud security strategy workshop" to "develop a cloud security strategy and roadmap aligned to business priorities",
+                    "cloud security architecture assessment" to "identify strengths and areas for improvement in the current security architecture during onboarding",
+                    "user entity behavior assessment" to "detect potential anomalies in user behavior that suggest malicious behavior in a Software-as-a-Service application"
+                ),
+                explanation = """Cloud Data Protection Assessment: We review the security posture of documents stored in one Software-as-a-Service (SaaS) instance, or review the activity taking place in an Infrastructure-as-a-Service (IaaS) deployment over a period of time.
+
+Cloud Data Architecture Assessment: We conduct whiteboarding sessions, interviews, and documentation reviews to assess the security architecture of your cloud environment
+
+Cloud User Entity Behavior Assessment: We examine how the users provisioned in a SaaS instance behave, establishes a baseline for each individual user, and monitor user activity
+
+Cloud Security Strategy: Our experts educate your team on cloud security as related to current and future states, as well as business priorities""",
+                reference = "https://www.cisco.com/c/dam/en/us/products/security/security-strategy-advisory-aag.pdf",
+                category = QuestionCategory.SCOR_PART_3
             )
         )
     }
