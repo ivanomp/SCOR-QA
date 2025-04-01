@@ -834,12 +834,12 @@ Reference: https://www.cisco.com/c/en/us/td/docs/security/ise/2-7/admin_guide/b_
                 QuestionCategory.SCOR_PART_3
             ),
             Question.MultipleChoice(
-                "A network engineer must configure a Cisco Secure Email Gateway to prompt users to enter two forms of information before gaining access. The Cisco Secure Email Gateway must also join a cluster machine using preshared keys. What must be configured to meet these requirements?",
+                "A network engineer must configure a Cisco Secure Email Gateway to prompt users to enter two forms of information before gaining access. The Cisco Secure Email Gateway must also join a cluster machine using preshared keys. What must be done to resolve this issue?",
                 listOf(
                     "A. Enable two-factor authentication through a RADIUS server and then join the cluster by using the Cisco Secure Email Gateway CLI",
-                    "B. Enable two-factor authentication through a RADIUS server and then join the cluster by using the Cisco Secure Email Gateway GUI",
-                    "C. Enable two-factor authentication through a TACACS+ server and then join the cluster by using the Cisco Secure Email Gateway GUI",
-                    "D. Enable two-factor authentication through a TACACS+ server and then join the cluster by using the Cisco Secure Email Gateway CLI"
+                    "B. Use the tenant control features to identify each subnet being used and track the connections within the Cisco Umbrella dashboard",
+                    "C. Install the Microsoft Active Directory Connector to give IP address information stitched to the requests in the Cisco Umbrella dashboard",
+                    "D. Configure an internal domain within Cisco Umbrella to help identify each address and create policy from the domains"
                 ),
                 setOf("A"),
                 """You cannot create or join a cluster from the Graphical User Interface (GUI). You must use the Command Line Interface (CLI) to create, join, or configure clusters of machines. Once you have created a cluster, you can change configuration settings from either the GUI or the CLI.
@@ -923,7 +923,7 @@ Reference: https://www.cisco.com/c/en/us/products/collateral/security/router-sec
                 setOf("D"),
                 """We need an automated solution to deal with the rapid change of cybersecurity so answer A and C are not correct.
 According to the following facts about Talos, we believe answer D is the best choice:
-Cisco WSA detects and correlates threats in real time by tapping into the largest threat-detection network in the world, Cisco Talos. To discover where threats are hiding, Cisco Talos pulls massive quantities of information across multiple vectors – firewall, IPS, web, email, and VPN. Cisco Talos constantly refreshes information every 3 to 5 minutes – adding intelligence to and receiving intelligence from Cisco WSA and other network security devices. This enables Cisco WSA to deliver industry-leading defense hours and even days ahead of competitors.
+Cisco WSA detects and correlates threats in real time by tapping into the largest threat-detection network in the world, Cisco Talos. To discover where threats are hiding, Cisco Talos pulls massive quantities of information across multiple vectors — firewall, IPS, web, email, and VPN. Cisco Talos constantly refreshes information every 3 to 5 minutes — adding intelligence to and receiving intelligence from Cisco WSA and other network security devices. This enables Cisco WSA to deliver industry-leading defense hours and even days ahead of competitors.
 Reference: https://www.cisco.com/c/en/us/products/collateral/security/web-security-appliance/solution-overview-c22-732948.html
 Talos' threat intelligence supports a two-way flow of telemetry and protection across market-leading security solutions including Next-Generation Intrusion Prevention System (NGIPS), Next-Generation Firewall (NGFW), Advanced Malware Protection (AMP), Email Security Appliance (ESA), Cloud Email Security (CES), Cloud Web Security (CWS), Web Security Appliance (WSA), Umbrella, and ThreatGrid, as well as numerous open-source and commercial threat protection systems.
 Reference: https://www.talosintelligence.com/docs/Talos_WhitePaper.pdf""",
@@ -1655,6 +1655,33 @@ AMP (Advanced Malware Protection) provides detection, blocking, tracking, analys
 Full Context Awareness provides policy enforcement based on complete visibility of users and communication between virtual machines.""",
                 reference = "",
                 category = QuestionCategory.SCOR_PART_3
+            ),
+            Question.MultipleChoice(
+                "Refer to the exhibit. What does this python script accomplish?",
+                listOf(
+                    "A. It lists the LDAP users from the external identity store configured on Cisco ISE",
+                    "B. It authenticates to a Cisco ISE server using the username of ersad",
+                    "C. It allows authentication with TLSv1 SSL protocol",
+                    "D. It authenticates to a Cisco ISE with an SSH connection"
+                ),
+                setOf("A"),
+                """In this question the username of "ersad" is just an example and it is in the comment section (which is started by a #) so it has no effect on the script. In fact the username will be taken from the second argument of the command. For example, suppose the file name of the above script is "Internal_user.py" then if we call the script with the command:
+
+python Internal_user.py 192.168.1.10 digitaltut digitaltutPassWord!
+Then the username would be "digitaltut".
+
+-> Answer B is not correct.
+
+From the line "conn = http.client.HTTPSConnection("{}:9060".format(host), context=ssl.SSLContext(ssl.PROTOCOL_TLSv1_2))", we specify we are using TLS version 1.2 as the channel encryption protocol (not TLSv1) -> Answer C is not correct.
+
+Also from the line above, we are using HTTPS to make a request. It is different from a SSH connection so answer D is not correct.
+
+-> Therefore only answer A is left.
+
+Note: The purpose of this Python script is used to get the guest users through ISE External RESTful Services (ERS) API. ERS is designed to allow external clients to perform CRUD (Create, Read, Update, Delete) operations on Cisco ISE resources.""",
+                "",
+                QuestionCategory.SCOR_PART_3,
+                "python_ise_script"
             )
         )
     }
