@@ -69,7 +69,7 @@ class QuizActivity : AppCompatActivity() {
     )
 
     companion object {
-        private const val QUESTION_LIMIT = 100 // Default number of questions per quiz
+        private const val QUESTION_LIMIT = 150 // Default number of questions per quiz
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -628,6 +628,10 @@ class QuizActivity : AppCompatActivity() {
     }
 
     private fun showExplanation(explanation: String, reference: String, isCorrect: Boolean) {
+        // Hide submit button and skip button
+        submitButton.visibility = View.GONE
+        skipButton.visibility = View.GONE
+        
         // Store the current question state
         currentQuestion?.let { question ->
             answeredQuestions.add(
@@ -707,71 +711,90 @@ class QuizActivity : AppCompatActivity() {
     private fun showPreviousQuestion() {
         if (currentQuestionIndex > 0) {
             currentQuestionIndex--
-            val previousAnswer = answeredQuestions[currentQuestionIndex]
             
-            // Restore the previous question state
-            currentQuestion = previousAnswer.question
-            selectedOptions = previousAnswer.selectedOptions
-            itemPlacements = previousAnswer.itemPlacements.toMutableMap()
+            // Find the previous answer in the answeredQuestions list
+            val previousAnswer = answeredQuestions.find { it.questionIndex == currentQuestionIndex }
             
-            // Show the question with previous answers
-            when (val question = currentQuestion) {
-                is Question.MultipleChoice -> {
-                    optionsContainer.visibility = View.VISIBLE
-                    dragDropContainer.visibility = View.GONE
-                    showMultipleChoiceQuestion(question)
-                    
-                    // Restore button states
-                    for (i in 0 until optionsContainer.childCount) {
-                        val button = optionsContainer.getChildAt(i) as? MaterialButton
-                        if (button != null) {
-                            val buttonLetter = button.text.toString().substringBefore(".")
-                            if (selectedOptions.contains(buttonLetter)) {
-                                button.backgroundTintList = ContextCompat.getColorStateList(this, 
-                                    if (previousAnswer.isCorrect) android.R.color.holo_green_light 
-                                    else android.R.color.holo_red_light)
-                                button.setTextColor(ContextCompat.getColor(this, android.R.color.white))
+            if (previousAnswer != null) {
+                // Restore the previous question state
+                currentQuestion = previousAnswer.question
+                selectedOptions = previousAnswer.selectedOptions
+                itemPlacements = previousAnswer.itemPlacements.toMutableMap()
+                
+                // Show the question with previous answers
+                when (val question = currentQuestion) {
+                    is Question.MultipleChoice -> {
+                        optionsContainer.visibility = View.VISIBLE
+                        dragDropContainer.visibility = View.GONE
+                        showMultipleChoiceQuestion(question)
+                        
+                        // Restore button states if the question was answered (not skipped)
+                        if (!previousAnswer.isSkipped) {
+                            for (i in 0 until optionsContainer.childCount) {
+                                val button = optionsContainer.getChildAt(i) as? MaterialButton
+                                if (button != null) {
+                                    val buttonLetter = button.text.toString().substringBefore(".")
+                                    if (selectedOptions.contains(buttonLetter)) {
+                                        button.backgroundTintList = ContextCompat.getColorStateList(this, 
+                                            if (previousAnswer.isCorrect) android.R.color.holo_green_light 
+                                            else android.R.color.holo_red_light)
+                                        button.setTextColor(ContextCompat.getColor(this, android.R.color.white))
+                                    }
+                                    button.isEnabled = false
+                                }
                             }
-                            button.isEnabled = false
                         }
                     }
+                    is Question.DragAndDrop -> {
+                        optionsContainer.visibility = View.GONE
+                        dragDropContainer.visibility = View.VISIBLE
+                        showDragAndDropQuestion(question)
+                        
+                        // Restore item placements if the question was answered (not skipped)
+                        if (!previousAnswer.isSkipped && itemPlacements.isNotEmpty()) {
+                            itemPlacements.forEach { (item, category) ->
+                                val itemView = findItemViewByText(item)
+                                val categoryView = findCategoryViewByName(category)
+                                if (itemView != null && categoryView != null) {
+                                    (itemView.parent as? ViewGroup)?.removeView(itemView)
+                                    (categoryView as LinearLayout).addView(itemView)
+                                }
+                            }
+                        }
+                    }
+                    null -> {
+                        // Handle null case
+                        Log.e("QuizActivity", "Question is null in showPreviousQuestion")
+                        showErrorDialog()
+                    }
                 }
-                is Question.DragAndDrop -> {
-                    optionsContainer.visibility = View.GONE
-                    dragDropContainer.visibility = View.VISIBLE
-                    showDragAndDropQuestion(question)
+                
+                // Only show explanation if the question was answered (not skipped)
+                if (!previousAnswer.isSkipped) {
+                    // Show explanation
+                    val explanation = when (val question = currentQuestion) {
+                        is Question.MultipleChoice -> question.explanation
+                        is Question.DragAndDrop -> question.explanation
+                        null -> "Error: Question not found"
+                    }
                     
-                    // Restore item placements
-                    itemPlacements.forEach { (item, category) ->
-                        val itemView = findItemViewByText(item)
-                        val categoryView = findCategoryViewByName(category)
-                        if (itemView != null && categoryView != null) {
-                            (itemView.parent as? ViewGroup)?.removeView(itemView)
-                            (categoryView as LinearLayout).addView(itemView)
-                        }
+                    val reference = when (val question = currentQuestion) {
+                        is Question.MultipleChoice -> question.reference
+                        is Question.DragAndDrop -> question.reference
+                        null -> "Error: Question not found"
                     }
+                    
+                    showExplanation(explanation, reference, previousAnswer.isCorrect)
+                } else {
+                    // For skipped questions, hide the explanation card and show the submit button
+                    explanationCard.visibility = View.GONE
+                    nextButton.visibility = View.GONE
+                    submitButton.visibility = View.VISIBLE
                 }
-                null -> {
-                    // Handle null case
-                    Log.e("QuizActivity", "Question is null in showPreviousQuestion")
-                    showErrorDialog()
-                }
+            } else {
+                // If no previous answer exists, just show the question
+                showQuestion()
             }
-            
-            // Show explanation
-            val explanation = when (val question = currentQuestion) {
-                is Question.MultipleChoice -> question.explanation
-                is Question.DragAndDrop -> question.explanation
-                null -> "Error: Question not found"
-            }
-            
-            val reference = when (val question = currentQuestion) {
-                is Question.MultipleChoice -> question.reference
-                is Question.DragAndDrop -> question.reference
-                null -> "Error: Question not found"
-            }
-            
-            showExplanation(explanation, reference, previousAnswer.isCorrect)
         }
     }
 
