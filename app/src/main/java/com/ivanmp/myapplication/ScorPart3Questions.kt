@@ -1108,97 +1108,97 @@ Therefore answer B is the best choice.""",
                 QuestionCategory.SCOR_PART_3
             ),
             Question.MultipleChoice(
-    "An engineer integrates Cisco FMC and Cisco ISE using pxGrid. Which role is assigned for Cisco FMC?",
-    listOf(
-        "A. client",
-        "B. server",
-        "C. publisher",
-        "D. controller"
-    ),
-    setOf("C"),
-    """pxGrid stands for Platform Exchange Grid, and it is a technology that allows integrating multiple vendors security products together and grouping them in an ecosystem domain. The main purpose of using pxGrid is to share contextual data between the integrated partners.
+                "An engineer integrates Cisco FMC and Cisco ISE using pxGrid. Which role is assigned for Cisco FMC?",
+                listOf(
+                    "A. client",
+                    "B. server",
+                    "C. publisher",
+                    "D. controller"
+                ),
+                setOf("C"),
+                """pxGrid stands for Platform Exchange Grid, and it is a technology that allows integrating multiple vendors security products together and grouping them in an ecosystem domain. The main purpose of using pxGrid is to share contextual data between the integrated partners.
 pxGrid uses a built-in API in ISE and it is comprised of three main components which are the controller, publisher and the subscriber. The controller is the core component to make everything working and as said is going to be ISE. The publisher instead is the partner that has some contextual data to be shared with the other partners. And finally the subscriber is the partner that is interested in parsing some contextual data from the other partners.
 Reference: https://bluenetsec.com/fmc-pxgrid-integration-with-ise/
 In fact, according to figure 6-5 of this link https://www.ciscopress.com/articles/article.asp?p=2963461&seqNum=2, FMC is a subscriber but we have no such option so the best answer here is "publisher".""",
-    "https://bluenetsec.com/fmc-pxgrid-integration-with-ise/",
-    QuestionCategory.SCOR_PART_3
-),
-Question.MultipleChoice(
-    "A network security engineer must export packet captures from the Cisco FMC web browser while troubleshooting an issue. When navigating to the address https://<FMC IP>/capure/CAPI/pcap/test.pcap, an error 403: Forbidden is given instead of the PCAP file. Which action must the engineer take to resolve this issue?",
-    listOf(
-        "A. Disable the proxy setting on the browser",
-        "B. Disable the HTTPS server and use HTTP instead",
-        "C. Use the Cisco FTD IP address as the proxy server setting on the browser",
-        "D. Enable the HTTPS server for the device platform policy"
-    ),
-    setOf("D"),
-    """When you see this HTTP RESPONSE in a packet capture (PCAP), it's likely that proxy is denying the request.
+                "https://bluenetsec.com/fmc-pxgrid-integration-with-ise/",
+                QuestionCategory.SCOR_PART_3
+            ),
+            Question.MultipleChoice(
+                "A network security engineer must export packet captures from the Cisco FMC web browser while troubleshooting an issue. When navigating to the address https://<FMC IP>/capure/CAPI/pcap/test.pcap, an error 403: Forbidden is given instead of the PCAP file. Which action must the engineer take to resolve this issue?",
+                listOf(
+                    "A. Disable the proxy setting on the browser",
+                    "B. Disable the HTTPS server and use HTTP instead",
+                    "C. Use the Cisco FTD IP address as the proxy server setting on the browser",
+                    "D. Enable the HTTPS server for the device platform policy"
+                ),
+                setOf("D"),
+                """When you see this HTTP RESPONSE in a packet capture (PCAP), it's likely that proxy is denying the request.
 To verify this, get a policy trace, and look for the exact HTTP REQUEST sent by the client, and match it with the policy rules. You will find either a DENY or Denied by Exception result.
 You can then modify the rule to allow this HTTP REQUEST, if appropriate.
 Reference: https://knowledge.broadcom.com/external/article/167567/why-do-my-pcaps-show-an-http-response-fr.html
 Therefore we should modify the policy to allow HTTPS request.""",
-    "https://knowledge.broadcom.com/external/article/167567/why-do-my-pcaps-show-an-http-response-fr.html",
-    QuestionCategory.SCOR_PART_3
-),
-Question.MultipleChoice(
-    "Which security solution protects users leveraging DNS-layer security?",
-    listOf(
-        "A. Cisco Umbrella",
-        "B. Cisco ISE",
-        "C. Cisco ASA",
-        "D. Cisco FTD"
-    ),
-    setOf("A"),
-    "",
-    "",
-    QuestionCategory.SCOR_PART_3
-),
-Question.MultipleChoice(
-    "What is the result of the\nACME-Router(config)#login block-for 100 attempts 4 within 60\ncommand on a Cisco IOS router?",
-    listOf(
-        "A. After four unsuccessful log in attempts, the line is blocked for 100 seconds and only permit IP addresses A are permitted in ACL 60",
-        "B. After four unsuccessful log in attempts, the line is blocked for 60 seconds and only permit IP addresses C are permitted in ACL 100",
-        "C. If four log in attempts fail in 100 seconds, wait for 60 seconds to next log in prompt",
-        "D. If four failures occur in 60 seconds, the router goes to quiet mode for 100 seconds"
-    ),
-    setOf("D"),
-    """The following example shows how to configure your router to enter a 100 second quiet period if 15 failed login attempts is exceeded within 100 seconds; all login requests will be denied during the quiet period except hosts from the ACL "myacl."
+                "https://knowledge.broadcom.com/external/article/167567/why-do-my-pcaps-show-an-http-response-fr.html",
+                QuestionCategory.SCOR_PART_3
+            ),
+            Question.MultipleChoice(
+                "Which security solution protects users leveraging DNS-layer security?",
+                listOf(
+                    "A. Cisco Umbrella",
+                    "B. Cisco ISE",
+                    "C. Cisco ASA",
+                    "D. Cisco FTD"
+                ),
+                setOf("A"),
+                "",
+                "",
+                QuestionCategory.SCOR_PART_3
+            ),
+            Question.MultipleChoice(
+                "What is the result of the\nACME-Router(config)#login block-for 100 attempts 4 within 60\ncommand on a Cisco IOS router?",
+                listOf(
+                    "A. After four unsuccessful log in attempts, the line is blocked for 100 seconds and only permit IP addresses A are permitted in ACL 60",
+                    "B. After four unsuccessful log in attempts, the line is blocked for 60 seconds and only permit IP addresses C are permitted in ACL 100",
+                    "C. If four log in attempts fail in 100 seconds, wait for 60 seconds to next log in prompt",
+                    "D. If four failures occur in 60 seconds, the router goes to quiet mode for 100 seconds"
+                ),
+                setOf("D"),
+                """The following example shows how to configure your router to enter a 100 second quiet period if 15 failed login attempts is exceeded within 100 seconds; all login requests will be denied during the quiet period except hosts from the ACL "myacl."
 Router(config)# login block-for 100 attempts 15 within 100
 Router(config)# login quiet-mode access-class myacl
 Reference: https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_usr_cfg/configuration/xe-16/sec-usr-cfg-xe-16-book/sec-login-enhance.html""",
-    "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_usr_cfg/configuration/xe-16/sec-usr-cfg-xe-16-book/sec-login-enhance.html",
-    QuestionCategory.SCOR_PART_3
-),
-Question.MultipleChoice(
-    "What is an advantage of network telemetry over SNMP pulls?",
-    listOf(
-        "A. scalability",
-        "B. security",
-        "C. encapsulation",
-        "D. accuracy"
-    ),
-    setOf("A"),
-    """SNMP uses the pull model when retrieving data from a switch. This model cannot scale for today's high-density platforms, and offers very limited extensibility. The pull model is based on a client sending a request to the switch, then the switch responds to that request. On average, network operators using SNMP poll data every five to thirty minutes. But with today's speeds and scale that's not enough to capture important network events.
+                "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_usr_cfg/configuration/xe-16/sec-usr-cfg-xe-16-book/sec-login-enhance.html",
+                QuestionCategory.SCOR_PART_3
+            ),
+            Question.MultipleChoice(
+                "What is an advantage of network telemetry over SNMP pulls?",
+                listOf(
+                    "A. scalability",
+                    "B. security",
+                    "C. encapsulation",
+                    "D. accuracy"
+                ),
+                setOf("A"),
+                """SNMP uses the pull model when retrieving data from a switch. This model cannot scale for today's high-density platforms, and offers very limited extensibility. The pull model is based on a client sending a request to the switch, then the switch responds to that request. On average, network operators using SNMP poll data every five to thirty minutes. But with today's speeds and scale that's not enough to capture important network events.
 …
 These traditional models also impose limits like scale and efficiency -> So we can deduce network telemetry is more scalable than SNMP pulls.
 Reference: https://blogs.cisco.com/developer/its-time-to-move-away-from-snmp-and-cli-and-use-model-driven-telemetry""",
-    "https://blogs.cisco.com/developer/its-time-to-move-away-from-snmp-and-cli-and-use-model-driven-telemetry",
-    QuestionCategory.SCOR_PART_3
-),
-Question.MultipleChoice(
-    "What is a benefit of using a multifactor authentication strategy?",
-    listOf(
-        "A. It provides secure remote access for applications",
-        "B. It provides an easy, single sign-on experience against multiple applications",
-        "C. It protects data by enabling the use of a second validation of identity",
-        "D. It provides visibility into devices to establish device trust"
-    ),
-    setOf("C"),
-    """Multi-factor Authentication (MFA) is an authentication method that requires the user to provide two or more verification factors to gain access to a resource. MFA requires means of verification that unauthorized users won't have.
+                "https://blogs.cisco.com/developer/its-time-to-move-away-from-snmp-and-cli-and-use-model-driven-telemetry",
+                QuestionCategory.SCOR_PART_3
+            ),
+            Question.MultipleChoice(
+                "What is a benefit of using a multifactor authentication strategy?",
+                listOf(
+                    "A. It provides secure remote access for applications",
+                    "B. It provides an easy, single sign-on experience against multiple applications",
+                    "C. It protects data by enabling the use of a second validation of identity",
+                    "D. It provides visibility into devices to establish device trust"
+                ),
+                setOf("C"),
+                """Multi-factor Authentication (MFA) is an authentication method that requires the user to provide two or more verification factors to gain access to a resource. MFA requires means of verification that unauthorized users won't have.
 Note: Single sign-on (SSO) is a property of identity and access management that enables users to securely authenticate with multiple applications and websites by logging in only once with just one set of credentials (username and password). With SSO, the application or website that the user is trying to access relies on a trusted third party to verify that users are who they say they are.""",
-    "",
-    QuestionCategory.SCOR_PART_3
-),
+                "",
+                QuestionCategory.SCOR_PART_3
+            ),
             Question.MultipleChoice(
                 "Which feature is leveraged by advanced antimalware capabilities to be an effective endpoint protection platform?",
                 listOf(
@@ -1655,6 +1655,24 @@ AMP (Advanced Malware Protection) provides detection, blocking, tracking, analys
 Full Context Awareness provides policy enforcement based on complete visibility of users and communication between virtual machines.""",
                 reference = "",
                 category = QuestionCategory.SCOR_PART_3
+            ),
+            Question.MultipleChoice(
+                "Refer to the exhibit.\nHow does Cisco Umbrella manage traffic that is directed toward risky domains?",
+                listOf(
+                    "A. Traffic is managed by the application settings, unhandled and allowed",
+                    "B. Traffic is allowed but logged",
+                    "C. Traffic is managed by the security settings and blocked",
+                    "D. Traffic is proxied through the intelligent proxy"
+                ),
+                setOf("D"),
+                """The 'greylist' of risky domains is compromised of domains that host both malicious and safe content—we consider these "risky" domains. These sites often allow users to upload and share content—making them difficult to police, even for the admins of the site.
+
+There's no reason to proxy requests to domains that are already known to be safe or bad. Umbrella's intelligent proxy only routes the requests for risky domains for deeper inspection -> Answer D is correct.
+
+Reference: https://docs.umbrella.com/deployment-msp/docs/what-is-the-intelligent-proxy""",
+                "https://docs.umbrella.com/deployment-msp/docs/what-is-the-intelligent-proxy",
+                QuestionCategory.SCOR_PART_3,
+                "umbrella_risky_domains"
             ),
             Question.MultipleChoice(
                 "Refer to the exhibit. What does this python script accomplish?",
