@@ -183,7 +183,7 @@ By configuring domain.com address in the block list, we implied to block *.domai
                 setOf("B"),
                 """Private Network Monitoring (PNM) provides visibility and threat detection for the on-premises network, delivered from the cloud as a SaaS solution. It is the perfect solution for organizations who prefer SaaS products and desire better awareness and security in their on-premises environments while reducing capital expenditure and operational overhead. It works by deploying lightweight software in a virtual machine or server that can consume a variety of native sources of telemetry or extract metadata from network packet flow. It encrypts this metadata and sends it to the Stealthwatch Cloud analytics platform for analysis. Stealthwatch Cloud consumes metadata only. The packet payloads are never retained or transferred outside the network.
 This lab focuses on how to configure a Stealthwatch Cloud Private Network Monitoring (PNM) Sensor, in order to provide visibility and effectively identify active threats, and monitors user and device behavior within on-premises networks.
-The Stealthwatch Cloud PNM Sensor is an extremely flexible piece of technology, capable of being utilized in a number of different deployment scenarios. It can be deployed as a complete Ubuntu based virtual appliance on different hypervisors (e.g. –VMware, VirtualBox). It can be deployed on hardware running a number of different Linux-based operating systems.
+The Stealthwatch Cloud PNM Sensor is an extremely flexible piece of technology, capable of being utilized in a number of different deployment scenarios. It can be deployed as a complete Ubuntu based virtual appliance on different hypervisors (e.g. –VMware, VirtualBox). It can be deployed on hardware running a number of different Linux-based operating systems
 Reference: https://www.ciscolive.com/c/dam/r/ciscolive/us/docs/2019/pdf/5eU6DfQV/LTRSEC-2240-LG2.pdf""",
                 "https://www.ciscolive.com/c/dam/r/ciscolive/us/docs/2019/pdf/5eU6DfQV/LTRSEC-2240-LG2.pdf",
                 QuestionCategory.SCOR_PART_3
@@ -326,11 +326,8 @@ crypto isakmp key sharedkeystring address 192.168.1.33
 At the remote peer (at 192.168.1.33) the ISAKMP identity is set and the same preshared key is specified:
 crypto isakmp identity address
 crypto isakmp key sharedkeystring address 10.0.0.1
-Reference: https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/security/a1/sec-a1-cr-book/sec-cr-c4.html#wp3880782430
-The command "crypto enrollment peer address" is not valid either.
-The command "crypto ca identity …" is only used to declare a trusted CA for the router and puts you in the ca-identity configuration mode. Also it should be followed by a name, not an IP address. For example: "crypto ca identity CA-Server" -> Answer A is not correct.
-Only answer B is the best choice left.""",
-                "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/security/a1/sec-a1-cr-book/sec-cr-c4.html#wp3880782430",
+Reference: https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_usr_aaa/configuration/15-sy/sec-usr-aaa-15-sy-book/sec-rad-coa.html""",
+                "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_usr_aaa/configuration/15-sy/sec-usr-aaa-15-sy-book/sec-rad-coa.html",
                 QuestionCategory.SCOR_PART_3
             ),
             Question.MultipleChoice(
@@ -651,7 +648,7 @@ Moreover, GETVPN is a site-to-site VPN so it does not require a central hub.""",
             Question.MultipleChoice(
                 "What is a benefit of using telemetry over SNMP to configure new routers for monitoring purposes?",
                 listOf(
-                    "A. Telemetry uses a pull, method which makes it more reliable than SNMP",
+                    "A. Telemetry uses a push, method which makes it more reliable than SNMP",
                     "B. Telemetry uses push and pull, which makes it more scalable than SNMP",
                     "C. Telemetry uses push and pull which makes it more secure than SNMP",
                     "D. Telemetry uses a push method which makes it faster than SNMP"
@@ -674,7 +671,8 @@ Referfence: https://developer.cisco.com/docs/ios-xe/#!streaming-telemetry-quick-
                     "D. Cisco FTD because it enables URL filtering and blocks malicious URLs by default, whereas Cisco ASA does not"
                 ),
                 setOf("C"),
-                "",
+                """Cisco ASA does not support URL filtering in the access control policy capabilities -> Answer A and B are not correct.
+Cisco ASA does not support URL filtering by default -> Answer D is not correct.""",
                 "",
                 QuestionCategory.SCOR_PART_3
             ),
@@ -687,7 +685,7 @@ Referfence: https://developer.cisco.com/docs/ios-xe/#!streaming-telemetry-quick-
                     "D. Use PAC keys to allow only the required network devices to send the traffic to the Cisco WSA"
                 ),
                 setOf("A"),
-                "",
+                """Transparent traffic redirection using WCCP is the best solution to meet the requirements of this question.""",
                 "",
                 QuestionCategory.SCOR_PART_3
             ),
@@ -790,8 +788,8 @@ Reference: https://www.cisco.com/c/en/us/td/docs/security/firepower/misc/fmc-ftd
 Ensure that the primary PAN and the node being registered are DNS resolvable to each other.
 …
 Step 4. Enter the DNS-resolvable fully qualified domain name (FQDN) of the standalone node that you are going to register (in the format hostname.domain-name, for example, abc.xyz.com). The FQDN of the primary PAN and the node being registered must be resolvable from each other.
-Reference: https://www.cisco.com/c/en/us/td/docs/security/ise/2-7/admin_guide/b_ise_27_admin_guide/b_ISE_admin_27_deployment.html""",
-                "https://www.cisco.com/c/en/us/td/docs/security/ise/2-7/admin_guide/b_ise_27_admin_guide/b_ISE_admin_27_deployment.html",
+Reference: https://www.cisco.com/c/en/us/td/docs/security/ise/2-7/admin_guide/b_ise_admin_guide_27/b_ise_admin_guide_27_deployment.html""",
+                "https://www.cisco.com/c/en/us/td/docs/security/ise/2-7/admin_guide/b_ise_admin_guide_27/b_ise_admin_guide_27_deployment.html",
                 QuestionCategory.SCOR_PART_3
             ),
             Question.MultipleChoice(
@@ -821,7 +819,7 @@ Reference: https://www.cisco.com/c/en/us/td/docs/security/ise/2-7/admin_guide/b_
                 QuestionCategory.SCOR_PART_3
             ),
             Question.MultipleChoice(
-                "How is data sent out to the attacker during a DNS tunneling attack?",
+                "How does data sent out to the attacker during a DNS tunneling attack?",
                 listOf(
                     "A. as part of the UDP'53 packet payload",
                     "B. as part of the domain name",
@@ -834,7 +832,7 @@ Reference: https://www.cisco.com/c/en/us/td/docs/security/ise/2-7/admin_guide/b_
                 QuestionCategory.SCOR_PART_3
             ),
             Question.MultipleChoice(
-                "A network engineer must configure a Cisco Secure Email Gateway to prompt users to enter two forms of information before gaining access. The Cisco Secure Email Gateway must also join a cluster machine using preshared keys. What must be done to resolve this issue?",
+                "A network engineer must configure a Cisco Secure Email Gateway to prompt users to enter two forms of information before gaining access. The Cisco Secure Email Gateway must also join a cluster machine using preshared keys. What must be done in order to resolve this issue?",
                 listOf(
                     "A. Enable two-factor authentication through a RADIUS server and then join the cluster by using the Cisco Secure Email Gateway CLI",
                     "B. Use the tenant control features to identify each subnet being used and track the connections within the Cisco Umbrella dashboard",
@@ -1045,11 +1043,9 @@ In this setup, ISE will forward the TACACS+ authentication requests to the Duo A
 4. The proxy forwards the request back to ISE for the 1st factor authentication
 5. ISE informs the Authentication Proxy if the local authentication was successful
 6. Upon successful ISE authentication, the Authentication Proxy sends an authentication request to Duo cloud for 2nd factor authentication
-7. Duo cloud sends a "push" to the admin user
-8. Admin user "approves" the "push"
-9. Duo informs the Authentication Proxy of the successful push
-10. Authentication proxy informs ISE of a successful Authentication
-11. ISE Authorizes the admin user
+7. Duo informs the Authentication Proxy of the successful push
+8. Authentication proxy informs ISE of a successful Authentication
+9. ISE Authorizes the admin user
 
 Therefore answer B is the best choice.""",
                 "",
@@ -1401,25 +1397,21 @@ OpenFlow and NETCONF are Southbound APIs used for most SDN implementations -> An
                 QuestionCategory.SCOR_PART_3
             ),
             Question.MultipleChoice(
-                "A Cisco ISE engineer configures Central Web Authentication (CWA) for wireless guest access and must have the guest endpoints redirect to the guest portal for authentication and authorization. While testing the policy, the engineer notices that the device is not redirected and instead gets full guest access. What must be done for the redirect to work?",
+                "A Cisco ISE administrator adds a new switch to an 802.1X deployment and has difficulty with some endpoints gaining access. Most PCs and IP phones can connect and authenticate using their machine certificate credentials. However printer and video cameras cannot based on the interface configuration provided. What must be to get these devices on to the network using Cisco ISE for authentication and authorization while maintaining security controls?",
                 listOf(
-                    "A. Create an advanced attribute setting of Cisco.cisco-gateway-id=guest within the authorization profile for the authorization policy line that the unauthenticated devices hit.",
-                    "B. Tag the guest portal in the CWA part of the Common Tasks section of the authorization profile for the authorization policy line that the unauthenticated devices hit",
-                    "C. Add the DACL name for the Airespace ACL configured on the WLC in the Common Tasks section of the authorization profile for the authorization policy line that the unauthenticated devices hit",
-                    "D. Use the track movement option within the authorization profile for the authorization policy line that the unauthenticated devices hit"
+                    "A. Change the default policy in Cisco ISE to allow all devices not using machine authentication",
+                    "B. Enable insecure protocols within Cisco ISE in the allowed protocols configuration",
+                    "C. Configure authentication event fail retry 2 action authorize vlan 41 on the interface",
+                    "D. Add mab to the interface configuration"
                 ),
-                setOf("C"),
-                """Using an Authorization Profile to Redirect Guest Endpoints to ISE
-As explained in Understanding Guest Flow, when endpoints first access the network, they are authenticated with MAB, and must be redirected to the Guest portal for authorization. ISE comes with a built-in profile called Cisco_WebAuth that references a built-in self-registered Guest portal. The WLC and switch require a preconfigured redirect ACL.
-…
-AireOS does not support downloadable ACLs. Therefore, ACLs must be configured locally on the wireless controller (or access points in FlexConnect mode). The ACL names must match in both ISE and in AireOS. The figure below indicates for a wireless guest:
- 
-Reference: https://community.cisco.com/t5/security-documents/ise-guest-access-prescriptive-deployment-guide/ta-p/3640475""",
-                "https://community.cisco.com/t5/security-documents/ise-guest-access-prescriptive-deployment-guide/ta-p/3640475",
+                setOf("D"),
+                """What is MAB? MAB stands for MAC Authentication Bypass, this is a form of network authentication that ISE supports by using the endpoints MAC Address to authenticate against an ISE policy set. MAB is used for devices that don't have the capability to support 802.1x e.g. certain printers and other legacy devices.
+Reference: https://www.allthingsnetworking.net/ise-mab-wired-configuration/""",
+                "https://www.allthingsnetworking.net/ise-mab-wired-configuration/",
                 QuestionCategory.SCOR_PART_3
             ),
             Question.MultipleChoice(
-                "What is a difference between Cisco Secure Endpoint and Cisco Umbrella?",
+                "What is the difference between Cisco Secure Endpoint and Cisco Umbrella?",
                 listOf(
                     "A. Cisco Secure Endpoint prevents, detects, and responds to attacks before damage can be done, and Cisco Umbrella provides the first line of defense against Internet threats.",
                     "B. Cisco Secure Endpoint prevents connections to malicious destinations, and Cisco Umbrella works at the file level to prevent the initial execution of malware.",
@@ -1700,6 +1692,154 @@ Note: The purpose of this Python script is used to get the guest users through I
                 "",
                 QuestionCategory.SCOR_PART_3,
                 "python_ise_script"
+            ),
+            Question.MultipleChoice(
+                "Refer to the exhibit.\nHow does Cisco Umbrella manage traffic that is directed toward risky domains?",
+                listOf(
+                    "A. Traffic is managed by the application settings, unhandled and allowed",
+                    "B. Traffic is allowed but logged",
+                    "C. Traffic is managed by the security settings and blocked",
+                    "D. Traffic is proxied through the intelligent proxy"
+                ),
+                setOf("D"),
+                """The 'greylist' of risky domains is compromised of domains that host both malicious and safe content—we consider these "risky" domains. These sites often allow users to upload and share content—making them difficult to police, even for the admins of the site.
+
+There's no reason to proxy requests to domains that are already known to be safe or bad. Umbrella's intelligent proxy only routes the requests for risky domains for deeper inspection -> Answer D is correct.
+
+Reference: https://docs.umbrella.com/deployment-msp/docs/what-is-the-intelligent-proxy""",
+                "https://docs.umbrella.com/deployment-msp/docs/what-is-the-intelligent-proxy",
+                QuestionCategory.SCOR_PART_3,
+                "umbrella_risky_domains"
+            ),
+            Question.MultipleChoice(
+                "Refer to the exhibit. What does this python script accomplish?",
+                listOf(
+                    "A. It lists the LDAP users from the external identity store configured on Cisco ISE",
+                    "B. It authenticates to a Cisco ISE server using the username of ersad",
+                    "C. It allows authentication with TLSv1 SSL protocol",
+                    "D. It authenticates to a Cisco ISE with an SSH connection"
+                ),
+                setOf("A"),
+                """In this question the username of "ersad" is just an example and it is in the comment section (which is started by a #) so it has no effect on the script. In fact the username will be taken from the second argument of the command. For example, suppose the file name of the above script is "Internal_user.py" then if we call the script with the command:
+
+python Internal_user.py 192.168.1.10 digitaltut digitaltutPassWord!
+Then the username would be "digitaltut".
+
+-> Answer B is not correct.
+
+From the line "conn = http.client.HTTPSConnection("{}:9060".format(host), context=ssl.SSLContext(ssl.PROTOCOL_TLSv1_2))", we specify we are using TLS version 1.2 as the channel encryption protocol (not TLSv1) -> Answer C is not correct.
+
+Also from the line above, we are using HTTPS to make a request. It is different from a SSH connection so answer D is not correct.
+
+-> Therefore only answer A is left.
+
+Note: The purpose of this Python script is used to get the guest users through ISE External RESTful Services (ERS) API. ERS is designed to allow external clients to perform CRUD (Create, Read, Update, Delete) operations on Cisco ISE resources.""",
+                "",
+                QuestionCategory.SCOR_PART_3,
+                "python_ise_script"
+            ),
+            Question.MultipleChoice(
+                "Refer to the exhibit.\nWhat will occur when this device tries to connect to the port?",
+                listOf(
+                    "A. 802.1X will not work, but MAB will start and allow the device on the network",
+                    "B. 802.1X will not work and the device will not be allowed network access",
+                    "C. 802.1X will work and the device will be allowed on the network",
+                    "D. 802.1X and MAB will both be used and ISE can use policy to determine the access level"
+                ),
+                setOf("C"),
+                """In this question we don't see "mab" command so MAC Authentication Bypass (MAB) is not enabled on the interface -> Answer A and answer D are not correct.
+
+In order to enable 802.1X on a port, we need two commands:
++ access-session port-control auto: enables 802.1X port-based authentication on the interface
++ dot1x pae {supplicant | authenticator | both}: sets the Port Access Entity (PAE) type. In this case "authenticator" keyword was chosen so the interface acts only as an authenticator and does not respond to any messages meant for a supplicant.+ authentication periodic: enables re-authentication on the interface
+
+We had both of these commands so 802.1X will work on the interface.
+
+Reference: https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_usr_8021x/configuration/xe-3se/3850/sec-user-8021x-xe-3se-3850-book/config-ieee-802x-pba.html
+
+Other commands are explained below:
+
++ authentication host-mode multi-auth: allows voice and multiple endpoints on the same physical access port
++ dot1x timeout tx-period 10: sets the retransmit period to 10 seconds
++ device-tracking attach-policy {policy-name}: applies the IP device tracking (IPDT) policy to switchport. The main task is to keep track of connected hosts (association of MAC and IP address)
+
+These commands enable the SNMP trap for added and removed MACs on the interface:
++ snmp trap mac-notification change added
++ snmp trap mac-notification change removed""",
+                "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_usr_8021x/configuration/xe-3se/3850/sec-user-8021x-xe-3se-3850-book/config-ieee-802x-pba.html",
+                QuestionCategory.SCOR_PART_3,
+                "port_authentication_config"
+            ),
+            Question.MultipleChoice(
+                "Refer to the exhibit.\nWhich configuration item makes it possible to have the AAA session on the network?",
+                listOf(
+                    "A. aaa authorization network default group ise",
+                    "B. aaa authorization exec default ise",
+                    "C. aaa authentication login console ise",
+                    "D. aaa authentication enable default enable"
+                ),
+                setOf("A"),
+                """+ The exhibit in this question shows a a successful MAB authorization for the MAC address (from the line "Status: Authorized" the last line "mab Authc Success") so we need the keyword "authorization" in our AAA command.
+
++ The authorized device is a Microsoft WorkStation so we need the keyword "network" in our AAA command.
+
+->The command "aaa authorization network default group ise" is the correct answer. This command configures network authorization via ISE.""",
+                "",
+                QuestionCategory.SCOR_PART_3,
+                "aaa_ise"
+            ),
+            Question.MultipleChoice(
+                "Refer to the exhibit.\nWhat is the function of the Python script code snippet for the Cisco ASA REST API?",
+                listOf(
+                    "A. deletes a global rule from policies",
+                    "B. obtains the saved configuration of the Cisco ASA firewall",
+                    "C. changes the hostname of the Cisco ASA",
+                    "D. adds a global rule into policies"
+                ),
+                setOf("D"),
+                """Reference: https://github.com/timwukp/Cisco-ASA-REST-API/blob/master/POST__api_access_global_rules_input_loop.py""",
+                "https://github.com/timwukp/Cisco-ASA-REST-API/blob/master/POST__api_access_global_rules_input_loop.py",
+                QuestionCategory.SCOR_PART_3,
+                "asa_rest_api_snippet"
+            ),
+            Question.MultipleChoice(
+                "Refer to the exhibit. When creating an access rule for URL filtering, a network engineer adds certain categories and individual URLs to block. What is the result of the configuration?",
+                listOf(
+                    "A. Only URLs for botnets with a reputation score of 3 will be allowed while the rest will be blocked",
+                    "B. Only URLs for botnets with reputation scores of 1-3 will be blocked",
+                    "C. Only URLs for botnets with reputation scores of 3-5 will be blocked",
+                    "D. Only URLs for botnets with a reputation score of 3 will be blocked"
+                ),
+                setOf("B"),
+                """When you create a rule to Block traffic based on a reputation level, selection of a reputation level also selects all of the reputation levels more severe than the level you originally selected. For example, if you configure a rule to block Benign Sites with security risks (level 3), it also automatically blocks Suspicious sites (level 2) and High risk (level 1) sites.
+
+Reference: https://www.cisco.com/c/en/us/support/docs/security/firesight-management-center/118852-technote-firesight-00.html""",
+                "https://www.cisco.com/c/en/us/support/docs/security/firesight-management-center/118852-technote-firesight-00.html",
+                QuestionCategory.SCOR_PART_3,
+                "firepower_rule_action"
+            ),
+            Question.MultipleChoice(
+                "Refer to the exhibit.\nAll servers are in the same VLAN/Subnet. DNS Server-1 and DNS Server-2 must communicate with each other, and all servers must communicate with default gateway multilayer switch. Which type of private VLAN ports should be configured to prevent communication between DNS servers and the file server?",
+                listOf(
+                    "A. Configure GigabitEthernet0/1 as promiscuous port, GigabitEthernet0/2 as isolated port, and GigabitEthernet0/3 and GigabitEthernet0/4 as community ports.",
+                    "B. Configure GigabitEthernet0/1 as community port, GigabitEthernet0/2 as promiscuous port, GigabitEthernet0/3 and GigabitEthernet0/4 as isolated ports.",
+                    "C. Configure GigabitEthernet0/1 as promiscuous port, Gigabithernet0/2 as community port and GigabitEthernet0/3 and GigabitEthernet0/4 as isolated ports.",
+                    "D. Configure GigabitEthernet0/1 as community port, GigabitEthernet0/2 as isolated port, and GigabitEthernet0/3 and GigabitEthernet0/4 as promiscuous ports."
+                ),
+                setOf("A"),
+                """* Isolated: only communicate with promiscuous ports. Notice that it cannot even communicate with another isolated port. Also, there can be only 1 isolated VLAN per PVLAN.
+* Promiscuous: can communicate with all other ports. The default gateway is usually connected to this port so that all devices in PVLAN can go outside.
+* Community: can communicate with other members of that community and promiscuous ports but cannot communicate with other communities. There can be multiple community VLANs per PVLAN.
+
+In this scenario:
+- The multilayer switch (default gateway) needs to communicate with all servers, so it should be connected to a promiscuous port (GigabitEthernet0/1)
+- The file server should not communicate with any DNS servers, so it should be on an isolated port (GigabitEthernet0/2)
+- DNS Server-1 and DNS Server-2 need to communicate with each other, so they should be on community ports (GigabitEthernet0/3 and GigabitEthernet0/4)
+
+Therefore, option A is correct.""",
+                "",
+                QuestionCategory.SCOR_PART_3,
+                "private_vlan_promiscuous_port"
             )
         )
     }
