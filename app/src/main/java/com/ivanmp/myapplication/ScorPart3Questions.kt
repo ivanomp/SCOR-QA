@@ -1404,7 +1404,7 @@ OpenFlow and NETCONF are Southbound APIs used for most SDN implementations -> An
                 "A Cisco ISE engineer configures Central Web Authentication (CWA) for wireless guest access and must have the guest endpoints redirect to the guest portal for authentication and authorization. While testing the policy, the engineer notices that the device is not redirected and instead gets full guest access. What must be done for the redirect to work?",
                 listOf(
                     "A. Create an advanced attribute setting of Cisco.cisco-gateway-id=guest within the authorization profile for the authorization policy line that the unauthenticated devices hit.",
-                    "B. Tag the guest portal in the CWA part of the Common Tasks section of the authorization profile for the authorization policy line that the unauthenticated devices hit.",
+                    "B. Tag the guest portal in the CWA part of the Common Tasks section of the authorization profile for the authorization policy line that the unauthenticated devices hit",
                     "C. Add the DACL name for the Airespace ACL configured on the WLC in the Common Tasks section of the authorization profile for the authorization policy line that the unauthenticated devices hit",
                     "D. Use the track movement option within the authorization profile for the authorization policy line that the unauthenticated devices hit"
                 ),
@@ -1622,6 +1622,38 @@ Cloud User Entity Behavior Assessment: We examine how the users provisioned in a
 
 Cloud Security Strategy: Our experts educate your team on cloud security as related to current and future states, as well as business priorities""",
                 reference = "https://www.cisco.com/c/dam/en/us/products/security/security-strategy-advisory-aag.pdf",
+                category = QuestionCategory.SCOR_PART_3
+            ),
+            Question.DragAndDrop(
+                question = "Drag and drop the features of Cisco ASA with Cisco Firepower from the left onto the benefits on the right.",
+                items = listOf(
+                    "NGIPS",
+                    "Collective Security Intelligence",
+                    "AMP",
+                    "Full Context Awareness"
+                ),
+                categories = listOf(
+                    "threat prevention and mitigation for known and unknown threats",
+                    "real-time threat intelligence and security protection",
+                    "detection, blocking and remediation to protect the enterprise against targeted malware attacks",
+                    "policy enforcement based on complete visibility of users and communication between virtual machines"
+                ),
+                correctMapping = mapOf(
+                    "NGIPS" to "threat prevention and mitigation for known and unknown threats",
+                    "Collective Security Intelligence" to "real-time threat intelligence and security protection",
+                    "AMP" to "detection, blocking and remediation to protect the enterprise against targeted malware attacks",
+                    "Full Context Awareness" to "policy enforcement based on complete visibility of users and communication between virtual machines"
+                ),
+                explanation = """Cisco ASA with FirePOWER Services combines the proven security capabilities of the ASA firewall with industry-leading Sourcefire threat and advanced malware protection features in a single device. The solution uniquely provides integrated threat defense across the entire attack continuum: before, during, and after an attack.
+
+NGIPS (Next-Generation Intrusion Prevention System) provides superior threat prevention and mitigation for known and unknown threats.
+
+Collective Security Intelligence provides real-time threat intelligence and security protection through Cisco's Talos Security Intelligence and Research Group.
+
+AMP (Advanced Malware Protection) provides detection, blocking, tracking, analysis, and remediation to protect the enterprise against targeted persistent malware attacks.
+
+Full Context Awareness provides policy enforcement based on complete visibility of users and communication between virtual machines.""",
+                reference = "",
                 category = QuestionCategory.SCOR_PART_3
             )
         )
