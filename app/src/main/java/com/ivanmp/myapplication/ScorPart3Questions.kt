@@ -1225,6 +1225,374 @@ Note: Single sign-on (SSO) is a property of identity and access management that 
 Reference: https://www.ciscopress.com/articles/article.asp?p=3004581&seqNum=2""",
                 "https://www.ciscopress.com/articles/article.asp?p=3004581&seqNum=2",
                 QuestionCategory.SCOR_PART_3
+            ),
+            Question.MultipleChoice(
+                "An engineer is trying to decide between using L2TP or GRE over IPsec for their site-to-site VPN implementation. What must be understood before choosing a solution?",
+                listOf(
+                    "A. L2TP uses TCP port 47 and GRE over IPsec uses UDP port 1701.",
+                    "B. GRE over IPsec cannot be used as a standalone protocol, and L2TP can.",
+                    "C. GRE over IPsec adds its own header, and L2TP does not",
+                    "D. L2TP is an IP packet encapsulation protocol, and GRE over IPsec is a tunneling protocol."
+                ),
+                setOf("C"),
+                """L2TP uses UDP port 1701 while GRE use IP protocol 47 -> Answer A is not correct.
+L2TP stands for Layer 2 Tunneling Protocol while GRE is a simple IP packet encapsulation protocol-> Answer D is not correct
+This Oreilly link says: "It is unlikely that you will set up L2TP as a standalone protocol, as it has no authentication and encryption on its own. The more likely scenario is setting up an L2TP/IPsec tunnel". So we understand that L2TP can be set up as a standalone protocol, but should not -> Answer B is not correct.
+The CCNP and CCIE Security Core SCOR 350-701 Official Cert Guide book says "the GRE protocol adds its own header (4 bytes plus options) between the payload (data) and the delivery header" while the entire L2TP packet, including payload and L2TP header, is sent within a User Datagram Protocol (UDP) datagram -> Answer C is correct.""",
+                "",
+                QuestionCategory.SCOR_PART_3
+            ),
+            Question.MultipleChoice(
+                "What are two functionalities of northbound and southbound APIs within Cisco SDN architecture? (Choose two.)",
+                listOf(
+                    "A. Southbound APIs are used to define how SDN controllers integrate with applications.",
+                    "B. Northbound interfaces utilize OpenFlow and OpFlex to integrate with network devices.",
+                    "C. Northbound APIs utilize RESTful API methods such as GET, POST, and DELETE.",
+                    "D. Southbound interfaces utilize device configurations such as VLANs and IP addresses.",
+                    "E. Southbound APIs utilize CLI, SNMP, and RESTCONF."
+                ),
+                setOf("C", "E"),
+                """Northbound APIs are used to define how SDN controllers integrate with applications -> Answer A is not correct.
+ 
+OpenFlow and OpFlex are Southbound APIs -> Answer B is not correct.
+Southbound APIs ultilize NETCONF, RESTCONF, SNMP, Telnet, SSH… -> Answer D is not correct while answer E is correct.""",
+                "",
+                QuestionCategory.SCOR_PART_3
+            ),
+            Question.MultipleChoice(
+                "Which two solutions help combat social engineering and phishing at the endpoint level? (Choose two)",
+                listOf(
+                    "A. Cisco ISEN",
+                    "B. Cisco Umbrella",
+                    "C. Cisco DNA Center",
+                    "D. Cisco TrustSec",
+                    "E. Cisco Duo Security"
+                ),
+                setOf("B", "E"),
+                "",
+                "",
+                QuestionCategory.SCOR_PART_3
+            ),
+            Question.MultipleChoice(
+                "A network engineer must migrate a Cisco WSA virtual appliance from one physical host to another physical host by using VMware Motion. What is a requirement for both physical hosts?",
+                listOf(
+                    "A. The hosts must run different versions of Cisco Asyncos",
+                    "B. The hosts must run Cisco AsyncOS 10.0 or greater",
+                    "C. The hosts must have access to the same defined network",
+                    "D. The hosts must use a different datastore than the virtual appliance"
+                ),
+                setOf("C"),
+                """Requirements:
++ Both physical hosts must have the same network configuration.
++ Both physical hosts must have access to the same defined network(s) to which the interfaces on the virtual appliance are mapped.
++ Both physical hosts must have access to the datastore that the virtual appliance uses. This datastore can be a storage area network (SAN) or Network-attached storage (NAS).
++ The Cisco Secure Email Virtual Gateway must have no mail in its queue.
+Reference: https://www.cisco.com/c/dam/en/us/td/docs/security/content_security/virtual_appliances/Cisco_Content_Security_Virtual_Appliance_Install_Guide.pdf""",
+                "https://www.cisco.com/c/dam/en/us/td/docs/security/content_security/virtual_appliances/Cisco_Content_Security_Virtual_Appliance_Install_Guide.pdf",
+                QuestionCategory.SCOR_PART_3
+            ),
+            Question.MultipleChoice(
+                "An engineer is implementing Cisco CES in an existing Microsoft Office 365 environment and must route inbound email to Cisco CES addresses. Which DNS record must be modified to accomplish this task?",
+                listOf(
+                    "A. CNAME",
+                    "B. МХ",
+                    "C. DKIM",
+                    "D. SPF"
+                ),
+                setOf("B"),
+                """In order to route inbound email to Cisco CES addresses we must change the MX record.
+ 
+Reference: https://www.ciscolive.com/c/dam/r/ciscolive/emea/docs/2020/pdf/BRKSEC-3433.pdf
+At this point, you are ready to cut over the domain through a Mail Exchange (MX) record change. Work with your DNS administrator to resolve your MX records to the IP addresses for your Cisco Secure Email Cloud instance as provided in your Cisco Secure Email welcome letter.
+Reference: https://www.cisco.com/c/en/us/support/docs/security/cloud-email-security/214812-configuring-office-365-microsoft-with.html""",
+                "https://www.cisco.com/c/en/us/support/docs/security/cloud-email-security/214812-configuring-office-365-microsoft-with.html",
+                QuestionCategory.SCOR_PART_3
+            ),
+            Question.MultipleChoice(
+                "Which method of attack is used by a hacker to send malicious code through a web application to an unsuspecting user to request that the victims web browser executes the code?",
+                listOf(
+                    "A. buffer overflow",
+                    "B. SQL injection",
+                    "C. browser WGET",
+                    "D. cross-site scripting"
+                ),
+                setOf("D"),
+                "",
+                "",
+                QuestionCategory.SCOR_PART_3
+            ),
+            Question.MultipleChoice(
+                "What are two ways a network administrator transparently identifies users using Active Directory on the Cisco WSA? (Choose two)",
+                listOf(
+                    "A. Create an LDAP authentication realm and disable transparent user identification",
+                    "B. Deploy a separate eDirectory server, the client IP address is recorded in this server.",
+                    "C. Create NTLM or Kerberos authentication realm and enable transparent user identification.",
+                    "D. The eDirectory client must be installed on each client workstation",
+                    "E. Deploy a separate Active Directory agent such as Cisco Context Directory Agent."
+                ),
+                setOf("C", "E"),
+                """Consider the following when you identify users transparently using Active Directory:
++ Transparent user identification with Active Directory works with an NTLM or Kerberos authentication scheme only. You cannot use it with an LDAP authentication realm that corresponds to an Active Directory instance.
++ Transparent user identification works with the versions of Active Directory supported by an Active Directory agent.
+Reference: https://www.cisco.com/c/en/us/td/docs/security/wsa/wsa11-0/user_guide/b_WSA_UserGuide/b_WSA_UserGuide_chapter_01001.html""",
+                "https://www.cisco.com/c/en/us/td/docs/security/wsa/wsa11-0/user_guide/b_WSA_UserGuide/b_WSA_UserGuide_chapter_01001.html",
+                QuestionCategory.SCOR_PART_3
+            ),
+            Question.MultipleChoice(
+                "Which endpoint solution protects a user from a phishing attack?",
+                listOf(
+                    "A. Cisco AnyConnect with Umbrella Roaming Security module",
+                    "B. Cisco AnyConnect with Network Access Manager module",
+                    "C. Cisco Identity Services Engine",
+                    "D. Cisco AnyConnect with ISE Posture module"
+                ),
+                setOf("A"),
+                """Umbrella Roaming is a cloud-delivered security service for Cisco's next-generation firewall. It protects your employees even when they are off the VPN. No additional agents are required. Simply enable the Umbrella functionality in the Cisco AnyConnect client. You'll get seamless protection against malware, phishing, and command-and-control callbacks wherever your users go.
+Reference: https://www.cisco.com/c/en/us/products/security/umbrella/umbrella-roaming.html""",
+                "https://www.cisco.com/c/en/us/products/security/umbrella/umbrella-roaming.html",
+                QuestionCategory.SCOR_PART_3
+            ),
+            Question.MultipleChoice(
+                "An engineer configures Cisco Umbrella and has an identity that references two different policies. Which action ensures that the policy that the identity must use takes precedence over the second one?",
+                listOf(
+                    "A. Configure only the policy with the most recently changed timestamp.",
+                    "B. Make the correct policy first in the policy order.",
+                    "C. Configure the default policy to redirect the requests to the correct policy.",
+                    "D. Place the policy with the most-specific configuration last in the policy order."
+                ),
+                setOf("B"),
+                "",
+                "",
+                QuestionCategory.SCOR_PART_3
+            ),
+            Question.MultipleChoice(
+                "What are two functionalities of SDN Northbound APIs? (Choose two)",
+                listOf(
+                    "A. Northbound APIs provide a programmable interface for applications to dynamically configure the network.",
+                    "B. Northbound APIs form the interface between the SDN controller and business applications.",
+                    "C. Northbound APIs use the NETCONF protocol to communicate with applications.",
+                    "D. Northbound APIs form the interface between the SDN controller and the network switches or routers.",
+                    "E. OpenFlow is a standardized northbound API protocol."
+                ),
+                setOf("A", "B"),
+                """Northbound APIs present an abstraction of network functions with a programmable interface for applications to consume the network services and configure the network dynamically -> Answer A is correct.
+Northbound APIs usually use RESTful APIs to communicate with applications -> Answer C is not correct.
+ 
+Southbound APIs form the interface between the SDN controller and the network switches or routers -> Answer D is not correct.
+OpenFlow and NETCONF are Southbound APIs used for most SDN implementations -> Answer E is not correct.""",
+                "",
+                QuestionCategory.SCOR_PART_3
+            ),
+            Question.MultipleChoice(
+                "What must be enabled to secure SaaS-based applications?",
+                listOf(
+                    "A. two-factor authentication",
+                    "B. end-to-end encryption",
+                    "C. application security gateway",
+                    "D. modular policy framework"
+                ),
+                setOf("A"),
+                """According to this link, we can use the following to secure SaaS-based applications:
++ Set up single sign-on (SSO) integrations
++ Use multi-factor authentication (MFA) -> Answer A is correct.
++ Install and integrate an identity governance solution
++ Stay up to date""",
+                "",
+                QuestionCategory.SCOR_PART_3
+            ),
+            Question.MultipleChoice(
+                "A Cisco ISE engineer configures Central Web Authentication (CWA) for wireless guest access and must have the guest endpoints redirect to the guest portal for authentication and authorization. While testing the policy, the engineer notices that the device is not redirected and instead gets full guest access. What must be done for the redirect to work?",
+                listOf(
+                    "A. Create an advanced attribute setting of Cisco.cisco-gateway-id=guest within the authorization profile for the authorization policy line that the unauthenticated devices hit.",
+                    "B. Tag the guest portal in the CWA part of the Common Tasks section of the authorization profile for the authorization policy line that the unauthenticated devices hit.",
+                    "C. Add the DACL name for the Airespace ACL configured on the WLC in the Common Tasks section of the authorization profile for the authorization policy line that the unauthenticated devices hit",
+                    "D. Use the track movement option within the authorization profile for the authorization policy line that the unauthenticated devices hit"
+                ),
+                setOf("C"),
+                """Using an Authorization Profile to Redirect Guest Endpoints to ISE
+As explained in Understanding Guest Flow, when endpoints first access the network, they are authenticated with MAB, and must be redirected to the Guest portal for authorization. ISE comes with a built-in profile called Cisco_WebAuth that references a built-in self-registered Guest portal. The WLC and switch require a preconfigured redirect ACL.
+…
+AireOS does not support downloadable ACLs. Therefore, ACLs must be configured locally on the wireless controller (or access points in FlexConnect mode). The ACL names must match in both ISE and in AireOS. The figure below indicates for a wireless guest:
+ 
+Reference: https://community.cisco.com/t5/security-documents/ise-guest-access-prescriptive-deployment-guide/ta-p/3640475""",
+                "https://community.cisco.com/t5/security-documents/ise-guest-access-prescriptive-deployment-guide/ta-p/3640475",
+                QuestionCategory.SCOR_PART_3
+            ),
+            Question.MultipleChoice(
+                "What is a difference between Cisco Secure Endpoint and Cisco Umbrella?",
+                listOf(
+                    "A. Cisco Secure Endpoint prevents, detects, and responds to attacks before damage can be done, and Cisco Umbrella provides the first line of defense against Internet threats.",
+                    "B. Cisco Secure Endpoint prevents connections to malicious destinations, and Cisco Umbrella works at the file level to prevent the initial execution of malware.",
+                    "C. Cisco Secure Endpoint automatically researches indicators of compromise and confirms threats, and Cisco Umbrella does not",
+                    "D. Cisco Secure Endpoint is a cloud-based service, and Cisco Umbrella is not"
+                ),
+                setOf("A"),
+                "",
+                "",
+                QuestionCategory.SCOR_PART_3
+            ),
+            Question.MultipleChoice(
+                "What is the intent of a basic SYN flood attack?",
+                listOf(
+                    "A. to flush the register stack to re-initiate the buffers",
+                    "B. to solicit DNS responses",
+                    "C. to exceed the threshold limit of the connection queue",
+                    "D. to cause the buffer to overflow"
+                ),
+                setOf("C"),
+                """A SYN flood (half-open attack) is a type of denial-of-service (DDoS) attack which aims to make a server unavailable to legitimate traffic by consuming all available server resources. By repeatedly sending initial connection request (SYN) packets, the attacker is able to overwhelm all available ports on a targeted server machine, causing the targeted device to respond to legitimate traffic sluggishly or not at all.""",
+                "",
+                QuestionCategory.SCOR_PART_3
+            ),
+            Question.MultipleChoice(
+                "Which open standard creates a framework for sharing threat intelligence in a machine-digestible format?",
+                listOf(
+                    "A. OpenC2",
+                    "B. OpenIoC",
+                    "C. STIX",
+                    "D. Cybox"
+                ),
+                setOf("B"),
+                """OpenIOC is an open framework, meant for sharing threat intelligence information in a machine-readable format. It was developed by the American cybersecurity firm MANDIANT in November 2011. It is written in eXtensible Markup Language (XML) and can be easily customized for additional intelligence so that incident responders can translate their knowledge into a standard format. Organizations can leverage this format to share threat-related latest Indicators of Compromise (IoCs) with other organizations, enabling real-time protection against the latest threats.""",
+                "",
+                QuestionCategory.SCOR_PART_3
+            ),
+            Question.MultipleChoice(
+                "Which two methods must be used to add switches into the fabric so that administrators can control how switches are added into DCNM for private cloud management? (Choose two)",
+                listOf(
+                    "A. PowerOn Auto Provisioning",
+                    "B. Cisco Cloud Director",
+                    "C. Seed IP",
+                    "D. CDP AutoDiscovery",
+                    "E. Cisco Prime Infrastructure"
+                ),
+                setOf("A", "C"),
+                """Cisco Data Center Network Manager (DCNM) offers network management system (NMS) support for traditional or multiple-tenant LAN and SAN fabrics. Cisco DCNM uses PowerOn Auto Provisioning (POAP) to automate the process of upgrading software images and installing configuration files on Cisco Nexus switches that are being deployed in the network.
+Reference: https://www.cisco.com/c/en/us/products/collateral/cloud-systems-management/prime-data-center-network-manager/guide-c07-740626.html""",
+                "https://www.cisco.com/c/en/us/products/collateral/cloud-systems-management/prime-data-center-network-manager/guide-c07-740626.html",
+                QuestionCategory.SCOR_PART_3
+            ),
+            Question.MultipleChoice(
+                "Which role is a default guest type in Cisco ISE?",
+                listOf(
+                    "A. Full-Time",
+                    "B. Contractor",
+                    "C. Yearly",
+                    "D. Monthly"
+                ),
+                setOf("B"),
+                """Each guest account must be associated with a guest type. Guest types allow a sponsor to assign different levels of access and different network connection times to a guest account. These guest types are associated with particular network access policies. Cisco ISE includes these default guest types:
+Contractor – Users who need access to the network for an extended amount of time, up to a year.
+Daily – Guests who need access to the resources on the network for just 1 to 5 days.
+Weekly – Users who need access to the network for a couple of weeks.
+Reference: https://www.cisco.com/c/en/us/td/docs/security/ise/1-3/admin_guide/b_ise_admin_guide_13/b_ise_admin_guide_sample_chapter_01111.html""",
+                "https://www.cisco.com/c/en/us/td/docs/security/ise/1-3/admin_guide/b_ise_admin_guide_13/b_ise_admin_guide_sample_chapter_01111.html",
+                QuestionCategory.SCOR_PART_3
+            ),
+            Question.MultipleChoice(
+                "An engineer configures new features within the Cisco Umbrella dashboard and wants to identify and proxy traffic that is categorized as risky domains and may contain safe and malicious content. Which action accomplishes these objectives?",
+                listOf(
+                    "A. Configure intelligent proxy within Cisco Umbrella to intercept and proxy the requests for only those categories",
+                    "B. Upload the threat intelligence database to Cisco Umbrella for the most current information on reputations and to have the destination lists block them.",
+                    "C. Create a new site within Cisco Umbrella to block requests from those categories so they can be sent to the proxy device.",
+                    "D. Configure URL filtering within Cisco Umbrella to track the URLs and proxy the requests for those categories and below."
+                ),
+                setOf("A"),
+                """The 'greylist' of risky domains is compromised of domains that host both malicious and safe content—we consider these "risky" domains. These sites often allow users to upload and share content—making them difficult to police, even for the admins of the site.
+Reference: https://docs.umbrella.com/deployment-msp/docs/what-is-the-intelligent-proxy
+In order to enable intelligent proxy, we need to use "Advanced Settings":
+ """,
+                "https://docs.umbrella.com/deployment-msp/docs/what-is-the-intelligent-proxy",
+                QuestionCategory.SCOR_PART_3
+            ),
+            Question.MultipleChoice(
+                "An administrator enables Cisco Threat Intelligence Director on a Cisco FMC. Which process uses STIX and allows uploads and downloads of block lists?",
+                listOf(
+                    "A. consumption",
+                    "B. editing",
+                    "C. sharing",
+                    "D. authoring"
+                ),
+                setOf("A"),
+                "",
+                "",
+                QuestionCategory.SCOR_PART_3
+            ),
+            Question.MultipleChoice(
+                "Why is it important to have a patching strategy for endpoints?",
+                listOf(
+                    "A. so that functionality is increased on a faster scale when it is used",
+                    "B. so that known vulnerabilities are targeted and having a regular patch cycle reduces risks",
+                    "C. so that patching strategies can assist with disabling nonsecure protocols in applications",
+                    "D. to take advantage of new features released with patches"
+                ),
+                setOf("B"),
+                "",
+                "",
+                QuestionCategory.SCOR_PART_3
+            ),
+            Question.MultipleChoice(
+                "What is a description of microsegmentation?",
+                listOf(
+                    "A. Environments deploy a container orchestration platform, such as Kubernetes, to manage the application delivery",
+                    "B. Environments apply a zero-trust model and specify how applications on different servers or containers can communicate",
+                    "C. Environments implement private VLAN segmentation to group servers with similar applications",
+                    "D. Environments deploy centrally managed host-based firewall rules on each server or container"
+                ),
+                setOf("B"),
+                """Zero Trust is a security framework requiring all users, whether in or outside the organization's network, to be authenticated, authorized, and continuously validated for security configuration and posture before being granted or keeping access to applications and data. Zero Trust assumes that there is no traditional network edge; networks can be local, in the cloud, or a combination or hybrid with resources anywhere as well as workers in any location.
+The Zero Trust model uses microsegmentation — a security technique that involves dividing perimeters into small zones to maintain separate access to every part of the network — to contain attacks.""",
+                "",
+                QuestionCategory.SCOR_PART_3
+            ),
+            Question.MultipleChoice(
+                "Which security product enables administrators to deploy Kubernetes clusters in air-gapped sites without needing Internet access?",
+                listOf(
+                    "A. Cisco Container Controller",
+                    "B. Cisco Container Platform",
+                    "C. Cisco Cloud Platform",
+                    "D. Cisco Content Platform"
+                ),
+                setOf("B"),
+                """The ability to deploy Kubernetes clusters in air-gapped sites
+Cisco Container Platform (CCP) tenant images contain all the necessary binaries and don't need internet access to function.
+Reference: https://www.cisco.com/c/en/us/products/cloud-systems-management/container-platform/index.html#~stickynav=3""",
+                "https://www.cisco.com/c/en/us/products/cloud-systems-management/container-platform/index.html#~stickynav=3",
+                QuestionCategory.SCOR_PART_3
+            ),
+            Question.MultipleChoice(
+                "What are two functions of TAXII in threat intelligence sharing? (Choose two)",
+                listOf(
+                    "A. exchanges trusted anomaly intelligence information",
+                    "B. determines how threat intelligence information is relayed",
+                    "C. determines the \"what\" of threat intelligence",
+                    "D. supports STIX information and allows users to describe threat motivations and abilities"
+                ),
+                setOf("A", "B"),
+                """In short, TAXII is about how parties communicate to exchange threat intelligence and STIX is about describing that threat intelligence in a structured way.
+Reference: https://logsentinel.com/blog/the-importance-of-threat-intelligence-sharing-through-taxii-and-stix/?cookie-state-change=1639912854054
+STIX states the "what" of threat intelligence, while TAXII defines "how" that information is relayed.
+Reference: https://www.anomali.com/resources/what-are-stix-taxii""",
+                "https://www.anomali.com/resources/what-are-stix-taxii",
+                QuestionCategory.SCOR_PART_3
+            ),
+            Question.MultipleChoice(
+                "An engineer must modify a policy to block specific addresses using Cisco Umbrella. The policy is created already and is actively used by devices, using many of the default policy elements. What else must be done to accomplish this task?",
+                listOf(
+                    "A. Create a destination list for addresses to be allowed or blocked",
+                    "B. Use content categories to block or allow specific addresses",
+                    "C. Add the specified addresses to the identities list and create a block action",
+                    "D. Modify the application settings to allow only applications to connect to required addresses"
+                ),
+                setOf("A"),
+                """Content Categories – Allows you to block access to categories of websites – groupings of sites with similarly themed content. For example, sports, gambling, or astrology…, not specific addresses -> Answer B is not correct.
+Application Settings – Allows you to block access to specific applications (not specific addresses). For example, Netflix, Facebook, or Amazon -> Answer D is not correct.
+Destination Lists allows you to create a unique list of destinations (for example, domain name or URL) to which you can block or allow access -> Answer A is correct.
+Reference: https://docs.umbrella.com/deployment-umbrella/docs/customize-your-policies-1
+An identity list cannot be an address as Umbrella uses the following identities:Network, Network Device, Roaming Computers, Mobile Devices, Chrome Book, Network Tunnel and WebUsers and Groups.
+Reference: https://www.cisco.com/c/dam/en/us/solutions/collateral/enterprise/design-zone-security/umbrella-design-guide.pdf""",
+                "https://docs.umbrella.com/deployment-umbrella/docs/customize-your-policies-1",
+                QuestionCategory.SCOR_PART_3
             )
         )
     }
